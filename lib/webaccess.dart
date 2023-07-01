@@ -24,7 +24,7 @@ class WebAccess {
     var traces = List<TraceInfo>.empty(growable: true);
 
     for (var trace in decoded) {
-      print(trace);
+      //print(trace);
       traces.add(TraceInfo(
           name: trace['tracename'],
           fileName: trace['tracepath'],

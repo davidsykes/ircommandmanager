@@ -22,15 +22,7 @@ class _FutureBuilderExampleState extends State<FavouritesPage> {
             (BuildContext context, AsyncSnapshot<List<TraceInfo>> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
-            children = <Widget>[
-              const Icon(
-                Icons.check_circle_outline,
-                color: Colors.green,
-                size: 60,
-              ),
-              Text('Plots:'),
-              for (var p in snapshot.data!) Text(p.name),
-            ];
+            children = plotListWidgets(snapshot.data!);
           } else if (snapshot.hasError) {
             children = <Widget>[
               const Icon(
@@ -65,5 +57,22 @@ class _FutureBuilderExampleState extends State<FavouritesPage> {
         },
       ),
     );
+  }
+
+  List<Widget> plotListWidgets(List<TraceInfo> plots) {
+    return <Widget>[
+      const Icon(
+        Icons.check_circle_outline,
+        color: Colors.green,
+        size: 60,
+      ),
+      Text('Plots1223:'),
+      Container(
+          height: 400,
+          child: ListView(
+            children: <Widget>[for (var p in plots) Text(p.name)],
+          )),
+      //for (var p in plots) Text(p.name),
+    ];
   }
 }
