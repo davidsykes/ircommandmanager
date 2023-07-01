@@ -18,7 +18,7 @@ class WebAccess {
   static Future<List<TraceInfo>> getPlots() async {
     // final httpPackageUrl = Uri.https('dart.dev', '/f/packages/http.json');
     final httpPackageUrl = Uri.parse('http://192.168.1.142:5000/tracenames');
-    final httpPackageInfo = await getP(httpPackageUrl);
+    final httpPackageInfo = await http.read(httpPackageUrl);
     final decoded = json.decode(httpPackageInfo);
 
     var traces = List<TraceInfo>.empty(growable: true);
@@ -33,9 +33,5 @@ class WebAccess {
     }
 
     return traces;
-  }
-
-  static Future<String> getP(Uri url) async {
-    return http.read(url);
   }
 }

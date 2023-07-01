@@ -1,34 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'myappstate.dart';
+import 'package:ircommandmanager/webaccess.dart';
 
-class FavouritesPage extends StatelessWidget {
+class FavouritesPage extends StatefulWidget {
+  const FavouritesPage({super.key});
+
+  @override
+  State<FavouritesPage> createState() => _FutureBuilderExampleState();
+}
+
+class _FutureBuilderExampleState extends State<FavouritesPage> {
+  final Future<List<TraceInfo>> _plots = WebAccess.getPlots();
+
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    var favourites = appState.favorites;
-
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-          height: 50,
-          color: Colors.amber[600],
-          child: const Center(child: Text('Entry A')),
-        ),
-        Container(
-          height: 50,
-          color: Colors.amber[500],
-          child: const Center(child: Text('Entry B')),
-        ),
-        Container(
-          height: 50,
-          color: Colors.amber[100],
-          child: const Center(child: Text('Entry C')),
-        ),
-        Text('sfsdf'),
-        for (var wp in favourites) Text(wp.first),
-      ],
+    return DefaultTextStyle(
+      style: Theme.of(context).textTheme.displayMedium!,
+      textAlign: TextAlign.center,
+      child: FutureBuilder<List<TraceInfo>>(
+        future: _plots,
+        builder:
+            (BuildContext context, AsyncSnapshot<List<TraceInfo>> snapshot) {
+          List<Widget> children;
+          if (snapshot.hasData) {
+            children = <Widget>[
+              const Icon(
+                Icons.check_circle_outline,
+                color: Colors.green,
+                size: 60,
+              ),
+              Text('Plots:'),
+              for (var p in snapshot.data!) Text(p.name),
+            ];
+          } else if (snapshot.hasError) {
+            children = <Widget>[
+              const Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 60,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Text('Error: ${snapshot.error}'),
+              ),
+            ];
+          } else {
+            children = const <Widget>[
+              SizedBox(
+                width: 60,
+                height: 60,
+                child: CircularProgressIndicator(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Text('Awaiting result...'),
+              ),
+            ];
+          }
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: children,
+            ),
+          );
+        },
+      ),
     );
   }
 }
