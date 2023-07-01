@@ -66,13 +66,11 @@ class _FutureBuilderExampleState extends State<FavouritesPage> {
         color: Colors.green,
         size: 60,
       ),
-      Text('Plots1223:'),
-      Container(
-          height: 400,
+      Text('Plots:'),
+      Expanded(
           child: ListView(
-            children: <Widget>[for (var p in plots) Text(p.name)],
-          )),
-      //for (var p in plots) Text(p.name),
+        children: <Widget>[for (var p in plots) Text(p.name)],
+      )),
     ];
   }
 }
