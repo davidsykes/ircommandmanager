@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:ircommandmanager/webaccess.dart';
 import 'dataobjects/selectabletraceinfo.dart';
 
-class FavouritesPage extends StatefulWidget {
-  const FavouritesPage({super.key});
+class ViewTracesPage extends StatefulWidget {
+  const ViewTracesPage({super.key});
 
   @override
-  State<FavouritesPage> createState() => _FutureBuilderExampleState();
+  State<ViewTracesPage> createState() => _ViewTracesPageFutureBuilder();
 }
 
-class _FutureBuilderExampleState extends State<FavouritesPage> {
+class _ViewTracesPageFutureBuilder extends State<ViewTracesPage> {
   final Future<List<SelectableTraceInfo>> _plots = getPlots();
 
   @override
@@ -23,7 +23,7 @@ class _FutureBuilderExampleState extends State<FavouritesPage> {
             AsyncSnapshot<List<SelectableTraceInfo>> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
-            children = plotListWidgets(snapshot.data!);
+            children = makeTraceViewPage(snapshot.data!);
           } else if (snapshot.hasError) {
             children = <Widget>[
               const Icon(
@@ -60,14 +60,24 @@ class _FutureBuilderExampleState extends State<FavouritesPage> {
     );
   }
 
-  List<Widget> plotListWidgets(List<SelectableTraceInfo> plots) {
+  List<Widget> makeTraceViewPage(List<SelectableTraceInfo> plots) {
     return <Widget>[
+      ButtonBar(
+        alignment: MainAxisAlignment.start,
+        children: <Widget>[
+          ElevatedButton(
+              onPressed: () {
+                deletePlots(plots);
+              },
+              child: Text('Delete')),
+          ElevatedButton(onPressed: null, child: Text('Hello')),
+        ],
+      ),
       const Icon(
         Icons.check_circle_outline,
         color: Colors.green,
         size: 60,
       ),
-      Text('Plots:'),
       Expanded(
           child: ListView(
         children: <Widget>[for (var p in plots) makePlotListItem(p)],
@@ -94,5 +104,9 @@ class _FutureBuilderExampleState extends State<FavouritesPage> {
       selectables.add(SelectableTraceInfo(traceInfo: trace));
     }
     return selectables;
+  }
+
+  void deletePlots(List<SelectableTraceInfo> plots) {
+    print(plots);
   }
 }
