@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ircommandmanager/webaccess.dart';
+import 'dataobjects/selectabletraceinfo.dart';
 
 class FavouritesPage extends StatefulWidget {
   const FavouritesPage({super.key});
@@ -9,17 +10,17 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FutureBuilderExampleState extends State<FavouritesPage> {
-  final Future<List<TraceInfo>> _plots = WebAccess.getPlots();
+  final Future<List<SelectableTraceInfo>> _plots = getPlots();
 
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.displayMedium!,
       textAlign: TextAlign.center,
-      child: FutureBuilder<List<TraceInfo>>(
+      child: FutureBuilder<List<SelectableTraceInfo>>(
         future: _plots,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<TraceInfo>> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<SelectableTraceInfo>> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
             children = plotListWidgets(snapshot.data!);
@@ -59,7 +60,7 @@ class _FutureBuilderExampleState extends State<FavouritesPage> {
     );
   }
 
-  List<Widget> plotListWidgets(List<TraceInfo> plots) {
+  List<Widget> plotListWidgets(List<SelectableTraceInfo> plots) {
     return <Widget>[
       const Icon(
         Icons.check_circle_outline,
@@ -69,8 +70,29 @@ class _FutureBuilderExampleState extends State<FavouritesPage> {
       Text('Plots:'),
       Expanded(
           child: ListView(
-        children: <Widget>[for (var p in plots) Text(p.name)],
+        children: <Widget>[for (var p in plots) makePlotListItem(p)],
       )),
     ];
+  }
+
+  Widget makePlotListItem(SelectableTraceInfo plot) {
+    return ListTile(
+      leading: Checkbox(
+        value: plot.selected,
+        onChanged: (bool? x) => setState(() {
+          plot.toggle();
+        }),
+      ),
+      title: Text(plot.traceInfo.name),
+    );
+  }
+
+  static Future<List<SelectableTraceInfo>> getPlots() async {
+    var plots = await WebAccess.getPlots();
+    var selectables = List<SelectableTraceInfo>.empty(growable: true);
+    for (var trace in plots) {
+      selectables.add(SelectableTraceInfo(traceInfo: trace));
+    }
+    return selectables;
   }
 }
