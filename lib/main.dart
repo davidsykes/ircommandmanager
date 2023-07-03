@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'myappstate.dart';
 import 'generatorpage.dart';
-import 'favourites.dart';
+import 'viewtracelist.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,10 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = GeneratorPage();
+        page = ViewTraceListPage();
         break;
       case 1:
-        page = ViewTracesPage();
+        page = GeneratorPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');

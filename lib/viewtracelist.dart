@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:ircommandmanager/webaccess.dart';
 import 'dataobjects/selectabletraceinfo.dart';
 
-class ViewTracesPage extends StatefulWidget {
-  const ViewTracesPage({super.key});
+class ViewTraceListPage extends StatefulWidget {
+  const ViewTraceListPage({super.key});
 
   @override
-  State<ViewTracesPage> createState() => _ViewTracesPageFutureBuilder();
+  State<ViewTraceListPage> createState() => _ViewTraceListPageFutureBuilder();
 }
 
-class _ViewTracesPageFutureBuilder extends State<ViewTracesPage> {
+class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
   final Future<List<SelectableTraceInfo>> _traces = getTraces();
 
   @override
