@@ -10,7 +10,7 @@ class ViewTracesPage extends StatefulWidget {
 }
 
 class _ViewTracesPageFutureBuilder extends State<ViewTracesPage> {
-  final Future<List<SelectableTraceInfo>> _plots = getPlots();
+  final Future<List<SelectableTraceInfo>> _traces = getTraces();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class _ViewTracesPageFutureBuilder extends State<ViewTracesPage> {
       style: Theme.of(context).textTheme.displayMedium!,
       textAlign: TextAlign.center,
       child: FutureBuilder<List<SelectableTraceInfo>>(
-        future: _plots,
+        future: _traces,
         builder: (BuildContext context,
             AsyncSnapshot<List<SelectableTraceInfo>> snapshot) {
           List<Widget> children;
@@ -60,14 +60,14 @@ class _ViewTracesPageFutureBuilder extends State<ViewTracesPage> {
     );
   }
 
-  List<Widget> makeTraceViewPage(List<SelectableTraceInfo> plots) {
+  List<Widget> makeTraceViewPage(List<SelectableTraceInfo> traces) {
     return <Widget>[
       ButtonBar(
         alignment: MainAxisAlignment.start,
         children: <Widget>[
           ElevatedButton(
               onPressed: () {
-                deletePlots(plots);
+                deleteTraces(traces);
               },
               child: Text('Delete')),
           ElevatedButton(onPressed: null, child: Text('Hello')),
@@ -80,33 +80,39 @@ class _ViewTracesPageFutureBuilder extends State<ViewTracesPage> {
       ),
       Expanded(
           child: ListView(
-        children: <Widget>[for (var p in plots) makePlotListItem(p)],
+        children: <Widget>[for (var p in traces) makeTraceListItem(p)],
       )),
     ];
   }
 
-  Widget makePlotListItem(SelectableTraceInfo plot) {
+  Widget makeTraceListItem(SelectableTraceInfo selectableTrace) {
+    var trace = selectableTrace.traceInfo;
     return ListTile(
       leading: Checkbox(
-        value: plot.selected,
+        value: selectableTrace.selected,
         onChanged: (bool? x) => setState(() {
-          plot.toggle();
+          selectableTrace.toggle();
         }),
       ),
-      title: Text(plot.traceInfo.name),
+      title: Text(trace.name),
+      subtitle: Text('${trace.traceCount} traces. ${trace.traceLength}uS'),
     );
   }
 
-  static Future<List<SelectableTraceInfo>> getPlots() async {
-    var plots = await WebAccess.getPlots();
+  static Future<List<SelectableTraceInfo>> getTraces() async {
+    var traces = await WebAccess.getTraces();
     var selectables = List<SelectableTraceInfo>.empty(growable: true);
-    for (var trace in plots) {
+    for (var trace in traces) {
       selectables.add(SelectableTraceInfo(traceInfo: trace));
     }
     return selectables;
   }
 
-  void deletePlots(List<SelectableTraceInfo> plots) {
-    print(plots);
+  void deleteTraces(List<SelectableTraceInfo> traces) {
+    var tracesToDelete = traces
+        .where((trace) => trace.selected)
+        .map((trace) => trace.traceInfo.fileName);
+
+    WebAccess.deleteTraces(tracesToDelete);
   }
 }
