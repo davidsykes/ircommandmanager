@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ircommandmanager/webaccess.dart';
+import 'package:provider/provider.dart';
 import 'dataobjects/selectabletraceinfo.dart';
+import 'myappstate.dart';
 
 class ViewTraceListPage extends StatefulWidget {
   const ViewTraceListPage({super.key});
@@ -10,20 +12,21 @@ class ViewTraceListPage extends StatefulWidget {
 }
 
 class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
-  final Future<List<SelectableTraceInfo>> _traces = getTraces();
-
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+    var loadTracelistFuture = getTraces(appState);
+
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.displayMedium!,
       textAlign: TextAlign.center,
       child: FutureBuilder<List<SelectableTraceInfo>>(
-        future: _traces,
+        future: loadTracelistFuture,
         builder: (BuildContext context,
             AsyncSnapshot<List<SelectableTraceInfo>> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
-            children = makeTraceViewPage(snapshot.data!);
+            children = makeTraceViewPage(appState, snapshot.data!);
           } else if (snapshot.hasError) {
             children = <Widget>[
               const Icon(
@@ -60,7 +63,8 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     );
   }
 
-  List<Widget> makeTraceViewPage(List<SelectableTraceInfo> traces) {
+  List<Widget> makeTraceViewPage(
+      MyAppState appState, List<SelectableTraceInfo> traces) {
     return <Widget>[
       ButtonBar(
         alignment: MainAxisAlignment.start,
@@ -70,7 +74,6 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
                 deleteTraces(traces);
               },
               child: Text('Delete')),
-          ElevatedButton(onPressed: null, child: Text('Hello')),
         ],
       ),
       const Icon(
@@ -80,12 +83,17 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
       ),
       Expanded(
           child: ListView(
-        children: <Widget>[for (var p in traces) makeTraceListItem(p)],
+        children: <Widget>[
+          for (var p in traces) makeTraceListItem(appState, traces, p)
+        ],
       )),
     ];
   }
 
-  Widget makeTraceListItem(SelectableTraceInfo selectableTrace) {
+  Widget makeTraceListItem(
+      MyAppState appState,
+      List<SelectableTraceInfo> selectableTraces,
+      SelectableTraceInfo selectableTrace) {
     var trace = selectableTrace.traceInfo;
     return ListTile(
       leading: Checkbox(
@@ -99,13 +107,10 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     );
   }
 
-  static Future<List<SelectableTraceInfo>> getTraces() async {
-    var traces = await WebAccess.getTraces();
-    var selectables = List<SelectableTraceInfo>.empty(growable: true);
-    for (var trace in traces) {
-      selectables.add(SelectableTraceInfo(traceInfo: trace));
-    }
-    return selectables;
+  static Future<List<SelectableTraceInfo>> getTraces(
+      MyAppState appState) async {
+    var traces = await appState.getTraceList();
+    return traces;
   }
 
   void deleteTraces(List<SelectableTraceInfo> traces) {

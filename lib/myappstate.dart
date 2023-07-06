@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'dataobjects/selectabletraceinfo.dart';
+import 'webaccess.dart';
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
@@ -18,5 +20,19 @@ class MyAppState extends ChangeNotifier {
       favorites.add(current);
     }
     notifyListeners();
+  }
+
+  void xxxxxxdeletethestuffabovehereeeeeeeee() {}
+
+  List<SelectableTraceInfo> traces = List<SelectableTraceInfo>.empty();
+
+  Future<List<SelectableTraceInfo>> getTraceList() async {
+    if (traces.isEmpty) {
+      var tracedata = await WebAccess.getTraces();
+      traces = tracedata
+          .map((traceInfo) => SelectableTraceInfo(traceInfo: traceInfo))
+          .toList();
+    }
+    return traces;
   }
 }
