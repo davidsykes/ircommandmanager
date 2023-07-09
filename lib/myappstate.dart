@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'dataobjects/selectabletraceinfo.dart';
+import 'dataobjects/traceinfo.dart';
 import 'webaccess.dart';
 
 class MyAppState extends ChangeNotifier {
@@ -24,15 +25,26 @@ class MyAppState extends ChangeNotifier {
 
   void xxxxxxdeletethestuffabovehereeeeeeeee() {}
 
-  List<SelectableTraceInfo> traces = List<SelectableTraceInfo>.empty();
+  late Future<List<TraceInfo>> getTraceListFuture;
 
-  Future<List<SelectableTraceInfo>> getTraceList() async {
-    if (traces.isEmpty) {
-      var tracedata = await WebAccess.getTraces();
-      traces = tracedata
+  MyAppState() {
+    getTraceListFuture = WebAccess.getTraces();
+  }
+
+  List<SelectableTraceInfo> selectableTraces =
+      List<SelectableTraceInfo>.empty();
+
+  Future<List<SelectableTraceInfo>> getSelectableTraceList() async {
+    if (selectableTraces.isEmpty) {
+      var tracedata = await getTraceListFuture;
+      selectableTraces = tracedata
           .map((traceInfo) => SelectableTraceInfo(traceInfo: traceInfo))
           .toList();
     }
-    return traces;
+    return selectableTraces;
+  }
+
+  List<SelectableTraceInfo> getCachedSelectableTraceList() {
+    return selectableTraces;
   }
 }

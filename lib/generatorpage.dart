@@ -41,9 +41,24 @@ class GeneratorPage extends StatelessWidget {
               ),
             ],
           ),
+          makeSelectedlist(appState),
         ],
       ),
     );
+  }
+
+  Widget makeSelectedlist(MyAppState appState) {
+    return Column(
+      children: makeListOfSelections(appState),
+    );
+  }
+
+  List<Widget> makeListOfSelections(MyAppState appState) {
+    var traces = appState.getCachedSelectableTraceList();
+    return traces
+        .where((trace) => trace.selected)
+        .map((trace) => Text(trace.traceInfo.name))
+        .toList();
   }
 }
 

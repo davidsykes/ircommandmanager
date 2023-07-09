@@ -109,7 +109,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
 
   static Future<List<SelectableTraceInfo>> getTraces(
       MyAppState appState) async {
-    var traces = await appState.getTraceList();
+    var traces = await appState.getSelectableTraceList();
     return traces;
   }
 
