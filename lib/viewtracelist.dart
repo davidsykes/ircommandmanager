@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ircommandmanager/webaccess.dart';
 import 'package:provider/provider.dart';
 import 'dataobjects/selectabletraceinfo.dart';
 import 'myappstate.dart';
@@ -71,7 +70,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
         children: <Widget>[
           ElevatedButton(
               onPressed: () {
-                deleteTraces(traces);
+                deleteTraces(traces, appState);
               },
               child: Text('Delete')),
         ],
@@ -113,11 +112,11 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     return traces;
   }
 
-  void deleteTraces(List<SelectableTraceInfo> traces) {
+  void deleteTraces(List<SelectableTraceInfo> traces, MyAppState appState) {
     var tracesToDelete = traces
         .where((trace) => trace.selected)
         .map((trace) => trace.traceInfo.fileName);
 
-    WebAccess.deleteTraces(tracesToDelete);
+    appState.deleteTraces(tracesToDelete);
   }
 }

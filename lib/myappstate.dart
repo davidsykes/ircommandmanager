@@ -1,34 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'dataobjects/selectabletraceinfo.dart';
 import 'dataobjects/traceinfo.dart';
 import 'webaccess.dart';
 
 class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-
-  void getNext() {
-    current = WordPair.random();
-    notifyListeners();
-  }
-
-  var favorites = <WordPair>[];
-
-  void toggleFavorite() {
-    if (favorites.contains(current)) {
-      favorites.remove(current);
-    } else {
-      favorites.add(current);
-    }
-    notifyListeners();
-  }
-
-  void xxxxxxdeletethestuffabovehereeeeeeeee() {}
-
+  late WebAccess webAccess;
   late Future<List<TraceInfo>> getTraceListFuture;
 
   MyAppState() {
-    getTraceListFuture = WebAccess.getTraces();
+    webAccess = WebAccess('192.168.1.142:5000');
+    getTraceListFuture = webAccess.getTraces();
   }
 
   List<SelectableTraceInfo> selectableTraces =
@@ -46,5 +27,24 @@ class MyAppState extends ChangeNotifier {
 
   List<SelectableTraceInfo> getCachedSelectableTraceList() {
     return selectableTraces;
+  }
+
+  List<TraceInfo> getSelectedTraces() {
+    var selectedTraces = getCachedSelectableTraceList()
+        .where((trace) => trace.selected)
+        .map((selectableTraceInfo) => selectableTraceInfo.traceInfo);
+    return selectedTraces.toList();
+  }
+
+  Future<List<TraceInfo>> getSelectedTracesWithDetails() async {
+    var selectedTraces = getSelectedTraces();
+    for (var trace in selectedTraces) {
+      trace.traceDetails ??= await webAccess.getTraceDetails(trace.fileName);
+    }
+    return selectedTraces.toList();
+  }
+
+  void deleteTraces(Iterable<String> tracesToDelete) {
+    webAccess.deleteTraces(tracesToDelete);
   }
 }
