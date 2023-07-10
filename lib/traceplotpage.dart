@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'dataobjects/traceinfo.dart';
 import 'myappstate.dart';
 
-class GeneratorPage extends StatelessWidget {
+class TracePlotPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
