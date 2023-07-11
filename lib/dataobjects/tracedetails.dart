@@ -1,13 +1,12 @@
-class TraceDetails {
-  //final String name;
-  //final String fileName;
-  //final int traceCount;
-  //final int traceLength;
+import 'dart:ui';
 
-  TraceDetails(
-      //{required this.name,
-      //required this.fileName,
-      //required this.traceCount,
-      //required this.traceLength}
-      );
+class TraceDetails {
+  late List<Offset> points;
+
+  TraceDetails(rawPoints) {
+    points = rawPoints
+        .map((rp) => Offset(rp['time'].toDouble(), rp['value'].toDouble()))
+        .toList()
+        .cast<Offset>();
+  }
 }

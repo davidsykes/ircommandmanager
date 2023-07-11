@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dataobjects/traceinfo.dart';
 import 'myappstate.dart';
+import 'tracepainter.dart';
 
 class TracePlotPage extends StatelessWidget {
   @override
@@ -44,7 +45,15 @@ class TracePlotPage extends StatelessWidget {
               ),
             ];
           }
-          return Center(
+          return Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Color.fromARGB(255, 155, 22, 22)),
+                left: BorderSide(color: Color(0xFFFFFFFF)),
+                right: BorderSide(),
+                bottom: BorderSide(),
+              ),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: children,
@@ -58,11 +67,17 @@ class TracePlotPage extends StatelessWidget {
   List<Widget> makeTraceViewPage(MyAppState appState, List<TraceInfo> traces) {
     return <Widget>[
       Expanded(
-          child: ListView(
-        children: <Widget>[
-          for (var p in traces) makeTraceListItem(appState, traces, p)
-        ],
+          child: CustomPaint(
+        size: Size.infinite,
+        painter: MyPainter(traces: traces),
       )),
+
+      // Expanded(
+      //     child: ListView(
+      //   children: <Widget>[
+      //     for (var p in traces) makeTraceListItem(appState, traces, p)
+      //   ],
+      // )),
     ];
   }
 
