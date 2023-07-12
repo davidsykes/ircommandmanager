@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:ircommandmanager/dataobjects/tracedetails.dart';
+import 'package:ircommandmanager/dataobjects/tracepoints.dart';
 import 'dataobjects/traceinfo.dart';
 
 class WebAccess {

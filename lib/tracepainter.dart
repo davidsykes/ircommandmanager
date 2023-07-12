@@ -29,7 +29,14 @@ class MyPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
     canvas.drawPoints(pointMode, points, paint);
 
-    canvas.drawPoints(pointMode, traces[0].traceDetails!.points, paint);
+    var offsets = traces[0]
+        .traceDetails!
+        .points
+        .map((rp) => Offset(rp.time.toDouble(), rp.value.toDouble()))
+        .toList()
+        .cast<Offset>();
+
+    canvas.drawPoints(pointMode, offsets, paint);
   }
 
   @override

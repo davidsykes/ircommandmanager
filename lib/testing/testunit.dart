@@ -4,7 +4,7 @@ class TestUnit {
   TestModule testModule;
   String name;
   String description;
-  bool Function() action;
+  void Function() action;
 
   TestUnit(
       {required this.testModule,

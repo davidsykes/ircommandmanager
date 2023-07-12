@@ -1,4 +1,4 @@
-import 'tracedetails.dart';
+import 'tracepoints.dart';
 
 class TraceInfo {
   final String name;

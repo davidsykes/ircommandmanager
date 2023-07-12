@@ -16,10 +16,18 @@ class TestRunner {
       var name = test.name;
       var description = test.description;
 
-      test.setUpObjectUnderTest();
-      var result = test.runTest();
+      try {
+        test.setUpObjectUnderTest();
+        var result = test.runTest();
 
-      results.add('Test $name result $result');
+        results.add('Test $name $description resultWW $result');
+      } on Exception catch (e) {
+        // Anything else that is an exception
+        results.add('Unknown exception: $e');
+      } catch (e) {
+        // No specified type, handles all
+        results.add('Something really unknown: $e');
+      }
     }
 
     return results;
