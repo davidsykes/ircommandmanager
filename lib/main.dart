@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'codetestpage.dart';
 import 'myappstate.dart';
 import 'traceplotpage.dart';
 import 'viewtracelist.dart';
@@ -45,6 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         page = TracePlotPage();
         break;
+      case 2:
+        page = CodeTestPage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -64,6 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),
                     label: Text('Trace Plots'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.favorite),
+                    label: Text('Tests'),
                   ),
                 ],
                 selectedIndex: selectedIndex,
