@@ -4,6 +4,6 @@ class TraceDetails {
   late List<TracePoint> points;
 
   TraceDetails(rawPoints) {
-    points = rawPoints.map((rp) => TracePoint(rp)).toList();
+    points = rawPoints.map((rp) => TracePoint(rp)).toList().cast<TracePoint>();
   }
 }

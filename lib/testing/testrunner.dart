@@ -13,20 +13,21 @@ class TestRunner {
     List<String> results = List.empty(growable: true);
 
     for (final test in tests) {
-      var name = test.name;
       var description = test.description;
 
       try {
         test.setUpObjectUnderTest();
-        var result = test.runTest();
+        test.runTest();
 
-        results.add('Test $name $description resultWW $result');
+        results.add('Pass: $description');
+      } on TestAssertFailException {
+        results.add('Fail: $description');
       } on Exception catch (e) {
         // Anything else that is an exception
         results.add('Unknown exception: $e');
       } catch (e) {
         // No specified type, handles all
-        results.add('Something really unknown: $e');
+        results.add('Something really re unknown: $e ($description)');
       }
     }
 

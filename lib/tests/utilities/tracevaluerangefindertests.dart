@@ -14,8 +14,8 @@ class TraceValueRangeFinderTests extends TestModule {
   @override
   Iterable<TestUnit> getTests() {
     return [
-      createTest('Test 1', 'a test', test1),
-      createTest('Test 2', 'another', aSimpleRangeValueIsReturned),
+      createTest('Test 1', test1),
+      createTest('A simple range is returned', aSimpleRangeValueIsReturned),
     ];
   }
 
@@ -42,8 +42,7 @@ class TraceValueRangeFinderTests extends TestModule {
     return TraceDetails(points);
   }
 
-  TestUnit createTest(String name, String description, void Function() action) {
-    return TestUnit(
-        testModule: this, name: name, description: description, action: action);
+  TestUnit createTest(String description, void Function() action) {
+    return TestUnit(testModule: this, description: description, action: action);
   }
 }

@@ -7,7 +7,9 @@ abstract class TestModule {
 
   void myAssert(bool value) {
     if (!value) {
-      throw 'out of llamas';
+      throw TestAssertFailException();
     }
   }
 }
+
+class TestAssertFailException {}
