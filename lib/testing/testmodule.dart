@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:ircommandmanager/testing/testunit.dart';
 
 abstract class TestModule {
@@ -7,9 +8,14 @@ abstract class TestModule {
 
   void myAssert(bool value) {
     if (!value) {
-      throw TestAssertFailException();
+      var st = StackTrace.current.toString();
+      var ls = LineSplitter().convert(st)[1];
+      throw TestAssertFailException(ls);
     }
   }
 }
 
-class TestAssertFailException {}
+class TestAssertFailException implements Exception {
+  String cause;
+  TestAssertFailException(this.cause);
+}

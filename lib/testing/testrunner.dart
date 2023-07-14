@@ -20,14 +20,15 @@ class TestRunner {
         test.runTest();
 
         results.add('Pass: $description');
-      } on TestAssertFailException {
+      } on TestAssertFailException catch (e) {
         results.add('Fail: $description');
+        results.add(e.cause);
       } on Exception catch (e) {
         // Anything else that is an exception
         results.add('Unknown exception: $e');
       } catch (e) {
         // No specified type, handles all
-        results.add('Something really re unknown: $e ($description)');
+        results.add('Something really bad: $e ($description)');
       }
     }
 

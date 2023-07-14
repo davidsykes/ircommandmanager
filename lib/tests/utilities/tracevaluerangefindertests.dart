@@ -26,7 +26,7 @@ class TraceValueRangeFinderTests extends TestModule {
   void aSimpleRangeValueIsReturned() {
     var data = [createSimple10x10Trace()];
     var range = _finder.calculateRange(data);
-    myAssert(range.minx == 033);
+    myAssert(range.minx == 0);
     myAssert(range.maxx == 10);
     myAssert(range.miny == 0);
     myAssert(range.maxy == 10);
