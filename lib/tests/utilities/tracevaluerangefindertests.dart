@@ -14,13 +14,11 @@ class TraceValueRangeFinderTests extends TestModule {
   @override
   Iterable<TestUnit> getTests() {
     return [
-      createTest('Test 1', test1),
       createTest('A simple range is returned', aSimpleRangeValueIsReturned),
+      createTest(
+          'A range with negatives is returned', aRangeWithNegativesIsReturned),
+      createTest('Multiple ranges are combined', multipleRangesAreCombined),
     ];
-  }
-
-  bool test1() {
-    return true;
   }
 
   void aSimpleRangeValueIsReturned() {
@@ -40,6 +38,37 @@ class TraceValueRangeFinderTests extends TestModule {
     ];
 
     return TraceDetails(points);
+  }
+
+  void aRangeWithNegativesIsReturned() {
+    var data = [createSimple10x10TraceWithNegatives()];
+    var range = _finder.calculateRange(data);
+    myAssert(range.minx == -10);
+    myAssert(range.maxx == 5);
+    myAssert(range.miny == -10);
+    myAssert(range.maxy == 5);
+  }
+
+  TraceDetails createSimple10x10TraceWithNegatives() {
+    var points = [
+      {'time': -10, 'value': 0},
+      {'time': 0, 'value': 5},
+      {'time': 5, 'value': -10},
+    ];
+
+    return TraceDetails(points);
+  }
+
+  void multipleRangesAreCombined() {
+    var data = [
+      createSimple10x10Trace(),
+      createSimple10x10TraceWithNegatives()
+    ];
+    var range = _finder.calculateRange(data);
+    myAssert(range.minx == -10);
+    myAssert(range.maxx == 10);
+    myAssert(range.miny == -10);
+    myAssert(range.maxy == 10);
   }
 
   TestUnit createTest(String description, void Function() action) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dataobjects/selectabletraceinfo.dart';
-import 'myappstate.dart';
+import '../dataobjects/selectabletraceinfo.dart';
+import '../myappstate.dart';
 
 class ViewTraceListPage extends StatefulWidget {
   const ViewTraceListPage({super.key});

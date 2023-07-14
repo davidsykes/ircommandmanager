@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dataobjects/traceinfo.dart';
-import 'myappstate.dart';
-import 'tracepainter.dart';
+import '../dataobjects/traceinfo.dart';
+import '../myappstate.dart';
+import '../tracepainter.dart';
 
 class TracePlotPage extends StatelessWidget {
   @override
@@ -71,13 +71,6 @@ class TracePlotPage extends StatelessWidget {
         size: Size.infinite,
         painter: MyPainter(traces: traces),
       )),
-
-      // Expanded(
-      //     child: ListView(
-      //   children: <Widget>[
-      //     for (var p in traces) makeTraceListItem(appState, traces, p)
-      //   ],
-      // )),
     ];
   }
 

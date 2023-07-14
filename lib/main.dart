@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'codetestpage.dart';
+import 'views/codetestpage.dart';
 import 'myappstate.dart';
-import 'traceplotpage.dart';
-import 'viewtracelist.dart';
+import 'views/traceplotpage.dart';
+import 'views/viewtracelist.dart';
 
 void main() {
   runApp(MyApp());
