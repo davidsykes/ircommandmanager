@@ -28,7 +28,7 @@ class TestRunner {
         results.add('Unknown exception: $e');
       } catch (e) {
         // No specified type, handles all
-        results.add('Something really bad: $e ($description)');
+        results.add('Fail: $description - Unknown error: $e');
       }
     }
 

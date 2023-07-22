@@ -1,9 +1,6 @@
 class PlotPoint {
-  late int x;
-  late int y;
+  int x;
+  int y;
 
-  PlotPoint(int x, int y) {
-    x = x;
-    y = y;
-  }
+  PlotPoint({required this.x, required this.y});
 }

@@ -2,12 +2,9 @@ class TracePoint {
   late int time;
   late int value;
 
-  TracePoint(int time, int value) {
-    time = time;
-    value = value;
-  }
+  TracePoint({required this.time, required this.value});
 
   static TracePoint fromJsonPoint(jsonPoint) {
-    return TracePoint(jsonPoint['time'], jsonPoint['value']);
+    return TracePoint(time: jsonPoint['time'], value: jsonPoint['value']);
   }
 }

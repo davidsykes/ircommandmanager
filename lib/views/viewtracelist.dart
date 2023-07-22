@@ -112,7 +112,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
       var traces = await appState.getSelectableTraceList();
       return traces;
     } catch (e) {
-      return Future.error('Something really bad: $e');
+      return Future.error('Error getting traces: $e');
     }
   }
 

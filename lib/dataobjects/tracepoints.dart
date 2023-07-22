@@ -3,15 +3,13 @@ import 'package:ircommandmanager/dataobjects/tracepoint.dart';
 class TracePoints {
   late List<TracePoint> points;
 
-  TracePoints(Iterable<TracePoint> points) {
-    points = points.toList();
+  TracePoints(Iterable<TracePoint> iterablePoints) {
+    points = iterablePoints.toList();
   }
 
   static TracePoints fromJsonPoints(rawPoints) {
-    var points = rawPoints
-        .map((rp) => TracePoint.fromJsonPoint(rp))
-        .toList()
-        .cast<TracePoint>();
-    return points;
+    var points1 = rawPoints.map((rp) => TracePoint.fromJsonPoint(rp));
+    var points2 = points1.toList().cast<TracePoint>();
+    return TracePoints(points2);
   }
 }

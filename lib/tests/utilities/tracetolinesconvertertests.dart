@@ -51,7 +51,7 @@ class TraceToLinesConverterTests extends TestModule {
   }
 
   TracePoints createTrace(List<List<int>> list) {
-    var points = list.map((p) => TracePoint(p[0], p[1]));
+    var points = list.map((p) => TracePoint(time: p[0], value: p[1]));
     return TracePoints(points);
   }
 }
