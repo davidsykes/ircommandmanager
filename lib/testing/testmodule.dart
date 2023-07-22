@@ -6,6 +6,10 @@ abstract class TestModule {
 
   void setUpObjectUnderTest();
 
+  TestUnit createTest(String description, void Function() action) {
+    return TestUnit(testModule: this, description: description, action: action);
+  }
+
   void myAssert(bool value) {
     if (!value) {
       var st = StackTrace.current.toString();

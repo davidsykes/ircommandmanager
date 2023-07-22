@@ -5,7 +5,7 @@ class TraceInfo {
   final String fileName;
   final int traceCount;
   final int traceLength;
-  TraceDetails? traceDetails;
+  TracePoints? traceDetails;
 
   TraceInfo(
       {required this.name,

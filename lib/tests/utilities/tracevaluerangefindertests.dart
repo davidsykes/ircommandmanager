@@ -30,14 +30,14 @@ class TraceValueRangeFinderTests extends TestModule {
     myAssert(range.maxy == 10);
   }
 
-  TraceDetails createSimple10x10Trace() {
+  TracePoints createSimple10x10Trace() {
     var points = [
       {'time': 0, 'value': 0},
       {'time': 0, 'value': 10},
       {'time': 10, 'value': 10},
     ];
 
-    return TraceDetails(points);
+    return TracePoints.fromJsonPoints(points);
   }
 
   void aRangeWithNegativesIsReturned() {
@@ -49,14 +49,14 @@ class TraceValueRangeFinderTests extends TestModule {
     myAssert(range.maxy == 5);
   }
 
-  TraceDetails createSimple10x10TraceWithNegatives() {
+  TracePoints createSimple10x10TraceWithNegatives() {
     var points = [
       {'time': -10, 'value': 0},
       {'time': 0, 'value': 5},
       {'time': 5, 'value': -10},
     ];
 
-    return TraceDetails(points);
+    return TracePoints.fromJsonPoints(points);
   }
 
   void multipleRangesAreCombined() {
@@ -69,9 +69,5 @@ class TraceValueRangeFinderTests extends TestModule {
     myAssert(range.maxx == 10);
     myAssert(range.miny == -10);
     myAssert(range.maxy == 10);
-  }
-
-  TestUnit createTest(String description, void Function() action) {
-    return TestUnit(testModule: this, description: description, action: action);
   }
 }

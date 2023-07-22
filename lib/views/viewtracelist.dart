@@ -108,8 +108,12 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
 
   static Future<List<SelectableTraceInfo>> getTraces(
       MyAppState appState) async {
-    var traces = await appState.getSelectableTraceList();
-    return traces;
+    try {
+      var traces = await appState.getSelectableTraceList();
+      return traces;
+    } catch (e) {
+      return Future.error('Something really bad: $e');
+    }
   }
 
   void deleteTraces(List<SelectableTraceInfo> traces, MyAppState appState) {

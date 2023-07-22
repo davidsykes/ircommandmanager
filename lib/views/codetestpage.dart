@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../testing/testrunner.dart';
+import '../tests/utilities/tracetolinesconvertertests.dart';
 import '../tests/utilities/tracevaluerangefindertests.dart';
 
 class CodeTestPage extends StatelessWidget {
@@ -12,6 +13,7 @@ class CodeTestPage extends StatelessWidget {
     var runner = TestRunner();
 
     runner.addTests(TraceValueRangeFinderTests());
+    runner.addTests(TraceToLinesConverterTests());
 
     var results = runner.runTests();
 

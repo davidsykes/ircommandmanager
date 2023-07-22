@@ -49,12 +49,12 @@ class WebAccess {
     print(result);
   }
 
-  Future<TraceDetails> getTraceDetails(String fileName) async {
+  Future<TracePoints> getTraceDetails(String fileName) async {
     final httpPackageUrl = Uri.parse(makeUrl('trace/$fileName'));
     final httpPackageInfo = await http.read(httpPackageUrl);
     final rawPoints = json.decode(httpPackageInfo);
 
-    TraceDetails td = TraceDetails(rawPoints);
+    TracePoints td = TracePoints(rawPoints);
     print('Get trace details for $fileName');
     return td;
   }
