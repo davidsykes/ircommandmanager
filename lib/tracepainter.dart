@@ -59,10 +59,11 @@ class MyPainter extends CustomPainter {
   }
 
   void drawTrace(TraceInfo trace, Canvas canvas, Paint paint) {
-    var traceAsLines = TraceToLinesConverter().convert(trace);
+    var traceAsLines =
+        TraceToLinesConverter().convertTraceToPlot(trace.traceDetails!);
 
-    var offsets = trace.traceDetails!.points
-        .map((rp) => Offset(rp.time.toDouble(), rp.value.toDouble()))
+    var offsets = traceAsLines
+        .map((p) => Offset(p.x.toDouble(), p.y.toDouble()))
         .toList()
         .cast<Offset>();
 

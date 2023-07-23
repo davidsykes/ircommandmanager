@@ -54,7 +54,7 @@ class WebAccess {
     final httpPackageInfo = await http.read(httpPackageUrl);
     final rawPoints = json.decode(httpPackageInfo);
 
-    TracePoints td = TracePoints(rawPoints);
+    TracePoints td = TracePoints.fromJsonPoints(rawPoints);
     print('Get trace details for $fileName');
     return td;
   }
