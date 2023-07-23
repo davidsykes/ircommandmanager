@@ -62,10 +62,8 @@ class MyPainter extends CustomPainter {
     var traceAsLines =
         TraceToLinesConverter().convertTraceToPlot(trace.traceDetails!);
 
-    var offsets = traceAsLines
-        .map((p) => Offset(p.x.toDouble(), p.y.toDouble()))
-        .toList()
-        .cast<Offset>();
+    var offsets =
+        traceAsLines.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
 
     canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
   }

@@ -1,21 +1,20 @@
 import 'package:ircommandmanager/dataobjects/tracepoints.dart';
-import '../dataobjects/plotpoint.dart';
 
 class TraceToLinesConverter {
-  List<PlotPoint> convertTraceToPlot(TracePoints tracePoints) {
+  List<List<double>> convertTraceToPlot(TracePoints tracePoints) {
     var points = tracePoints.points;
     var pointsToConvert = points.length;
     var currentPoint = 0;
-    var plots = List<PlotPoint>.empty(growable: true);
-    var lasty = points[currentPoint].value;
-    plots.add(PlotPoint(x: points[currentPoint].time, y: lasty));
+    var plots = List<List<double>>.empty(growable: true);
+    var lasty = points[currentPoint].value.toDouble();
+    plots.add([points[currentPoint].time.toDouble(), lasty]);
     currentPoint++;
 
     while (currentPoint < pointsToConvert) {
-      var x = points[currentPoint].time;
-      var y = points[currentPoint].value;
-      plots.add(PlotPoint(x: x, y: lasty));
-      plots.add(PlotPoint(x: x, y: y));
+      var x = points[currentPoint].time.toDouble();
+      var y = points[currentPoint].value.toDouble();
+      plots.add([x, lasty]);
+      plots.add([x, y]);
       currentPoint++;
       lasty = y;
     }
