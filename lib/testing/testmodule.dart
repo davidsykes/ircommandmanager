@@ -17,6 +17,15 @@ abstract class TestModule {
       throw TestAssertFailException(ls);
     }
   }
+
+  void assertEqual(dynamic a, dynamic b) {
+    print('A= $a $b');
+    if (a == b) {
+      print('A= $a $b');
+    } else {
+      print('A!= $a $b');
+    }
+  }
 }
 
 class TestAssertFailException implements Exception {

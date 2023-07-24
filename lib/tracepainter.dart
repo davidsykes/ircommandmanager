@@ -3,8 +3,8 @@ import 'package:ircommandmanager/utilities/tracetolinesconverter.dart';
 import 'package:ircommandmanager/utilities/tracevaluerangefinder.dart';
 import 'dataobjects/traceinfo.dart';
 import 'dart:ui' as ui;
-
 import 'dataobjects/tracepoints.dart';
+import 'utilities/scalinghelper.dart';
 
 class MyPainter extends CustomPainter {
   final List<TraceInfo> traces;
@@ -25,16 +25,9 @@ class MyPainter extends CustomPainter {
 
     drawTestPattern(canvas, size, paint);
 
-    var tracesToPlot =
-        traces.map((t) => t.traceDetails!).cast<TracePoints>().toList();
+    drawTracesUsingUnscaledCanvas(canvas, size, paint);
 
-    var range = TraceValueRangeFinder().calculateRange(tracesToPlot);
-
-    var scalex = size.width / range.maxx;
-    var scaley = size.height / range.maxy;
-    canvas.scale(scalex, scaley);
-
-    drawTrace(traces[0], canvas, paint);
+    drawTracesUsingScaledCanvas(canvas, size, paint);
   }
 
   @override
@@ -66,5 +59,29 @@ class MyPainter extends CustomPainter {
         traceAsLines.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
 
     canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
+  }
+
+  void drawTracesUsingScaledCanvas(Canvas canvas, Size size, Paint paint) {
+    var tracesToPlot =
+        traces.map((t) => t.traceDetails!).cast<TracePoints>().toList();
+
+    var range = TraceValueRangeFinder().calculateRange(tracesToPlot);
+
+    var scalex = size.width / range.maxx;
+    var scaley = size.height / range.maxy;
+    canvas.scale(scalex, scaley);
+
+    drawTrace(traces[0], canvas, paint);
+  }
+
+  void drawTracesUsingUnscaledCanvas(Canvas canvas, Size size, Paint paint) {
+    var scalingHelper = ScalingHelper(
+        horizontalExtent: size.width, verticalExtent: size.height);
+
+    var plots = traces
+        .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))
+        .toList();
+
+    var maxY = scalingHelper.getMaximumYValue(plots);
   }
 }
