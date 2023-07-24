@@ -15,7 +15,7 @@ class TraceToLinesConverterTests extends TestModule {
   @override
   Iterable<TestUnit> getTests() {
     return [
-      createTest('A simple trace is converted', aSimpleTraceIsConverted),
+      createTest(aSimpleTraceIsConverted),
     ];
   }
 

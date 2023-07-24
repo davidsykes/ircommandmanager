@@ -75,13 +75,26 @@ class MyPainter extends CustomPainter {
   }
 
   void drawTracesUsingUnscaledCanvas(Canvas canvas, Size size, Paint paint) {
-    var scalingHelper = ScalingHelper(
-        horizontalExtent: size.width, verticalExtent: size.height);
+    var scalingHelper =
+        ScalingHelper(screenWidth: size.width, screenHeight: size.height);
 
     var plots = traces
         .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))
         .toList();
 
     var maxY = scalingHelper.getMaximumYValue(plots);
+
+    for (var plot in plots) {
+      var scaled1 =
+          scalingHelper.scaleToHorizontalExtent(plot: plot, maxY: maxY);
+
+      var offsets = convertToOffsets(scaled1);
+      canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
+    }
+  }
+
+  List<Offset> convertToOffsets(plot) {
+    var offsets = plot.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
+    return offsets;
   }
 }

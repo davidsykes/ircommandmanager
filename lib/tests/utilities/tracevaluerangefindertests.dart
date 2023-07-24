@@ -14,10 +14,9 @@ class TraceValueRangeFinderTests extends TestModule {
   @override
   Iterable<TestUnit> getTests() {
     return [
-      createTest('A simple range is returned', aSimpleRangeValueIsReturned),
-      createTest(
-          'A range with negatives is returned', aRangeWithNegativesIsReturned),
-      createTest('Multiple ranges are combined', multipleRangesAreCombined),
+      createTest(aSimpleRangeValueIsReturned),
+      createTest(aRangeWithNegativesIsReturned),
+      createTest(multipleRangesAreCombined),
     ];
   }
 

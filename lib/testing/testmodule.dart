@@ -6,25 +6,31 @@ abstract class TestModule {
 
   void setUpObjectUnderTest();
 
-  TestUnit createTest(String description, void Function() action) {
-    return TestUnit(testModule: this, description: description, action: action);
+  TestUnit createTest(void Function() action) {
+    return TestUnit(testModule: this, action: action);
   }
 
   void myAssert(bool value) {
     if (!value) {
-      var st = StackTrace.current.toString();
-      var ls = LineSplitter().convert(st)[1];
-      throw TestAssertFailException(ls);
+      throwAssert();
     }
   }
 
   void assertEqual(dynamic a, dynamic b) {
-    print('A= $a $b');
-    if (a == b) {
-      print('A= $a $b');
-    } else {
+    var aj = json.encode(a);
+    var bj = json.encode(b);
+    if (aj != bj) {
       print('A!= $a $b');
+      print('AJ!= $aj');
+      print('AJ!= $bj');
+      throwAssert();
     }
+  }
+
+  void throwAssert() {
+    var st = StackTrace.current.toString();
+    var ls = LineSplitter().convert(st)[2];
+    throw TestAssertFailException(ls);
   }
 }
 

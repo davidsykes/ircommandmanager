@@ -7,21 +7,40 @@ class ScalingHelperTests extends TestModule {
 
   @override
   void setUpObjectUnderTest() {
-    _helper = ScalingHelper(horizontalExtent: 100, verticalExtent: 100);
+    _helper = ScalingHelper(screenWidth: 320, screenHeight: 200);
   }
 
   @override
   Iterable<TestUnit> getTests() {
     return [
-      createTest(
-          'The maximum y value is calculated', theMaximumYValueIsCalculated),
+      createTest(theMaximumYValueIsCalculated),
+      createTest(plotsCanBeScaledHorizontally),
     ];
   }
 
   void theMaximumYValueIsCalculated() {
-    List<List<List<double>>> values = [
+    var values = createSomeValues();
+
+    var max = _helper.getMaximumYValue(values);
+
+    assertEqual(max, 10.0);
+  }
+
+  void plotsCanBeScaledHorizontally() {
+    var values = createSomeValues();
+
+    var max = _helper.scaleToHorizontalExtent(plot: values[0], maxY: 1);
+
+    assertEqual(max, [
+      [0.0, 0.0],
+      [320.0, 1.0]
+    ]);
+  }
+
+  List<List<List<double>>> createSomeValues() {
+    return [
       [
-        [0.0, 0],
+        [0, 0],
         [1, 1]
       ],
       [
@@ -33,9 +52,5 @@ class ScalingHelperTests extends TestModule {
         [1, 1]
       ],
     ];
-
-    var max = _helper.getMaximumYValue(values);
-
-    assertEqual(max, 10);
   }
 }

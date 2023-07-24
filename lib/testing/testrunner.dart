@@ -11,26 +11,25 @@ class TestRunner {
 
   List<String> runTests() {
     List<String> results = List.empty(growable: true);
+    var numberOfPassingTests = 0;
 
     for (final test in tests) {
-      var description = test.description;
-
       try {
         test.setUpObjectUnderTest();
         test.runTest();
-
-        results.add('Pass: $description');
+        numberOfPassingTests++;
       } on TestAssertFailException catch (e) {
-        results.add('Fail: $description');
-        results.add(e.cause);
+        var cause = e.cause;
+        results.add('Fail: $cause');
       } on Exception catch (e) {
         // Anything else that is an exception
         results.add('Unknown exception: $e');
       } catch (e) {
         // No specified type, handles all
-        results.add('Fail: $description - Unknown error: $e');
+        results.add('Fail: Unknown error: $e');
       }
     }
+    results.add('$numberOfPassingTests tests pass');
 
     return results;
   }
