@@ -27,7 +27,7 @@ class MyPainter extends CustomPainter {
 
     drawTracesUsingUnscaledCanvas(canvas, size, paint);
 
-    drawTracesUsingScaledCanvas(canvas, size, paint);
+    //drawTracesUsingScaledCanvas(canvas, size, paint);
   }
 
   @override
@@ -82,11 +82,11 @@ class MyPainter extends CustomPainter {
         .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))
         .toList();
 
-    var maxY = scalingHelper.getMaximumYValue(plots);
+    var maxX = scalingHelper.getMaximumXValue(plots);
 
     for (var plot in plots) {
       var scaled1 =
-          scalingHelper.scaleToHorizontalExtent(plot: plot, maxY: maxY);
+          scalingHelper.scaleToHorizontalExtent(plot: plot, maxY: maxX);
 
       var offsets = convertToOffsets(scaled1);
       canvas.drawPoints(ui.PointMode.polygon, offsets, paint);

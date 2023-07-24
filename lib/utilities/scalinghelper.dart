@@ -4,6 +4,18 @@ class ScalingHelper {
 
   ScalingHelper({required this.screenWidth, required this.screenHeight});
 
+  double getMaximumXValue(List<List<List<double>>> values) {
+    double maxx = 0;
+    for (List<List<double>> plot in values) {
+      for (List<double> p in plot) {
+        if (p[0] > maxx) {
+          maxx = p[0];
+        }
+      }
+    }
+    return maxx;
+  }
+
   double getMaximumYValue(List<List<List<double>>> values) {
     double maxy = 0;
     for (List<List<double>> plot in values) {
