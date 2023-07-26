@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../dataobjects/plotviewcontrolvariables.dart';
 import '../dataobjects/traceinfo.dart';
 import '../myappstate.dart';
 import '../tracepainter.dart';
 
-class TracePlotPage extends StatelessWidget {
+class TracePlotPage extends StatefulWidget {
+  @override
+  State<TracePlotPage> createState() => _TracePlotPageState();
+
+  static Future<List<TraceInfo>> getSelectedTraces(MyAppState appState) async {
+    var traces = await appState.getSelectedTracesWithDetails();
+    return traces;
+  }
+}
+
+class _TracePlotPageState extends State<TracePlotPage> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    var loadTracelistFuture = getSelectedTraces(appState);
+    var loadTracelistFuture = TracePlotPage.getSelectedTraces(appState);
 
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.displayMedium!,
@@ -19,7 +30,8 @@ class TracePlotPage extends StatelessWidget {
             (BuildContext context, AsyncSnapshot<List<TraceInfo>> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
-            children = makeTraceViewPage(appState, snapshot.data!);
+            children = makeTraceViewPage(
+                appState.plotViewControlVariables, snapshot.data!);
           } else if (snapshot.hasError) {
             children = <Widget>[
               const Icon(
@@ -64,49 +76,68 @@ class TracePlotPage extends StatelessWidget {
     );
   }
 
-  //https://stackoverflow.com/a/74161144/259
-
-  List<Widget> makeTraceViewPage(MyAppState appState, List<TraceInfo> traces) {
-    final redrawTrigger = ValueNotifier<int>(0); // 1. the important bit
+  List<Widget> makeTraceViewPage(
+      PlotViewControlVariables plotViewControlVariables,
+      List<TraceInfo> traces) {
     return <Widget>[
       ButtonBar(
         alignment: MainAxisAlignment.start,
-        children: createButtonBar(appState),
+        children: createButtonBar(plotViewControlVariables),
       ),
       Expanded(
           child: CustomPaint(
         size: Size.infinite,
-        painter:
-            MyPainter(state: appState, traces: traces, notifier: redrawTrigger),
+        painter: MyPainter(
+            plotViewControlVariables: plotViewControlVariables, traces: traces),
       )),
     ];
   }
 
-  static Future<List<TraceInfo>> getSelectedTraces(MyAppState appState) async {
-    var traces = await appState.getSelectedTracesWithDetails();
-    return traces;
-  }
-
-  List<Widget> createButtonBar(MyAppState appState) {
+  List<Widget> createButtonBar(
+      PlotViewControlVariables plotViewControlVariables) {
     return <Widget>[
       ElevatedButton(
           onPressed: () {
-            zoomIn(appState);
+            zoomIn(plotViewControlVariables);
           },
           child: Text('+')),
       ElevatedButton(
           onPressed: () {
-            zoomOut(appState);
+            zoomOut(plotViewControlVariables);
           },
           child: Text('-')),
+      Slider(
+          value: plotViewControlVariables.zoom.toDouble(),
+          min: 1,
+          max: 100,
+          label: plotViewControlVariables.zoom.toString(),
+          onChanged: (double value) {
+            setState(() {
+              plotViewControlVariables.zoom = value.round();
+            });
+          }),
+      Slider(
+          value: plotViewControlVariables.offset.toDouble(),
+          min: 0,
+          max: 99,
+          label: plotViewControlVariables.offset.toString(),
+          onChanged: (double value) {
+            setState(() {
+              plotViewControlVariables.offset = value.round();
+            });
+          }),
     ];
   }
 
-  void zoomIn(MyAppState appState) {
-    appState.scroll++;
+  void zoomIn(PlotViewControlVariables plotViewControlVariables) {
+    setState(() {
+      plotViewControlVariables.zoom++;
+    });
   }
 
-  void zoomOut(MyAppState appState) {
-    appState.scroll--;
+  void zoomOut(PlotViewControlVariables plotViewControlVariables) {
+    setState(() {
+      plotViewControlVariables.zoom--;
+    });
   }
 }

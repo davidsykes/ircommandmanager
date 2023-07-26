@@ -7,7 +7,8 @@ class ScalingHelperTests extends TestModule {
 
   @override
   void setUpObjectUnderTest() {
-    _helper = ScalingHelper(screenWidth: 320, screenHeight: 200, scroll: 1);
+    _helper =
+        ScalingHelper(screenWidth: 320, screenHeight: 200, zoom: 1, offset: 0);
   }
 
   @override

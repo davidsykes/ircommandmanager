@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:ircommandmanager/myappstate.dart';
 import 'package:ircommandmanager/utilities/tracetolinesconverter.dart';
 import 'package:ircommandmanager/utilities/tracevaluerangefinder.dart';
+import 'dataobjects/plotviewcontrolvariables.dart';
 import 'dataobjects/traceinfo.dart';
 import 'dart:ui' as ui;
 import 'dataobjects/tracepoints.dart';
 import 'utilities/scalinghelper.dart';
 
 class MyPainter extends CustomPainter {
-  final MyAppState state;
+  final PlotViewControlVariables plotViewControlVariables;
   final List<TraceInfo> traces;
-  ValueNotifier<int> notifier;
 
-  MyPainter({required this.state, required this.traces, required this.notifier})
-      : super(repaint: notifier);
+  MyPainter({required this.plotViewControlVariables, required this.traces});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -82,7 +80,8 @@ class MyPainter extends CustomPainter {
     var scalingHelper = ScalingHelper(
         screenWidth: size.width,
         screenHeight: size.height,
-        scroll: state.scroll);
+        zoom: plotViewControlVariables.zoom,
+        offset: plotViewControlVariables.offset);
 
     var plots = traces
         .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))

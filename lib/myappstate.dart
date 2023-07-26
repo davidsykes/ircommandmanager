@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dataobjects/plotviewcontrolvariables.dart';
 import 'dataobjects/selectabletraceinfo.dart';
 import 'dataobjects/traceinfo.dart';
 import 'webaccess.dart';
@@ -6,7 +7,8 @@ import 'webaccess.dart';
 class MyAppState extends ChangeNotifier {
   late WebAccess webAccess;
   late Future<List<TraceInfo>> getTraceListFuture;
-  int scroll = 1;
+  PlotViewControlVariables plotViewControlVariables =
+      PlotViewControlVariables();
 
   MyAppState() {
     webAccess = WebAccess('192.168.1.142:5000');
