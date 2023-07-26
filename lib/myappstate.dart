@@ -6,6 +6,7 @@ import 'webaccess.dart';
 class MyAppState extends ChangeNotifier {
   late WebAccess webAccess;
   late Future<List<TraceInfo>> getTraceListFuture;
+  int scroll = 1;
 
   MyAppState() {
     webAccess = WebAccess('192.168.1.142:5000');

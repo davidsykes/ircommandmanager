@@ -1,8 +1,12 @@
 class ScalingHelper {
   final double screenWidth;
   final double screenHeight;
+  final int scroll;
 
-  ScalingHelper({required this.screenWidth, required this.screenHeight});
+  ScalingHelper(
+      {required this.screenWidth,
+      required this.screenHeight,
+      required this.scroll});
 
   double getMaximumXValue(List<List<List<double>>> values) {
     double maxx = 0;
@@ -30,7 +34,7 @@ class ScalingHelper {
 
   List<List<double>> scaleToHorizontalExtent(
       {required List<List<double>> plot, required double maxY}) {
-    var horizontalScale = screenWidth / maxY;
+    var horizontalScale = screenWidth / maxY * scroll;
 
     var scaled = plot.map((p) => [p[0] * horizontalScale, p[1]]);
 

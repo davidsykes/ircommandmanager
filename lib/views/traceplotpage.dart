@@ -64,27 +64,49 @@ class TracePlotPage extends StatelessWidget {
     );
   }
 
+  //https://stackoverflow.com/a/74161144/259
+
   List<Widget> makeTraceViewPage(MyAppState appState, List<TraceInfo> traces) {
+    final redrawTrigger = ValueNotifier<int>(0); // 1. the important bit
     return <Widget>[
+      ButtonBar(
+        alignment: MainAxisAlignment.start,
+        children: createButtonBar(appState),
+      ),
       Expanded(
           child: CustomPaint(
         size: Size.infinite,
-        painter: MyPainter(traces: traces),
+        painter:
+            MyPainter(state: appState, traces: traces, notifier: redrawTrigger),
       )),
     ];
-  }
-
-  Widget makeTraceListItem(
-      MyAppState appState, List<TraceInfo> selectableTraces, TraceInfo trace) {
-    return ListTile(
-      leading: Text(trace.name),
-      title: Text(trace.name),
-      subtitle: Text('${trace.traceCount} traces. ${trace.traceLength}uS'),
-    );
   }
 
   static Future<List<TraceInfo>> getSelectedTraces(MyAppState appState) async {
     var traces = await appState.getSelectedTracesWithDetails();
     return traces;
+  }
+
+  List<Widget> createButtonBar(MyAppState appState) {
+    return <Widget>[
+      ElevatedButton(
+          onPressed: () {
+            zoomIn(appState);
+          },
+          child: Text('+')),
+      ElevatedButton(
+          onPressed: () {
+            zoomOut(appState);
+          },
+          child: Text('-')),
+    ];
+  }
+
+  void zoomIn(MyAppState appState) {
+    appState.scroll++;
+  }
+
+  void zoomOut(MyAppState appState) {
+    appState.scroll--;
   }
 }

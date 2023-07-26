@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ircommandmanager/myappstate.dart';
 import 'package:ircommandmanager/utilities/tracetolinesconverter.dart';
 import 'package:ircommandmanager/utilities/tracevaluerangefinder.dart';
 import 'dataobjects/traceinfo.dart';
@@ -7,9 +8,12 @@ import 'dataobjects/tracepoints.dart';
 import 'utilities/scalinghelper.dart';
 
 class MyPainter extends CustomPainter {
+  final MyAppState state;
   final List<TraceInfo> traces;
+  ValueNotifier<int> notifier;
 
-  MyPainter({required this.traces});
+  MyPainter({required this.state, required this.traces, required this.notifier})
+      : super(repaint: notifier);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -23,7 +27,7 @@ class MyPainter extends CustomPainter {
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.butt;
 
-    drawTestPattern(canvas, size, paint);
+    //drawTestPattern(canvas, size, paint);
 
     drawTracesUsingUnscaledCanvas(canvas, size, paint);
 
@@ -75,8 +79,10 @@ class MyPainter extends CustomPainter {
   }
 
   void drawTracesUsingUnscaledCanvas(Canvas canvas, Size size, Paint paint) {
-    var scalingHelper =
-        ScalingHelper(screenWidth: size.width, screenHeight: size.height);
+    var scalingHelper = ScalingHelper(
+        screenWidth: size.width,
+        screenHeight: size.height,
+        scroll: state.scroll);
 
     var plots = traces
         .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))

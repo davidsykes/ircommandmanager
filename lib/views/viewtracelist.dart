@@ -75,11 +75,6 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
               child: Text('Delete')),
         ],
       ),
-      const Icon(
-        Icons.check_circle_outline,
-        color: Colors.green,
-        size: 60,
-      ),
       Expanded(
           child: ListView(
         children: <Widget>[
