@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ircommandmanager/utilities/tracetolinesconverter.dart';
-import 'package:ircommandmanager/utilities/tracevaluerangefinder.dart';
 import 'dataobjects/plotviewcontrolvariables.dart';
 import 'dataobjects/traceinfo.dart';
 import 'dart:ui' as ui;
-import 'dataobjects/tracepoints.dart';
 import 'utilities/scalinghelper.dart';
 
 class MyPainter extends CustomPainter {
@@ -25,11 +23,11 @@ class MyPainter extends CustomPainter {
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.butt;
 
-    //drawTestPattern(canvas, size, paint);
+    if (plotViewControlVariables.showTestPlot) {
+      drawTestPattern(canvas, size, paint);
+    }
 
     drawTracesUsingUnscaledCanvas(canvas, size, paint);
-
-    //drawTracesUsingScaledCanvas(canvas, size, paint);
   }
 
   @override
@@ -53,29 +51,6 @@ class MyPainter extends CustomPainter {
     canvas.drawPoints(ui.PointMode.polygon, points, paint);
   }
 
-  void drawTrace(TraceInfo trace, Canvas canvas, Paint paint) {
-    var traceAsLines =
-        TraceToLinesConverter().convertTraceToPlot(trace.traceDetails!);
-
-    var offsets =
-        traceAsLines.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
-
-    canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
-  }
-
-  void drawTracesUsingScaledCanvas(Canvas canvas, Size size, Paint paint) {
-    var tracesToPlot =
-        traces.map((t) => t.traceDetails!).cast<TracePoints>().toList();
-
-    var range = TraceValueRangeFinder().calculateRange(tracesToPlot);
-
-    var scalex = size.width / range.maxx;
-    var scaley = size.height / range.maxy;
-    canvas.scale(scalex, scaley);
-
-    drawTrace(traces[0], canvas, paint);
-  }
-
   void drawTracesUsingUnscaledCanvas(Canvas canvas, Size size, Paint paint) {
     var scalingHelper = ScalingHelper(
         screenWidth: size.width,
@@ -83,23 +58,27 @@ class MyPainter extends CustomPainter {
         zoom: plotViewControlVariables.zoom,
         offset: plotViewControlVariables.offset);
 
-    var plots = traces
+    var tracesToPlot = traces
         .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))
         .toList();
 
-    var maxX = scalingHelper.getMaximumXValue(plots);
+    var maxX = scalingHelper.getMaximumXValue(tracesToPlot);
 
-    for (var plot in plots) {
-      var scaled1 =
-          scalingHelper.scaleToHorizontalExtent(plot: plot, maxY: maxX);
-
-      var offsets = convertToOffsets(scaled1);
-      canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
+    for (var plot in tracesToPlot) {
+      plotTrace(plot, scalingHelper, maxX, canvas, paint);
     }
   }
 
   List<Offset> convertToOffsets(plot) {
     var offsets = plot.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
     return offsets;
+  }
+
+  void plotTrace(List<List<double>> plot, ScalingHelper scalingHelper,
+      double maxX, Canvas canvas, Paint paint) {
+    var scaled = scalingHelper.scaleToHorizontalExtent(plot: plot, maxX: maxX);
+
+    var offsets = convertToOffsets(scaled);
+    canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
   }
 }

@@ -1,5 +1,4 @@
 import 'package:ircommandmanager/webaccess.dart';
-import '../dataobjects/selectabletraceinfo.dart';
 import '../dataobjects/traceinfo.dart';
 import '../dataobjects/tracepoints.dart';
 import '../dataobjects/tracesdata.dart';

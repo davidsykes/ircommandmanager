@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../testing/testrunner.dart';
 import '../tests/utilities/scalinghelpertests.dart';
 import '../tests/utilities/tracetolinesconvertertests.dart';
-import '../tests/utilities/tracevaluerangefindertests.dart';
 
 class CodeTestPage extends StatelessWidget {
   @override
@@ -13,7 +12,6 @@ class CodeTestPage extends StatelessWidget {
   List<Widget> makeTraceViewPage() {
     var runner = TestRunner();
 
-    runner.addTests(TraceValueRangeFinderTests());
     runner.addTests(TraceToLinesConverterTests());
     runner.addTests(ScalingHelperTests());
 

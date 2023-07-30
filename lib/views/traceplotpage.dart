@@ -98,16 +98,7 @@ class _TracePlotPageState extends State<TracePlotPage> {
   List<Widget> createButtonBar(
       PlotViewControlVariables plotViewControlVariables) {
     return <Widget>[
-      ElevatedButton(
-          onPressed: () {
-            zoomIn(plotViewControlVariables);
-          },
-          child: Text('+')),
-      ElevatedButton(
-          onPressed: () {
-            zoomOut(plotViewControlVariables);
-          },
-          child: Text('-')),
+      Text('Zoom'),
       Slider(
           value: plotViewControlVariables.zoom.toDouble(),
           min: 1,
@@ -118,6 +109,7 @@ class _TracePlotPageState extends State<TracePlotPage> {
               plotViewControlVariables.zoom = value.round();
             });
           }),
+      Text('Pan'),
       Slider(
           value: plotViewControlVariables.offset.toDouble(),
           min: 0,
@@ -128,18 +120,13 @@ class _TracePlotPageState extends State<TracePlotPage> {
               plotViewControlVariables.offset = value.round();
             });
           }),
+      Checkbox(
+        value: plotViewControlVariables.showTestPlot,
+        onChanged: (bool? x) => setState(() {
+          plotViewControlVariables.showTestPlot =
+              !plotViewControlVariables.showTestPlot;
+        }),
+      )
     ];
-  }
-
-  void zoomIn(PlotViewControlVariables plotViewControlVariables) {
-    setState(() {
-      plotViewControlVariables.zoom++;
-    });
-  }
-
-  void zoomOut(PlotViewControlVariables plotViewControlVariables) {
-    setState(() {
-      plotViewControlVariables.zoom--;
-    });
   }
 }

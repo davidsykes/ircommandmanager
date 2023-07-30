@@ -35,10 +35,12 @@ class ScalingHelper {
   }
 
   List<List<double>> scaleToHorizontalExtent(
-      {required List<List<double>> plot, required double maxY}) {
-    var horizontalScale = screenWidth / maxY * zoom;
+      {required List<List<double>> plot, required double maxX}) {
+    var horizontalScale = screenWidth / maxX * zoom;
+    var horizontalOffset = offset * screenWidth / 100;
 
-    var scaled = plot.map((p) => [p[0] * horizontalScale, p[1]]);
+    var scaled =
+        plot.map((p) => [p[0] * horizontalScale - horizontalOffset, p[1]]);
 
     return scaled.toList();
   }
