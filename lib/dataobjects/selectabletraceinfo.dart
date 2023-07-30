@@ -2,11 +2,15 @@ import 'traceinfo.dart';
 
 class SelectableTraceInfo {
   final TraceInfo traceInfo;
-  bool selected = false;
+  bool _selected = false;
 
   SelectableTraceInfo({required this.traceInfo});
 
   toggle() {
-    selected = !selected;
+    _selected = !_selected;
+  }
+
+  isSelected() {
+    return _selected;
   }
 }

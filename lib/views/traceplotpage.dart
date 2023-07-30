@@ -8,18 +8,13 @@ import '../tracepainter.dart';
 class TracePlotPage extends StatefulWidget {
   @override
   State<TracePlotPage> createState() => _TracePlotPageState();
-
-  static Future<List<TraceInfo>> getSelectedTraces(MyAppState appState) async {
-    var traces = await appState.getSelectedTracesWithDetails();
-    return traces;
-  }
 }
 
 class _TracePlotPageState extends State<TracePlotPage> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    var loadTracelistFuture = TracePlotPage.getSelectedTraces(appState);
+    var loadTracelistFuture = getSelectedTracesWithDetails(appState);
 
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.displayMedium!,
@@ -74,6 +69,13 @@ class _TracePlotPageState extends State<TracePlotPage> {
         },
       ),
     );
+  }
+
+  static Future<List<TraceInfo>> getSelectedTracesWithDetails(
+      MyAppState appState) async {
+    var traces =
+        await appState.traceDataController.getSelectedTracesWithDetails();
+    return traces;
   }
 
   List<Widget> makeTraceViewPage(

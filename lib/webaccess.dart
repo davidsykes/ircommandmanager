@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:ircommandmanager/dataobjects/tracepoints.dart';
-import 'dataobjects/traceinfo.dart';
 
 class WebAccess {
   late String ipAddress;
@@ -14,22 +12,11 @@ class WebAccess {
     return 'http://$ipAddress/$u';
   }
 
-  Future<List<TraceInfo>> getTraces() async {
-    final httpPackageUrl = Uri.parse(makeUrl('tracenames'));
+  dynamic getWebData(String url) async {
+    final httpPackageUrl = Uri.parse(makeUrl(url));
     final httpPackageInfo = await http.read(httpPackageUrl);
     final decoded = json.decode(httpPackageInfo);
-
-    var traces = List<TraceInfo>.empty(growable: true);
-
-    for (var trace in decoded) {
-      traces.add(TraceInfo(
-          name: trace['tracename'],
-          fileName: trace['tracepath'],
-          traceCount: trace['tracecount'],
-          traceLength: trace['tracelength']));
-    }
-
-    return traces;
+    return decoded;
   }
 
   void deleteTraces(Iterable<String> tracesToDelete) {
@@ -47,15 +34,5 @@ class WebAccess {
     );
 
     print(result);
-  }
-
-  Future<TracePoints> getTraceDetails(String fileName) async {
-    final httpPackageUrl = Uri.parse(makeUrl('trace/$fileName'));
-    final httpPackageInfo = await http.read(httpPackageUrl);
-    final rawPoints = json.decode(httpPackageInfo);
-
-    TracePoints td = TracePoints.fromJsonPoints(rawPoints);
-    print('Get trace details for $fileName');
-    return td;
   }
 }

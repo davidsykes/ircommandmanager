@@ -1,50 +1,22 @@
 import 'package:flutter/material.dart';
 import 'dataobjects/plotviewcontrolvariables.dart';
-import 'dataobjects/selectabletraceinfo.dart';
-import 'dataobjects/traceinfo.dart';
+import 'dataobjects/tracesdata.dart';
+import 'utilities/tracedatacontoller.dart';
 import 'webaccess.dart';
 
 class MyAppState extends ChangeNotifier {
   late WebAccess webAccess;
-  late Future<List<TraceInfo>> getTraceListFuture;
+  late TraceDataController traceDataController;
   PlotViewControlVariables plotViewControlVariables =
       PlotViewControlVariables();
 
   MyAppState() {
     webAccess = WebAccess('192.168.1.142:5000');
-    getTraceListFuture = webAccess.getTraces();
+    traceDataController = TraceDataController(webAccess: webAccess);
   }
 
-  List<SelectableTraceInfo> selectableTraces =
-      List<SelectableTraceInfo>.empty();
-
-  Future<List<SelectableTraceInfo>> getSelectableTraceList() async {
-    if (selectableTraces.isEmpty) {
-      var tracedata = await getTraceListFuture;
-      selectableTraces = tracedata
-          .map((traceInfo) => SelectableTraceInfo(traceInfo: traceInfo))
-          .toList();
-    }
-    return selectableTraces;
-  }
-
-  List<SelectableTraceInfo> getCachedSelectableTraceList() {
-    return selectableTraces;
-  }
-
-  List<TraceInfo> getSelectedTraces() {
-    var selectedTraces = getCachedSelectableTraceList()
-        .where((trace) => trace.selected)
-        .map((selectableTraceInfo) => selectableTraceInfo.traceInfo);
-    return selectedTraces.toList();
-  }
-
-  Future<List<TraceInfo>> getSelectedTracesWithDetails() async {
-    var selectedTraces = getSelectedTraces();
-    for (var trace in selectedTraces) {
-      trace.traceDetails ??= await webAccess.getTraceDetails(trace.fileName);
-    }
-    return selectedTraces.toList();
+  Future<TracesData> getTracesDataFuture() async {
+    return traceDataController.getTracesDataFuture;
   }
 
   void deleteTraces(Iterable<String> tracesToDelete) {

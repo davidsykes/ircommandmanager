@@ -1,0 +1,21 @@
+
+TracesData
+List<TraceInfo> traces;
+
+SelectableTrace
+TraceInfo traceinfo
+bool selected
+
+TraceInfo
+String name;
+String fileName;
+int traceCount;
+int traceLength;
+TracePoints? traceDetails;
+
+TracePoints
+List<TracePoint> points;
+
+TracePoint
+int time;
+int value;

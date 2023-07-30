@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../dataobjects/selectabletraceinfo.dart';
+import '../dataobjects/tracesdata.dart';
 import '../myappstate.dart';
 
 class ViewTraceListPage extends StatefulWidget {
@@ -19,10 +20,9 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.displayMedium!,
       textAlign: TextAlign.center,
-      child: FutureBuilder<List<SelectableTraceInfo>>(
+      child: FutureBuilder<TracesData>(
         future: loadTracelistFuture,
-        builder: (BuildContext context,
-            AsyncSnapshot<List<SelectableTraceInfo>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<TracesData> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
             children = makeTraceViewPage(appState, snapshot.data!);
@@ -62,8 +62,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     );
   }
 
-  List<Widget> makeTraceViewPage(
-      MyAppState appState, List<SelectableTraceInfo> traces) {
+  List<Widget> makeTraceViewPage(MyAppState appState, TracesData traces) {
     return <Widget>[
       ButtonBar(
         alignment: MainAxisAlignment.start,
@@ -78,20 +77,18 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
       Expanded(
           child: ListView(
         children: <Widget>[
-          for (var p in traces) makeTraceListItem(appState, traces, p)
+          for (var p in traces.getAllTraces()) makeTraceListItem(appState, p)
         ],
       )),
     ];
   }
 
   Widget makeTraceListItem(
-      MyAppState appState,
-      List<SelectableTraceInfo> selectableTraces,
-      SelectableTraceInfo selectableTrace) {
+      MyAppState appState, SelectableTraceInfo selectableTrace) {
     var trace = selectableTrace.traceInfo;
     return ListTile(
       leading: Checkbox(
-        value: selectableTrace.selected,
+        value: selectableTrace.isSelected(),
         onChanged: (bool? x) => setState(() {
           selectableTrace.toggle();
         }),
@@ -101,18 +98,18 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     );
   }
 
-  static Future<List<SelectableTraceInfo>> getTraces(
-      MyAppState appState) async {
+  static Future<TracesData> getTraces(MyAppState appState) async {
     try {
-      var traces = await appState.getSelectableTraceList();
+      var traces = await appState.getTracesDataFuture();
       return traces;
     } catch (e) {
       return Future.error('Error getting traces: $e');
     }
   }
 
-  void deleteTraces(List<SelectableTraceInfo> traces, MyAppState appState) {
+  void deleteTraces(TracesData traces, MyAppState appState) {
     var tracesToDelete = traces
+        .getAllTraces()
         .where((trace) => trace.selected)
         .map((trace) => trace.traceInfo.fileName);
 
