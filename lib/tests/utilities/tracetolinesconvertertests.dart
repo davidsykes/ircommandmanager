@@ -1,5 +1,5 @@
-import '../../dataobjects/tracepoint.dart';
-import '../../dataobjects/tracepoints.dart';
+import '../../dataobjects/traces/tracepoint.dart';
+import '../../dataobjects/traces/tracepoints.dart';
 import '../../testing/testmodule.dart';
 import '../../testing/testunit.dart';
 import '../../utilities/tracetolinesconverter.dart';

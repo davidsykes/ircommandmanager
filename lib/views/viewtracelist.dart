@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../dataobjects/selectabletraceinfo.dart';
-import '../dataobjects/tracesdata.dart';
+import '../dataobjects/traces/selectabletraceinfo.dart';
+import '../dataobjects/traces/tracesdata.dart';
 import '../myappstate.dart';
 
 class ViewTraceListPage extends StatefulWidget {
@@ -72,6 +72,11 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
                 deleteTraces(traces, appState);
               },
               child: Text('Delete')),
+          Checkbox(
+              value: appState.showTestPlots,
+              onChanged: (bool? x) => setState(() {
+                    appState.showTestPlots = !appState.showTestPlots;
+                  })),
         ],
       ),
       Expanded(
@@ -100,7 +105,8 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
 
   static Future<TracesData> getTraces(MyAppState appState) async {
     try {
-      var traces = await appState.getTracesDataFuture();
+      var traces =
+          await appState.getTraceDataController().getTracesDataFuture();
       return traces;
     } catch (e) {
       return Future.error('Error getting traces: $e');

@@ -1,14 +1,20 @@
 import 'package:ircommandmanager/webaccess.dart';
-import '../dataobjects/traceinfo.dart';
-import '../dataobjects/tracepoints.dart';
-import '../dataobjects/tracesdata.dart';
+import '../dataobjects/traces/traceinfo.dart';
+import '../dataobjects/traces/tracepoints.dart';
+import '../dataobjects/traces/tracesdata.dart';
+import 'itracedatacontroller.dart';
 
-class TraceDataController {
+class TraceDataController implements ITraceDataController {
   late WebAccess webAccess;
-  late Future<TracesData> getTracesDataFuture;
+  late Future<TracesData> _getTracesDataFuture;
 
   TraceDataController({required this.webAccess}) {
-    getTracesDataFuture = getTracesData();
+    _getTracesDataFuture = getTracesData();
+  }
+
+  @override
+  Future<TracesData> getTracesDataFuture() {
+    return _getTracesDataFuture;
   }
 
   Future<TracesData> getTracesData() async {
@@ -26,8 +32,9 @@ class TraceDataController {
     return TracesData(traces);
   }
 
+  @override
   Future<List<TraceInfo>> getSelectedTracesWithDetails() async {
-    var traces = await getTracesDataFuture;
+    var traces = await getTracesDataFuture();
     var selectedTraces = traces.getSelectedTraces();
 
     for (var trace in selectedTraces) {

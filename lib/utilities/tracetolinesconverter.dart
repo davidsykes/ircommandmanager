@@ -1,4 +1,4 @@
-import 'package:ircommandmanager/dataobjects/tracepoints.dart';
+import '../dataobjects/traces/tracepoints.dart';
 
 class TraceToLinesConverter {
   List<List<double>> convertTraceToPlot(TracePoints tracePoints) {

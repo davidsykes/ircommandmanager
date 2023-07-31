@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../dataobjects/plotviewcontrolvariables.dart';
-import '../dataobjects/traceinfo.dart';
+import '../dataobjects/traces/traceinfo.dart';
 import '../myappstate.dart';
 import '../tracepainter.dart';
 
@@ -74,7 +74,7 @@ class _TracePlotPageState extends State<TracePlotPage> {
   static Future<List<TraceInfo>> getSelectedTracesWithDetails(
       MyAppState appState) async {
     var traces =
-        await appState.traceDataController.getSelectedTracesWithDetails();
+        await appState.getTraceDataController().getSelectedTracesWithDetails();
     return traces;
   }
 

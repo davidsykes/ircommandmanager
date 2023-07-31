@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 import 'dataobjects/plotviewcontrolvariables.dart';
-import 'dataobjects/tracesdata.dart';
+import 'dataobjects/testing/testtracedatacontroller.dart';
+import 'utilities/itracedatacontroller.dart';
 import 'utilities/tracedatacontoller.dart';
 import 'webaccess.dart';
 
 class MyAppState extends ChangeNotifier {
   late WebAccess webAccess;
-  late TraceDataController traceDataController;
+  ITraceDataController? actualTraceDataController;
+  ITraceDataController? testTraceDataController;
   PlotViewControlVariables plotViewControlVariables =
       PlotViewControlVariables();
+  bool showTestPlots = false;
 
   MyAppState() {
     webAccess = WebAccess('192.168.1.142:5000');
-    traceDataController = TraceDataController(webAccess: webAccess);
   }
 
-  Future<TracesData> getTracesDataFuture() async {
-    return traceDataController.getTracesDataFuture;
+  ITraceDataController getTraceDataController() {
+    if (showTestPlots) {
+      testTraceDataController ??= TestTraceDataController();
+      return testTraceDataController!;
+    }
+
+    actualTraceDataController ??= TraceDataController(webAccess: webAccess);
+    return actualTraceDataController!;
   }
 
   void deleteTraces(Iterable<String> tracesToDelete) {

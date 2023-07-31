@@ -1,4 +1,4 @@
-import 'package:ircommandmanager/dataobjects/tracepoint.dart';
+import 'tracepoint.dart';
 
 class TracePoints {
   late List<TracePoint> points;

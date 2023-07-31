@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../myappstate.dart';
 import '../testing/testrunner.dart';
 import '../tests/utilities/scalinghelpertests.dart';
 import '../tests/utilities/tracetolinesconvertertests.dart';
 
-class CodeTestPage extends StatelessWidget {
+class CodeTestPage extends StatefulWidget {
+  @override
+  State<CodeTestPage> createState() => _CodeTestPageState();
+}
+
+class _CodeTestPageState extends State<CodeTestPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView(children: makeTraceViewPage());
+    var appState = context.watch<MyAppState>();
+    return ListView(children: makeTraceViewPage(appState));
   }
 
-  List<Widget> makeTraceViewPage() {
+  List<Widget> makeTraceViewPage(MyAppState appState) {
+    return <Widget>[
+      Checkbox(
+          value: appState.showTestPlots,
+          onChanged: (bool? x) => setState(() {
+                appState.showTestPlots = !appState.showTestPlots;
+              })),
+      for (var w in runTestsAndReturnResults()) w
+    ];
+  }
+
+  List<Widget> runTestsAndReturnResults() {
     var runner = TestRunner();
 
     runner.addTests(TraceToLinesConverterTests());

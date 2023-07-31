@@ -39,7 +39,7 @@ class ScalingHelperTests extends TestModule {
   void plotsCanBeScaledHorizontally() {
     var values = createSomeValues();
 
-    var max = _helper.scaleToHorizontalExtent(plot: values[2], maxY: 1);
+    var max = _helper.scaleToHorizontalExtent(plot: values[2], maxX: 1);
 
     assertEqual(max, [
       [0.0, 0.0],
