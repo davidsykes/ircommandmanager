@@ -19,11 +19,17 @@ class _CodeTestPageState extends State<CodeTestPage> {
 
   List<Widget> makeTraceViewPage(MyAppState appState) {
     return <Widget>[
-      Checkbox(
-          value: appState.showTestPlots,
-          onChanged: (bool? x) => setState(() {
-                appState.showTestPlots = !appState.showTestPlots;
-              })),
+      ButtonBar(
+        alignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text('Show Test Plots'),
+          Checkbox(
+              value: appState.showTestPlots,
+              onChanged: (bool? x) => setState(() {
+                    appState.showTestPlots = !appState.showTestPlots;
+                  })),
+        ],
+      ),
       for (var w in runTestsAndReturnResults()) w
     ];
   }

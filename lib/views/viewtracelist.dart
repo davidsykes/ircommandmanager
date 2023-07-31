@@ -72,6 +72,10 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
                 deleteTraces(traces, appState);
               },
               child: Text('Delete')),
+          Text(
+            'Show Test Plots',
+            style: TextStyle(fontSize: 18),
+          ),
           Checkbox(
               value: appState.showTestPlots,
               onChanged: (bool? x) => setState(() {

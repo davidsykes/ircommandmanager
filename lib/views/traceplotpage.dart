@@ -120,13 +120,6 @@ class _TracePlotPageState extends State<TracePlotPage> {
               plotViewControlVariables.offset = value.round();
             });
           }),
-      Checkbox(
-        value: plotViewControlVariables.showTestPlot,
-        onChanged: (bool? x) => setState(() {
-          plotViewControlVariables.showTestPlot =
-              !plotViewControlVariables.showTestPlot;
-        }),
-      )
     ];
   }
 }
