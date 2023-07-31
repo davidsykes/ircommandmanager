@@ -69,7 +69,9 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
         children: <Widget>[
           ElevatedButton(
               onPressed: () {
-                deleteTraces(traces, appState);
+                setState(() {
+                  deleteTraces(traces, appState);
+                });
               },
               child: Text('Delete')),
           Text(

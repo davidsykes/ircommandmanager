@@ -9,7 +9,7 @@ class TraceDataController implements ITraceDataController {
   late Future<TracesData> _getTracesDataFuture;
 
   TraceDataController({required this.webAccess}) {
-    _getTracesDataFuture = getTracesData();
+    setOffFetchDataFuture();
   }
 
   @override
@@ -49,5 +49,24 @@ class TraceDataController implements ITraceDataController {
     TracePoints td = TracePoints.fromJsonPoints(rawPoints);
     print('Get trace details for $fileName');
     return td;
+  }
+
+  @override
+  void deleteTraces(Iterable<String> tracesToDelete) {
+    //webAccess.deleteTraces(tracesToDelete);
+    for (var trace in tracesToDelete) {
+      deleteTrace(trace);
+    }
+    setOffFetchDataFuture();
+  }
+
+  void deleteTrace(String trace) async {
+    var result = await webAccess.post('delete/$trace');
+
+    print(result);
+  }
+
+  void setOffFetchDataFuture() {
+    _getTracesDataFuture = getTracesData();
   }
 }

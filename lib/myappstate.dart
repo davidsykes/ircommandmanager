@@ -28,6 +28,6 @@ class MyAppState extends ChangeNotifier {
   }
 
   void deleteTraces(Iterable<String> tracesToDelete) {
-    webAccess.deleteTraces(tracesToDelete);
+    getTraceDataController().deleteTraces(tracesToDelete);
   }
 }

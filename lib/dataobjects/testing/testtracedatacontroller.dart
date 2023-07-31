@@ -32,6 +32,9 @@ class TestTraceDataController implements ITraceDataController {
   }
 
   @override
+  void deleteTraces(Iterable<String> tracesToDelete) {}
+
+  @override
   Future<List<TraceInfo>> getSelectedTracesWithDetails() async {
     var traces = await getTracesDataFuture();
     var selectedTraces = traces.getSelectedTraces();

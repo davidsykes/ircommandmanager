@@ -5,4 +5,6 @@ abstract class ITraceDataController {
   Future<List<TraceInfo>> getSelectedTracesWithDetails();
 
   Future<TracesData> getTracesDataFuture();
+
+  void deleteTraces(Iterable<String> tracesToDelete);
 }
