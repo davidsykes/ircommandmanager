@@ -21,6 +21,9 @@ class TestRunner {
       } on TestAssertFailException catch (e) {
         var cause = e.cause;
         results.add('Fail: $cause');
+        for (final extraCause in e.causes) {
+          results.add(extraCause);
+        }
       } on Exception catch (e) {
         // Anything else that is an exception
         results.add('Unknown exception: $e');

@@ -120,7 +120,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
   void deleteTraces(TracesData traces, MyAppState appState) {
     var tracesToDelete = traces
         .getAllTraces()
-        .where((trace) => trace.selected)
+        .where((trace) => trace.isSelected())
         .map((trace) => trace.traceInfo.fileName);
 
     appState.deleteTraces(tracesToDelete);

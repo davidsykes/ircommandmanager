@@ -12,29 +12,27 @@ abstract class TestModule {
 
   void myAssert(bool value) {
     if (!value) {
-      throwAssert();
+      throwAssert([]);
     }
   }
 
-  void assertEqual(dynamic a, dynamic b) {
-    var aj = json.encode(a);
-    var bj = json.encode(b);
-    if (aj != bj) {
-      print('A!= $a $b');
-      print('AJ!= $aj');
-      print('AJ!= $bj');
-      throwAssert();
+  void assertEqual(dynamic value, dynamic expected) {
+    var vj = json.encode(value);
+    var ej = json.encode(expected);
+    if (vj != ej) {
+      throwAssert(['got $vj', 'Expected $ej']);
     }
   }
 
-  void throwAssert() {
+  void throwAssert(List<String> causes) {
     var st = StackTrace.current.toString();
     var ls = LineSplitter().convert(st)[2];
-    throw TestAssertFailException(ls);
+    throw TestAssertFailException(ls, causes);
   }
 }
 
 class TestAssertFailException implements Exception {
   String cause;
-  TestAssertFailException(this.cause);
+  List<String> causes = List.empty();
+  TestAssertFailException(this.cause, this.causes);
 }

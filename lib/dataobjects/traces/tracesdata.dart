@@ -8,7 +8,7 @@ class TracesData {
     _traces = traces.map((t) => SelectableTraceInfo(traceInfo: t)).toList();
   }
 
-  getAllTraces() {
+  List<SelectableTraceInfo> getAllTraces() {
     return _traces;
   }
 

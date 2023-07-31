@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../myappstate.dart';
 import '../testing/testrunner.dart';
 import '../tests/utilities/scalinghelpertests.dart';
+import '../tests/utilities/tracesdatatests.dart';
 import '../tests/utilities/tracetolinesconvertertests.dart';
 
 class CodeTestPage extends StatefulWidget {
@@ -39,6 +40,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
 
     runner.addTests(TraceToLinesConverterTests());
     runner.addTests(ScalingHelperTests());
+    runner.addTests(TracesDataTests());
 
     var results = runner.runTests();
 
