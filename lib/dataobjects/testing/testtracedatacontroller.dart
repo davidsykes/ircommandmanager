@@ -41,16 +41,16 @@ class TestTraceDataController implements ITraceDataController {
   TracePoints make10Trace() {
     var points = [
       TracePoint(time: 0, value: 0),
-      TracePoint(time: 1, value: 1),
-      TracePoint(time: 2, value: 2),
-      TracePoint(time: 3, value: 3),
-      TracePoint(time: 4, value: 4),
-      TracePoint(time: 5, value: 5),
-      TracePoint(time: 6, value: 6),
-      TracePoint(time: 7, value: 7),
-      TracePoint(time: 8, value: 8),
-      TracePoint(time: 9, value: 9),
-      TracePoint(time: 10, value: 10),
+      TracePoint(time: 1, value: 50),
+      TracePoint(time: 2, value: 100),
+      TracePoint(time: 3, value: 150),
+      TracePoint(time: 4, value: 200),
+      TracePoint(time: 5, value: 250),
+      TracePoint(time: 6, value: 300),
+      TracePoint(time: 7, value: 350),
+      TracePoint(time: 8, value: 400),
+      TracePoint(time: 9, value: 450),
+      TracePoint(time: 10, value: 500),
     ];
     return TracePoints(points);
   }
