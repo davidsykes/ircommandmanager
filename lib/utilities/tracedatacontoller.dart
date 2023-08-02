@@ -9,7 +9,12 @@ class TraceDataController implements ITraceDataController {
   late Future<TracesData> _getTracesDataFuture;
 
   TraceDataController({required this.webAccess}) {
-    setOffFetchDataFuture();
+    refreshTraces();
+  }
+
+  @override
+  void refreshTraces() {
+    _getTracesDataFuture = getTracesData();
   }
 
   @override
@@ -57,16 +62,12 @@ class TraceDataController implements ITraceDataController {
     for (var trace in tracesToDelete) {
       deleteTrace(trace);
     }
-    setOffFetchDataFuture();
+    refreshTraces();
   }
 
   void deleteTrace(String trace) async {
     var result = await webAccess.post('delete/$trace');
 
     print(result);
-  }
-
-  void setOffFetchDataFuture() {
-    _getTracesDataFuture = getTracesData();
   }
 }

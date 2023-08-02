@@ -70,6 +70,13 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
           ElevatedButton(
               onPressed: () {
                 setState(() {
+                  refreshTraces(appState);
+                });
+              },
+              child: Text('Refresh')),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
                   deleteTraces(traces, appState);
                 });
               },
@@ -126,5 +133,9 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
         .map((trace) => trace.traceInfo.fileName);
 
     appState.deleteTraces(tracesToDelete);
+  }
+
+  void refreshTraces(MyAppState appState) {
+    appState.getTraceDataController().refreshTraces();
   }
 }

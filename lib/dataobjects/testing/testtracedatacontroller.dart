@@ -32,6 +32,8 @@ class TestTraceDataController implements ITraceDataController {
   }
 
   @override
+  void refreshTraces() {}
+  @override
   void deleteTraces(Iterable<String> tracesToDelete) {}
 
   @override
