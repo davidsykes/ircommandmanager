@@ -17,6 +17,7 @@ class ScalingHelperTests extends TestModule {
       createTest(theMaximumXValueIsCalculated),
       createTest(theMaximumYValueIsCalculated),
       createTest(plotsCanBeScaledHorizontally),
+      createTest(plotsCanBeScaledVVerticallyToRangeFrom0To1),
     ];
   }
 
@@ -45,6 +46,20 @@ class ScalingHelperTests extends TestModule {
       [0.0, 0.0],
       [320.0, 1.0]
     ]);
+  }
+
+  void plotsCanBeScaledVVerticallyToRangeFrom0To1() {
+    List<List<double>> values = [
+      [10, 10],
+      [10, 11],
+      [10, 12],
+    ];
+
+    var newValues = _helper.scalePlotToUnitRange(values);
+
+    assertEqual(newValues[0], [10.0, 0.0]);
+    assertEqual(newValues[1], [10.0, 0.5]);
+    assertEqual(newValues[2], [10.0, 1.0]);
   }
 
   List<List<List<double>>> createSomeValues() {

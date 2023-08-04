@@ -44,4 +44,15 @@ class ScalingHelper {
 
     return scaled.toList();
   }
+
+  List<List<double>> scalePlotToUnitRange(List<List<double>> scaled) {
+    var values = scaled.map((v) => v[1]);
+    var min = values.reduce((curr, next) => curr < next ? curr : next);
+    var max = values.reduce((curr, next) => curr > next ? curr : next);
+    var range = max - min;
+
+    var newValues = scaled.map((v) => [v[0], (v[1] - min) / range]).toList();
+
+    return newValues;
+  }
 }

@@ -4,7 +4,7 @@ import 'package:ircommandmanager/testing/testunit.dart';
 abstract class TestModule {
   Iterable<TestUnit> getTests();
 
-  void setUpObjectUnderTest();
+  void setUpObjectUnderTest() {}
 
   TestUnit createTest(void Function() action) {
     return TestUnit(testModule: this, action: action);

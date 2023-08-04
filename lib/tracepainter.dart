@@ -69,16 +69,18 @@ class MyPainter extends CustomPainter {
     }
   }
 
-  List<Offset> convertToOffsets(plot) {
-    var offsets = plot.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
-    return offsets;
-  }
-
   void plotTrace(List<List<double>> plot, ScalingHelper scalingHelper,
       double maxX, Canvas canvas, Paint paint) {
     var scaled = scalingHelper.scaleToHorizontalExtent(plot: plot, maxX: maxX);
 
+    scaled = scalingHelper.scalePlotToUnitRange(scaled);
+
     var offsets = convertToOffsets(scaled);
     canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
+  }
+
+  List<Offset> convertToOffsets(plot) {
+    var offsets = plot.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
+    return offsets;
   }
 }
