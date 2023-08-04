@@ -100,13 +100,13 @@ class _TracePlotPageState extends State<TracePlotPage> {
     return <Widget>[
       Text('Zoom'),
       Slider(
-          value: plotViewControlVariables.zoom.toDouble(),
-          min: 1,
+          value: plotViewControlVariables.zoom.toDouble() * 4,
+          min: 4,
           max: 100,
           label: plotViewControlVariables.zoom.toString(),
           onChanged: (double value) {
             setState(() {
-              plotViewControlVariables.zoom = value.round();
+              plotViewControlVariables.zoom = (value / 4).round();
             });
           }),
       Text('Pan'),
