@@ -81,6 +81,13 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
                 });
               },
               child: Text('Delete')),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  selectAllTraces(traces);
+                });
+              },
+              child: Text('Select All')),
           Text(
             'Show Test Plots',
             style: TextStyle(fontSize: 18),
@@ -133,6 +140,14 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
         .map((trace) => trace.traceInfo.fileName);
 
     appState.deleteTraces(tracesToDelete);
+  }
+
+  void selectAllTraces(TracesData traces) {
+    for (var trace in traces.getAllTraces()) {
+      if (!trace.isSelected()) {
+        trace.toggle();
+      }
+    }
   }
 
   void refreshTraces(MyAppState appState) {
