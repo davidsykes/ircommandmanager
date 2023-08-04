@@ -1,21 +1,19 @@
 import '../../testing/testmodule.dart';
 import '../../testing/testunit.dart';
-import '../../utilities/scalinghelper.dart';
+import '../../utilities/tracehorizontalscaler.dart';
 
-class ScalingHelperTests extends TestModule {
-  late ScalingHelper _helper;
+class TraceHorizontalScalerTests extends TestModule {
+  late TraceHorizontalScaler _helper;
 
   @override
   void setUpObjectUnderTest() {
-    _helper =
-        ScalingHelper(screenWidth: 320, screenHeight: 200, zoom: 1, offset: 0);
+    _helper = TraceHorizontalScaler(screenWidth: 320, zoom: 1, offset: 0);
   }
 
   @override
   Iterable<TestUnit> getTests() {
     return [
       createTest(theMaximumXValueIsCalculated),
-      createTest(theMaximumYValueIsCalculated),
       createTest(plotsCanBeScaledHorizontally),
       createTest(plotsCanBeScaledVVerticallyToRangeFrom0To1),
     ];
@@ -27,14 +25,6 @@ class ScalingHelperTests extends TestModule {
     var max = _helper.getMaximumXValue(values);
 
     assertEqual(max, 5.0);
-  }
-
-  void theMaximumYValueIsCalculated() {
-    var values = createSomeValues();
-
-    var max = _helper.getMaximumYValue(values);
-
-    assertEqual(max, 10.0);
   }
 
   void plotsCanBeScaledHorizontally() {

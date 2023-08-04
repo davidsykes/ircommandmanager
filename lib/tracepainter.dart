@@ -3,7 +3,7 @@ import 'package:ircommandmanager/utilities/tracetolinesconverter.dart';
 import 'dataobjects/plotviewcontrolvariables.dart';
 import 'dart:ui' as ui;
 import 'dataobjects/traces/traceinfo.dart';
-import 'utilities/scalinghelper.dart';
+import 'utilities/tracehorizontalscaler.dart';
 
 class MyPainter extends CustomPainter {
   final PlotViewControlVariables plotViewControlVariables;
@@ -15,8 +15,6 @@ class MyPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     //canvas.translate(0, -size.height);
     //canvas.scale(0.2, 0.2);
-    //var canvasWidth = size.width;
-    //var canvasHeight = size.height;
 
     final paint = Paint()
       ..color = Colors.black
@@ -52,9 +50,8 @@ class MyPainter extends CustomPainter {
   }
 
   void drawTracesUsingUnscaledCanvas(Canvas canvas, Size size, Paint paint) {
-    var scalingHelper = ScalingHelper(
+    var horizontalScaler = TraceHorizontalScaler(
         screenWidth: size.width,
-        screenHeight: size.height,
         zoom: plotViewControlVariables.zoom,
         offset: plotViewControlVariables.offset);
 
@@ -62,18 +59,23 @@ class MyPainter extends CustomPainter {
         .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))
         .toList();
 
-    var maxX = scalingHelper.getMaximumXValue(tracesToPlot);
+    var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
 
     for (var plot in tracesToPlot) {
-      plotTrace(plot, scalingHelper, maxX, canvas, paint);
+      plotTrace(plot, horizontalScaler, maxX, canvas, paint);
     }
   }
 
-  void plotTrace(List<List<double>> plot, ScalingHelper scalingHelper,
-      double maxX, Canvas canvas, Paint paint) {
-    var scaled = scalingHelper.scaleToHorizontalExtent(plot: plot, maxX: maxX);
+  void plotTrace(
+      List<List<double>> plot,
+      TraceHorizontalScaler horizontalScaler,
+      double maxX,
+      Canvas canvas,
+      Paint paint) {
+    var scaled =
+        horizontalScaler.scaleToHorizontalExtent(plot: plot, maxX: maxX);
 
-    scaled = scalingHelper.scalePlotToUnitRange(scaled);
+    scaled = horizontalScaler.scalePlotToUnitRange(scaled);
 
     var offsets = convertToOffsets(scaled);
     canvas.drawPoints(ui.PointMode.polygon, offsets, paint);

@@ -1,14 +1,10 @@
-class ScalingHelper {
+class TraceHorizontalScaler {
   final double screenWidth;
-  final double screenHeight;
   final int zoom;
   final int offset;
 
-  ScalingHelper(
-      {required this.screenWidth,
-      required this.screenHeight,
-      required this.zoom,
-      required this.offset});
+  TraceHorizontalScaler(
+      {required this.screenWidth, required this.zoom, required this.offset});
 
   double getMaximumXValue(List<List<List<double>>> values) {
     double maxx = 0;
@@ -20,18 +16,6 @@ class ScalingHelper {
       }
     }
     return maxx;
-  }
-
-  double getMaximumYValue(List<List<List<double>>> values) {
-    double maxy = 0;
-    for (List<List<double>> plot in values) {
-      for (List<double> p in plot) {
-        if (p[1] > maxy) {
-          maxy = p[1];
-        }
-      }
-    }
-    return maxy;
   }
 
   List<List<double>> scaleToHorizontalExtent(

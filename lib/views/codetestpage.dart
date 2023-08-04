@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../myappstate.dart';
 import '../testing/testrunner.dart';
-import '../tests/utilities/scalinghelpertests.dart';
+import '../tests/utilities/tracehorizontalscalertests.dart';
 import '../tests/utilities/tracesdatatests.dart';
 import '../tests/utilities/tracetolinesconvertertests.dart';
 import '../tests/utilities/varticalplotplacertests.dart';
@@ -40,7 +40,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
     var runner = TestRunner();
 
     runner.addTests(TraceToLinesConverterTests());
-    runner.addTests(ScalingHelperTests());
+    runner.addTests(TraceHorizontalScalerTests());
     runner.addTests(TracesDataTests());
     runner.addTests(VerticalPlotPlacerTests());
 
