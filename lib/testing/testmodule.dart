@@ -16,8 +16,8 @@ abstract class TestModule {
     }
   }
 
-  void assertEqual(dynamic value, dynamic expected) {
-    var vj = json.encode(value);
+  void assertEqual(dynamic actual, dynamic expected) {
+    var vj = json.encode(actual);
     var ej = json.encode(expected);
     if (vj != ej) {
       throwAssert(['got $vj', 'Expected $ej']);

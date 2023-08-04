@@ -3,11 +3,11 @@ import '../../testing/testunit.dart';
 import '../../utilities/tracehorizontalscaler.dart';
 
 class TraceHorizontalScalerTests extends TestModule {
-  late TraceHorizontalScaler _helper;
+  late TraceHorizontalScaler _scaler;
 
   @override
   void setUpObjectUnderTest() {
-    _helper = TraceHorizontalScaler(screenWidth: 320, zoom: 1, offset: 0);
+    _scaler = TraceHorizontalScaler(screenWidth: 320, zoom: 1, offset: 0);
   }
 
   @override
@@ -22,7 +22,7 @@ class TraceHorizontalScalerTests extends TestModule {
   void theMaximumXValueIsCalculated() {
     var values = createSomeValues();
 
-    var max = _helper.getMaximumXValue(values);
+    var max = _scaler.getMaximumXValue(values);
 
     assertEqual(max, 5.0);
   }
@@ -30,7 +30,7 @@ class TraceHorizontalScalerTests extends TestModule {
   void plotsCanBeScaledHorizontally() {
     var values = createSomeValues();
 
-    var max = _helper.scaleToHorizontalExtent(plot: values[2], maxX: 1);
+    var max = _scaler.scaleToHorizontalExtent(plot: values[2], maxX: 1);
 
     assertEqual(max, [
       [0.0, 0.0],
@@ -45,7 +45,7 @@ class TraceHorizontalScalerTests extends TestModule {
       [10, 12],
     ];
 
-    var newValues = _helper.scalePlotToUnitRange(values);
+    var newValues = _scaler.scalePlotValuesToUnitRange(values);
 
     assertEqual(newValues[0], [10.0, 0.0]);
     assertEqual(newValues[1], [10.0, 0.5]);

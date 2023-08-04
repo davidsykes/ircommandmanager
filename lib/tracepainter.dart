@@ -4,6 +4,7 @@ import 'dataobjects/plotviewcontrolvariables.dart';
 import 'dart:ui' as ui;
 import 'dataobjects/traces/traceinfo.dart';
 import 'utilities/tracehorizontalscaler.dart';
+import 'utilities/traceverticalscaler.dart';
 
 class MyPainter extends CustomPainter {
   final PlotViewControlVariables plotViewControlVariables;
@@ -13,8 +14,8 @@ class MyPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    //canvas.translate(0, -size.height);
-    //canvas.scale(0.2, 0.2);
+    canvas.translate(0, size.height);
+    canvas.scale(1, -1);
 
     final paint = Paint()
       ..color = Colors.black
@@ -55,6 +56,9 @@ class MyPainter extends CustomPainter {
         zoom: plotViewControlVariables.zoom,
         offset: plotViewControlVariables.offset);
 
+    var verticalScaler = TraceVerticalScaler(
+        screenHeight: size.height, traceCount: traces.length);
+
     var tracesToPlot = traces
         .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))
         .toList();
@@ -62,7 +66,7 @@ class MyPainter extends CustomPainter {
     var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
 
     for (var plot in tracesToPlot) {
-      plotTrace(plot, horizontalScaler, maxX, canvas, paint);
+      plotTrace(plot, horizontalScaler, maxX, verticalScaler, canvas, paint);
     }
   }
 
@@ -70,12 +74,15 @@ class MyPainter extends CustomPainter {
       List<List<double>> plot,
       TraceHorizontalScaler horizontalScaler,
       double maxX,
+      TraceVerticalScaler traceVerticalScaler,
       Canvas canvas,
       Paint paint) {
     var scaled =
         horizontalScaler.scaleToHorizontalExtent(plot: plot, maxX: maxX);
 
-    scaled = horizontalScaler.scalePlotToUnitRange(scaled);
+    scaled = horizontalScaler.scalePlotValuesToUnitRange(scaled);
+
+    scaled = traceVerticalScaler.scalePlot(0, scaled);
 
     var offsets = convertToOffsets(scaled);
     canvas.drawPoints(ui.PointMode.polygon, offsets, paint);

@@ -29,7 +29,7 @@ class TraceHorizontalScaler {
     return scaled.toList();
   }
 
-  List<List<double>> scalePlotToUnitRange(List<List<double>> scaled) {
+  List<List<double>> scalePlotValuesToUnitRange(List<List<double>> scaled) {
     var values = scaled.map((v) => v[1]);
     var min = values.reduce((curr, next) => curr < next ? curr : next);
     var max = values.reduce((curr, next) => curr > next ? curr : next);

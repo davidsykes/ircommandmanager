@@ -5,7 +5,7 @@ import '../testing/testrunner.dart';
 import '../tests/utilities/tracehorizontalscalertests.dart';
 import '../tests/utilities/tracesdatatests.dart';
 import '../tests/utilities/tracetolinesconvertertests.dart';
-import '../tests/utilities/varticalplotplacertests.dart';
+import '../tests/utilities/traceverticalscalertests.dart';
 
 class CodeTestPage extends StatefulWidget {
   @override
@@ -41,8 +41,8 @@ class _CodeTestPageState extends State<CodeTestPage> {
 
     runner.addTests(TraceToLinesConverterTests());
     runner.addTests(TraceHorizontalScalerTests());
+    runner.addTests(TraceVerticalScalerTests());
     runner.addTests(TracesDataTests());
-    runner.addTests(VerticalPlotPlacerTests());
 
     var results = runner.runTests();
 
