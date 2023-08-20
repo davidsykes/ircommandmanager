@@ -1,0 +1,3 @@
+IrCommandManager
+Flutter app to connect to the ir web server to view and manage ir data
+This includes the flutter plotting code
