@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'views/codetestpage.dart';
 import 'myappstate.dart';
-import 'views/ircommandspage.dart';
+import 'views/ircommandspage/ircommandspage.dart';
 import 'views/traceplotpage.dart';
 import 'views/viewtracelist.dart';
 
