@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../myappstate.dart';
 import '../testing/testrunner.dart';
+import '../tests/utilities/converters/commandslistfromapicommandsconvertertests.dart';
 import '../tests/utilities/tracehorizontalscalertests.dart';
 import '../tests/utilities/tracesdatatests.dart';
 import '../tests/utilities/tracetolinesconvertertests.dart';
@@ -43,6 +44,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
     runner.addTests(TraceHorizontalScalerTests());
     runner.addTests(TraceVerticalScalerTests());
     runner.addTests(TracesDataTests());
+    runner.addTests(CommandsListFromApiCommandsConverterTests());
 
     var results = runner.runTests();
 
