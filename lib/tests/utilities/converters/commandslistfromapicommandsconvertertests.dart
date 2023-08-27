@@ -37,7 +37,7 @@ class CommandsListFromApiCommandsConverterTests extends TestModule {
     var codes = CommandsListFromApiCommandsConverter.convert(data);
 
     assertEqual(codes.length, 1);
-    assertEqual(codes[0].name, 1);
+    assertEqual(codes[0].name, "3_3times");
     assertEqual(codes[0].points.length, 3);
     assertEqual(codes[0].points[0].time, 0);
     assertEqual(codes[0].points[0].value, 0);

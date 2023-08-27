@@ -4,5 +4,7 @@ class IrCommand {
   final String name;
   late List<TracePoint> points;
 
-  IrCommand(this.name);
+  IrCommand(this.name) {
+    points = List.empty(growable: true);
+  }
 }
