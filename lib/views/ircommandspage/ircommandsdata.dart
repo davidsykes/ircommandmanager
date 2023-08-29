@@ -50,9 +50,9 @@ class IrCommandsData {
     var codes = await _webAccess.getWebData('codes');
     commandsList = CommandsListFromApiCommandsConverter.convert(codes);
 
-    return Future.delayed(
-      const Duration(seconds: 2),
-      () => IrCommandsData(),
-    );
+    var cd = IrCommandsData();
+    cd.commandsList = commandsList;
+
+    return cd;
   }
 }

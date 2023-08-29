@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../myappstate.dart';
 import 'tabs/ircommandslisttab.dart';
 
 class IrCommandsPage extends StatefulWidget {
@@ -11,7 +9,6 @@ class IrCommandsPage extends StatefulWidget {
 class _IrCommandsPageState extends State<IrCommandsPage> {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
     return MaterialApp(
       home: DefaultTabController(
         length: 3,
