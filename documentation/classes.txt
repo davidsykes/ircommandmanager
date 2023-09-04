@@ -1,3 +1,19 @@
+IrCommandSequence		A timed series of command values, starting at time 0
+List<CommandValue> values
+
+CommandValue			A command value specifying the time and the value
+int time
+int value
+
+PlotSequence			A series of plot values
+List<PlotValue> plots
+
+PlotValue			A point for plotting
+int x
+int y
+
+
+
 
 TracesData
 List<TraceInfo> traces;

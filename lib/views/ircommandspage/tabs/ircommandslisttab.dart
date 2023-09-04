@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ircommandmanager/dataobjects/ircommand.dart';
+import '../../../dataobjects/ircommand.dart';
+import '../../../utilities/converters/ircommandsequencetoplotsequenceconverter.dart';
 import '../ircommandsdata.dart';
 
 class IrCommandsListTab {
@@ -63,31 +64,27 @@ class IrCommandsListTab {
     );
   }
 
-  // static void wTXFROMHEREXXXXXX() {}
-
-  // static List<Widget> makeTraceViewPage(IrCommandsData irCommandsData) {
-  //   return [
-  //     Text('sfdswf3'),
-  //     //ListView(children: makeIrCommandListWidgets(irCommandsData.commandsList)),
-  //     //makeIrCommandList(irCommandsData.commandsList),
-  //   ];
-  // }
-
-  // static Widget makeIrCommandList(List<IrCommand> commandsList) {
-  //   return Expanded(
-  //       child: ListView(children: makeIrCommandListWidgets(commandsList)));
-  // }
-
   static List<Widget> makeIrCommandListWidgets(List<IrCommand> commandsList) {
     List<Widget> widgets = List.empty(growable: true);
 
     for (var command in commandsList) {
-      var widget = SizedBox(width: 2, child: Text(command.name));
+      var widget = GestureDetector(
+        onTap: () {
+          friday(command);
+        },
+        child: Text(command.name),
+      );
       widgets.add(widget);
     }
 
     widgets.add(Text(DateTime.now().millisecondsSinceEpoch.toString()));
 
     return widgets;
+  }
+
+  static void friday(IrCommand command) {
+    //IrCommandsData().loadIrCommandsData(),
+    var plots = IrCommandSequenceToPlotSequenceConverter.convert(command);
+    //PlotWindow().SetPlot(plots);
   }
 }
