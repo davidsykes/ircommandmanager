@@ -3,7 +3,7 @@ import 'package:ircommandmanager/plotting/dataobjects/plotvalue.dart';
 import '../../plotting/dataobjects/plotsequence.dart';
 
 class IrCommandSequenceToPlotSequenceConverter {
-  static PlotSequence convert(IrCommandSequence command) {
+  PlotSequence convert(IrCommandSequence command) {
     var values = command.values;
     List<PlotValue> plots = List.empty(growable: true);
     plots.add(PlotValue(values[0].time, values[0].value));

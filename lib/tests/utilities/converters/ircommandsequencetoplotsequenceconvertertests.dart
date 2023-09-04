@@ -5,6 +5,13 @@ import '../../../testing/testunit.dart';
 import '../../../utilities/converters/ircommandsequencetoplotsequenceconverter.dart';
 
 class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {
+  late IrCommandSequenceToPlotSequenceConverter _converter;
+
+  @override
+  void setUpObjectUnderTest() {
+    _converter = IrCommandSequenceToPlotSequenceConverter();
+  }
+
   @override
   Iterable<TestUnit> getTests() {
     return [
@@ -15,8 +22,7 @@ class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {
   void aSequenceIsConverted() {
     var commandSequence = createSimpleSequence();
 
-    var sequence =
-        IrCommandSequenceToPlotSequenceConverter.convert(commandSequence);
+    var sequence = _converter.convert(commandSequence);
     var plots = sequence.plots;
 
     assertEqual(plots.length, 7);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'tabs/ircommandslisttab.dart';
+import 'tabs/ircommandstab/ircommandslisttabview.dart';
 
 class IrCommandsPage extends StatefulWidget {
   @override
@@ -25,7 +25,7 @@ class _IrCommandsPageState extends State<IrCommandsPage> {
           ),
           body: TabBarView(
             children: [
-              IrCommandsListTab.getWidgets(),
+              IrCommandsListTabView.getWidgets(),
               Icon(Icons.directions_transit),
               Icon(Icons.directions_bike),
             ],

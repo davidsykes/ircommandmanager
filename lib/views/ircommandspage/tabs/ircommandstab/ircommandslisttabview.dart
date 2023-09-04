@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../dataobjects/ircommandsequence.dart';
-import '../../../utilities/converters/ircommandsequencetoplotsequenceconverter.dart';
-import '../ircommandsdata.dart';
+import '../../../../dataobjects/ircommandsequence.dart';
+import '../../ircommandsdata.dart';
+import 'ircommandsplotwindow.dart';
 
-class IrCommandsListTab {
+class IrCommandsListTabView {
   static Widget getWidgets() {
     return FutureBuilder(
       future: IrCommandsData().loadIrCommandsData(),
       builder: (BuildContext context, AsyncSnapshot<IrCommandsData> snapshot) {
         List<Widget> children;
         if (snapshot.hasData) {
-          //children = makeTraceViewPage(snapshot.data!);
           return makePage(snapshot.data!);
         } else if (snapshot.hasError) {
           children = <Widget>[
@@ -58,7 +57,10 @@ class IrCommandsListTab {
         ),
         Expanded(
           flex: 75,
-          child: Container(color: Colors.green),
+          child: CustomPaint(
+            size: Size.infinite,
+            painter: IrCommandsPlotWindow().plotWindow,
+          ),
         ),
       ],
     );
@@ -84,8 +86,6 @@ class IrCommandsListTab {
   }
 
   static void friday(IrCommandSequence command) {
-    //IrCommandsData().loadIrCommandsData(),
-    var plots = IrCommandSequenceToPlotSequenceConverter.convert(command);
-    //PlotWindow().SetPlot(plots);
+    IrCommandsPlotWindow().showCommand(command);
   }
 }
