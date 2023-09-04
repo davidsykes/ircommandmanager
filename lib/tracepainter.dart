@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ircommandmanager/utilities/ircommandsequencetoplotsequenceconverter.dart';
+import 'utilities/tracetolinesconverter.dart';
 import 'plotting/view/plotviewcontrolvariables.dart';
 import 'dart:ui' as ui;
 import 'dataobjects/traces/traceinfo.dart';
@@ -60,8 +60,7 @@ class MyPainter extends CustomPainter {
         screenHeight: size.height, traceCount: traces.length);
 
     var tracesToPlot = traces
-        .map((t) => IrCommandSequenceToPlotSequenceConverter()
-            .convertTraceToPlot(t.traceDetails!))
+        .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))
         .toList();
 
     var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
