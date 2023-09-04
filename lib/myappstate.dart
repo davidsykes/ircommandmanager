@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dataobjects/plotviewcontrolvariables.dart';
+import 'plotting/view/plotviewcontrolvariables.dart';
 import 'dataobjects/testing/testtracedatacontroller.dart';
 import 'utilities/itracedatacontroller.dart';
 import 'utilities/tracedatacontoller.dart';

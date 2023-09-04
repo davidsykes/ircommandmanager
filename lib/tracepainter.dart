@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ircommandmanager/utilities/tracetolinesconverter.dart';
-import 'dataobjects/plotviewcontrolvariables.dart';
+import 'plotting/view/plotviewcontrolvariables.dart';
 import 'dart:ui' as ui;
 import 'dataobjects/traces/traceinfo.dart';
 import 'utilities/tracehorizontalscaler.dart';
