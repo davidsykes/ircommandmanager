@@ -1,6 +1,6 @@
 import '../dataobjects/traces/tracepoints.dart';
 
-class TraceToLinesConverter {
+class IrCommandSequenceToPlotSequenceConverter {
   List<List<double>> convertTraceToPlot(TracePoints tracePoints) {
     var points = tracePoints.points;
     var pointsToConvert = points.length;

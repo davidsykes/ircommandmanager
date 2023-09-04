@@ -1,4 +1,4 @@
-import '../../dataobjects/ircommand.dart';
+import '../../dataobjects/ircommandsequence.dart';
 import '../../utilities/converters/commandsequencetransferformattocommandsequenceconverter.dart';
 import '../../webaccess.dart';
 
@@ -10,17 +10,8 @@ class IrCommandsData {
 
   WebAccess _webAccess = WebAccess('192.168.1.142:5001');
 
-  List<IrCommand> commandsList = List<IrCommand>.empty(growable: true);
-
-  // String account = 'johanacct1';
-
-  // String getServerUrl() {
-  //   return 'http://192.168.1.60';
-  // }
-
-  // String getAccountUrl() {
-  //   return '${getServerUrl()}/accounts/$account';
-  // }
+  List<IrCommandSequence> commandsList =
+      List<IrCommandSequence>.empty(growable: true);
 
   Future<IrCommandsData>? loadIrCommandsDataFuture;
   Future<IrCommandsData> loadIrCommandsData() async {

@@ -1,10 +1,10 @@
-import 'package:ircommandmanager/dataobjects/ircommand.dart';
+import 'package:ircommandmanager/dataobjects/ircommandsequence.dart';
 import 'package:ircommandmanager/plotting/dataobjects/plotvalue.dart';
 import '../../plotting/dataobjects/plotsequence.dart';
 
 class IrCommandSequenceToPlotSequenceConverter {
-  static PlotSequence convert(IrCommand command) {
-    var values = command.points;
+  static PlotSequence convert(IrCommandSequence command) {
+    var values = command.values;
     List<PlotValue> plots = List.empty(growable: true);
     plots.add(PlotValue(values[0].time, values[0].value));
     var lastValue = values[0].value;

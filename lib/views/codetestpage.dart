@@ -6,7 +6,7 @@ import '../tests/utilities/converters/commandsequencetransferformattocommandsequ
 import '../tests/utilities/converters/ircommandsequencetoplotsequenceconvertertests.dart';
 import '../tests/utilities/tracehorizontalscalertests.dart';
 import '../tests/utilities/tracesdatatests.dart';
-import '../tests/utilities/tracetolinesconvertertests.dart';
+import '../tests/utilities/ircommandsequencetoplotsequenceconvertertests.dart';
 import '../tests/utilities/traceverticalscalertests.dart';
 
 class CodeTestPage extends StatefulWidget {

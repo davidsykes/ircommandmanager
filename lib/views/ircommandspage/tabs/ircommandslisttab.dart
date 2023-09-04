@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../dataobjects/ircommand.dart';
+import '../../../dataobjects/ircommandsequence.dart';
 import '../../../utilities/converters/ircommandsequencetoplotsequenceconverter.dart';
 import '../ircommandsdata.dart';
 
@@ -64,7 +64,8 @@ class IrCommandsListTab {
     );
   }
 
-  static List<Widget> makeIrCommandListWidgets(List<IrCommand> commandsList) {
+  static List<Widget> makeIrCommandListWidgets(
+      List<IrCommandSequence> commandsList) {
     List<Widget> widgets = List.empty(growable: true);
 
     for (var command in commandsList) {
@@ -82,7 +83,7 @@ class IrCommandsListTab {
     return widgets;
   }
 
-  static void friday(IrCommand command) {
+  static void friday(IrCommandSequence command) {
     //IrCommandsData().loadIrCommandsData(),
     var plots = IrCommandSequenceToPlotSequenceConverter.convert(command);
     //PlotWindow().SetPlot(plots);

@@ -2,14 +2,14 @@ import '../../dataobjects/traces/tracepoint.dart';
 import '../../dataobjects/traces/tracepoints.dart';
 import '../../testing/testmodule.dart';
 import '../../testing/testunit.dart';
-import '../../utilities/tracetolinesconverter.dart';
+import '../../utilities/ircommandsequencetoplotsequenceconverter.dart';
 
 class TraceToLinesConverterTests extends TestModule {
-  late TraceToLinesConverter _converter;
+  late IrCommandSequenceToPlotSequenceConverter _converter;
 
   @override
   void setUpObjectUnderTest() {
-    _converter = TraceToLinesConverter();
+    _converter = IrCommandSequenceToPlotSequenceConverter();
   }
 
   @override

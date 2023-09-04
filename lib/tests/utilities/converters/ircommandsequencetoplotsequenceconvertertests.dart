@@ -1,5 +1,5 @@
 import 'package:ircommandmanager/dataobjects/traces/tracepoint.dart';
-import '../../../dataobjects/ircommand.dart';
+import '../../../dataobjects/ircommandsequence.dart';
 import '../../../testing/testmodule.dart';
 import '../../../testing/testunit.dart';
 import '../../../utilities/converters/ircommandsequencetoplotsequenceconverter.dart';
@@ -36,7 +36,7 @@ class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {
     myAssert(plots[6].y == 1);
   }
 
-  IrCommand createSimpleSequence() {
+  IrCommandSequence createSimpleSequence() {
     return createSequence([
       [0, 0],
       [1, 1],
@@ -45,9 +45,9 @@ class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {
     ]);
   }
 
-  IrCommand createSequence(List<List<int>> list) {
-    var cmd = IrCommand("Command name");
-    cmd.points = list.map((p) => TracePoint(time: p[0], value: p[1])).toList();
+  IrCommandSequence createSequence(List<List<int>> list) {
+    var cmd = IrCommandSequence("Command name");
+    cmd.values = list.map((p) => TracePoint(time: p[0], value: p[1])).toList();
     return cmd;
   }
 }
