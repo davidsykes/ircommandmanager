@@ -1,5 +1,5 @@
 import '../../dataobjects/ircommand.dart';
-import '../../utilities/converters/commandslistfromapicommandsconverter.dart';
+import '../../utilities/converters/commandsequencetransferformattocommandsequenceconverter.dart';
 import '../../webaccess.dart';
 
 class IrCommandsData {
@@ -30,7 +30,8 @@ class IrCommandsData {
 
   Future<IrCommandsData> _loadIrCommandsData() async {
     var codes = await _webAccess.getWebData('codes');
-    commandsList = CommandsListFromApiCommandsConverter.convert(codes);
+    commandsList =
+        CommandSequenceTransferFormatToCommandSequenceConverter.convert(codes);
 
     var cd = IrCommandsData();
     cd.commandsList = commandsList;

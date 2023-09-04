@@ -1,7 +1,7 @@
 import 'package:ircommandmanager/dataobjects/ircommand.dart';
 import '../../dataobjects/traces/tracepoint.dart';
 
-class CommandsListFromApiCommandsConverter {
+class CommandSequenceTransferFormatToCommandSequenceConverter {
   static List<IrCommand> convert(codes) {
     for (var code in codes) {
       _makeIrCommand(code);

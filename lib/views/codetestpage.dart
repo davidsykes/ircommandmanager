@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../myappstate.dart';
 import '../testing/testrunner.dart';
-import '../tests/utilities/converters/commandslistfromapicommandsconvertertests.dart';
+import '../tests/utilities/converters/commandsequencetransferformattocommandsequenceconvertertests.dart';
 import '../tests/utilities/converters/ircommandsequencetoplotsequenceconvertertests.dart';
 import '../tests/utilities/tracehorizontalscalertests.dart';
 import '../tests/utilities/tracesdatatests.dart';

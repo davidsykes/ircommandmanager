@@ -1,8 +1,7 @@
 import 'dart:convert';
-
 import '../../../testing/testmodule.dart';
 import '../../../testing/testunit.dart';
-import '../../../utilities/converters/commandslistfromapicommandsconverter.dart';
+import '../../../utilities/converters/commandsequencetransferformattocommandsequenceconverter.dart';
 
 class CommandsListFromApiCommandsConverterTests extends TestModule {
   @override
@@ -34,7 +33,8 @@ class CommandsListFromApiCommandsConverterTests extends TestModule {
 ]""";
     var data = json.decode(jsonCodes);
 
-    var codes = CommandsListFromApiCommandsConverter.convert(data);
+    var codes =
+        CommandSequenceTransferFormatToCommandSequenceConverter.convert(data);
 
     assertEqual(codes.length, 1);
     assertEqual(codes[0].name, "3_3times");
