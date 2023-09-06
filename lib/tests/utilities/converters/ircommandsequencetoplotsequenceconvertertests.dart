@@ -16,6 +16,7 @@ class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {
   Iterable<TestUnit> getTests() {
     return [
       createTest(aSequenceIsConverted),
+      createTest(aSequenceCanHaveNoElements),
     ];
   }
 
@@ -40,6 +41,15 @@ class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {
     myAssert(plots[5].y == 0);
     myAssert(plots[6].x == 3);
     myAssert(plots[6].y == 1);
+  }
+
+  void aSequenceCanHaveNoElements() {
+    var commandSequence = IrCommandSequence('empty');
+
+    var sequence = _converter.convert(commandSequence);
+    var plots = sequence.plots;
+
+    assertEqual(plots.length, 0);
   }
 
   IrCommandSequence createSimpleSequence() {

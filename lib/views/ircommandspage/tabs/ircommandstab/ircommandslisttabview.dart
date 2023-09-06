@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
+import '../../../../dataobjects/traces/tracepoint.dart';
 import '../../ircommandsdata.dart';
 import 'ircommandsplotwindow.dart';
 
@@ -71,21 +72,37 @@ class IrCommandsListTabView {
     List<Widget> widgets = List.empty(growable: true);
 
     for (var command in commandsList) {
-      var widget = GestureDetector(
-        onTap: () {
-          friday(command);
-        },
-        child: Text(command.name),
-      );
-      widgets.add(widget);
+      widgets.add(makeTappableWidget(command));
     }
 
     widgets.add(Text(DateTime.now().millisecondsSinceEpoch.toString()));
+
+    widgets.add(makeTappableWidget(makeTestCommand1()));
 
     return widgets;
   }
 
   static void friday(IrCommandSequence command) {
     IrCommandsPlotWindow().showCommand(command);
+  }
+
+  static Widget makeTappableWidget(IrCommandSequence command) {
+    var widget = GestureDetector(
+      onTap: () {
+        friday(command);
+      },
+      child: Text(command.name),
+    );
+    return widget;
+  }
+
+  static IrCommandSequence makeTestCommand1() {
+    var cmd = IrCommandSequence('0to10');
+
+    var list = List<int>.generate(11, (i) => i);
+    var list2 = list.map((i) => TracePoint(time: i, value: i));
+    cmd.values = list2.toList();
+
+    return cmd;
   }
 }

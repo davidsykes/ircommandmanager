@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
-
-import 'package:ircommandmanager/plotting/dataobjects/plotsequence.dart';
+import '../dataobjects/plotsequence.dart';
+import '../logic/unitsizescaler.dart';
+import 'plotviewcontrolvariables.dart';
 
 class PlotWindow extends CustomPainter {
-  // final PlotViewControlVariables plotViewControlVariables;
-  // final List<TraceInfo> traces;
-
-  // MyPainter({required this.plotViewControlVariables, required this.traces});
+  List<PlotSequence> plotSequences = List.empty();
+  List<PlotSequence> unitPlots = List.empty();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -19,11 +18,13 @@ class PlotWindow extends CustomPainter {
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.butt;
 
-//    if (plotViewControlVariables.showTestPlot) {
-    drawTestPattern(canvas, size, paint);
-//    }
+    var pvcv = PlotViewControlVariables();
 
-//    drawTracesUsingUnscaledCanvas(canvas, size, paint);
+    if (pvcv.showTestPlot) {
+      drawTestPattern(canvas, size, paint);
+    }
+
+    drawPlots(canvas, size, paint);
   }
 
   @override
@@ -43,32 +44,44 @@ class PlotWindow extends CustomPainter {
       Offset(canvasWidth, canvasHeight),
       Offset(0, canvasHeight),
       Offset(canvasWidth, 0),
+      Offset(0, 0),
+      Offset(canvasWidth / 2, canvasHeight / 4),
+      Offset(canvasWidth / 3, canvasHeight / 4),
+      Offset(canvasWidth / 2, canvasHeight / 4),
+      Offset(canvasWidth / 2, canvasHeight / 5),
     ];
     canvas.drawPoints(ui.PointMode.polygon, points, paint);
   }
 
-  void setPlot(PlotSequence plot) {}
+  void setPlot(PlotSequence plot) {
+    plotSequences = [plot];
+    scalePlotsToUnitSize();
+  }
 
-  // void drawTracesUsingUnscaledCanvas(Canvas canvas, Size size, Paint paint) {
-  //   var horizontalScaler = TraceHorizontalScaler(
-  //       screenWidth: size.width,
-  //       zoom: plotViewControlVariables.zoom,
-  //       offset: plotViewControlVariables.offset);
+  void scalePlotsToUnitSize() {
+    unitPlots = UnitSizeScaler().scaleToUnitSize(plotSequences);
+  }
 
-  //   var verticalScaler = TraceVerticalScaler(
-  //       screenHeight: size.height, traceCount: traces.length);
+  void drawPlots(Canvas canvas, Size size, Paint paint) {
+    //   var horizontalScaler = TraceHorizontalScaler(
+    //       screenWidth: size.width,
+    //       zoom: plotViewControlVariables.zoom,
+    //       offset: plotViewControlVariables.offset);
 
-  //   var tracesToPlot = traces
-  //       .map((t) => IrCommandSequenceToPlotSequenceConverter()
-  //           .convertTraceToPlot(t.traceDetails!))
-  //       .toList();
+    //   var verticalScaler = TraceVerticalScaler(
+    //       screenHeight: size.height, traceCount: traces.length);
 
-  //   var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
+    //   var tracesToPlot = traces
+    //       .map((t) => IrCommandSequenceToPlotSequenceConverter()
+    //           .convertTraceToPlot(t.traceDetails!))
+    //       .toList();
 
-  //   for (var plot in tracesToPlot) {
-  //     plotTrace(plot, horizontalScaler, maxX, verticalScaler, canvas, paint);
-  //   }
-  // }
+    //   var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
+
+    for (var plot in unitPlots) {
+      //     plotTrace(plot, horizontalScaler, maxX, verticalScaler, canvas, paint);
+    }
+  }
 
   // void plotTrace(
   //     List<List<double>> plot,

@@ -1,5 +1,5 @@
-IrCommandSequence		A timed series of command values, starting at time 0
-List<CommandValue> values
+IrCommandSequence [IrCommand]		A timed series of command values, starting at time 0
+List<CommandValue> values [points]
 
 CommandValue			A command value specifying the time and the value
 int time
