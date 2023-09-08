@@ -25,7 +25,7 @@ class _IrCommandsPageState extends State<IrCommandsPage> {
           ),
           body: TabBarView(
             children: [
-              IrCommandsListTabView.getWidgets(),
+              IrCommandsListTabView(),
               Icon(Icons.directions_transit),
               Icon(Icons.directions_bike),
             ],

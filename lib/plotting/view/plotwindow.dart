@@ -8,6 +8,8 @@ class PlotWindow extends CustomPainter {
   List<PlotSequence> plotSequences = List.empty();
   List<PlotSequence> unitPlots = List.empty();
 
+  PlotWindow({required Listenable repaint}) : super(repaint: repaint);
+
   @override
   void paint(Canvas canvas, Size size) {
     canvas.translate(0, size.height);

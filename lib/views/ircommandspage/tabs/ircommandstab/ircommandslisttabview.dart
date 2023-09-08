@@ -4,8 +4,21 @@ import '../../../../dataobjects/traces/tracepoint.dart';
 import '../../ircommandsdata.dart';
 import 'ircommandsplotwindow.dart';
 
-class IrCommandsListTabView {
-  static Widget getWidgets() {
+class IrCommandsListTabView extends StatefulWidget {
+  @override
+  State<IrCommandsListTabView> createState() => _IrCommandsListTabViewState();
+}
+
+class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
+  final _counter = ValueNotifier<int>(0);
+  late IrCommandsPlotWindow _plotWindow;
+
+  _IrCommandsListTabViewState() {
+    _plotWindow = IrCommandsPlotWindow(repaint: _counter);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return FutureBuilder(
       future: IrCommandsData().loadIrCommandsData(),
       builder: (BuildContext context, AsyncSnapshot<IrCommandsData> snapshot) {
@@ -47,7 +60,7 @@ class IrCommandsListTabView {
     );
   }
 
-  static Widget makePage(IrCommandsData irCommandsData) {
+  Widget makePage(IrCommandsData irCommandsData) {
     return Row(
       children: <Widget>[
         Expanded(
@@ -60,15 +73,14 @@ class IrCommandsListTabView {
           flex: 75,
           child: CustomPaint(
             size: Size.infinite,
-            painter: IrCommandsPlotWindow().plotWindow,
+            painter: _plotWindow.plotWindow, //PlotWindow(repaint: _counter),
           ),
         ),
       ],
     );
   }
 
-  static List<Widget> makeIrCommandListWidgets(
-      List<IrCommandSequence> commandsList) {
+  List<Widget> makeIrCommandListWidgets(List<IrCommandSequence> commandsList) {
     List<Widget> widgets = List.empty(growable: true);
 
     for (var command in commandsList) {
@@ -82,11 +94,14 @@ class IrCommandsListTabView {
     return widgets;
   }
 
-  static void friday(IrCommandSequence command) {
-    IrCommandsPlotWindow().showCommand(command);
+  void friday(IrCommandSequence command) {
+    setState(() {
+      _plotWindow.showCommand(command);
+      _counter.value++;
+    });
   }
 
-  static Widget makeTappableWidget(IrCommandSequence command) {
+  Widget makeTappableWidget(IrCommandSequence command) {
     var widget = GestureDetector(
       onTap: () {
         friday(command);
