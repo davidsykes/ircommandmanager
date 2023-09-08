@@ -6,6 +6,10 @@ class TestUnit {
 
   TestUnit({required this.testModule, required this.action});
 
+  void setUpMocks() {
+    testModule.setUpMocks();
+  }
+
   void setUpObjectUnderTest() {
     testModule.setUpObjectUnderTest();
   }

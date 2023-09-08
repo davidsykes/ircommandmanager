@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import '../dataobjects/plotsequence.dart';
-import '../logic/unitsizescaler.dart';
+import '../logic/iplotsequencesunitsizescaler.dart';
+import '../logic/plotsequencesrangefinder.dart';
+import '../logic/plotsequencesunitsizescaler.dart';
 import 'plotviewcontrolvariables.dart';
 
 class PlotWindow extends CustomPainter {
   List<PlotSequence> plotSequences = List.empty();
   List<PlotSequence> unitPlots = List.empty();
 
-  PlotWindow({required Listenable repaint}) : super(repaint: repaint);
+  late IPlotSequencesUnitSizeScaler _scaler;
+
+  PlotWindow({required Listenable repaint}) : super(repaint: repaint) {
+    var plotSequencesRangeFinder = PlotSequencesRangeFinder();
+    _scaler = PlotSequencesUnitSizeScaler(plotSequencesRangeFinder);
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -61,7 +68,7 @@ class PlotWindow extends CustomPainter {
   }
 
   void scalePlotsToUnitSize() {
-    unitPlots = UnitSizeScaler().scaleToUnitSize(plotSequences);
+    unitPlots = _scaler.scaleToUnitSize(plotSequences);
   }
 
   void drawPlots(Canvas canvas, Size size, Paint paint) {

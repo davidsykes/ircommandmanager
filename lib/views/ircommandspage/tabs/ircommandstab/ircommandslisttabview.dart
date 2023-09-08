@@ -73,7 +73,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
           flex: 75,
           child: CustomPaint(
             size: Size.infinite,
-            painter: _plotWindow.plotWindow, //PlotWindow(repaint: _counter),
+            painter: _plotWindow.plotWindow,
           ),
         ),
       ],

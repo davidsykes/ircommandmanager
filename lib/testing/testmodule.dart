@@ -4,6 +4,7 @@ import 'package:ircommandmanager/testing/testunit.dart';
 abstract class TestModule {
   Iterable<TestUnit> getTests();
 
+  void setUpMocks() {}
   void setUpObjectUnderTest() {}
 
   TestUnit createTest(void Function() action) {
@@ -13,6 +14,12 @@ abstract class TestModule {
   void myAssert(bool value) {
     if (!value) {
       throwAssert([]);
+    }
+  }
+
+  void assertSameObject(dynamic actual, dynamic expected) {
+    if (actual != expected) {
+      throwAssert(['Expected identical objects']);
     }
   }
 

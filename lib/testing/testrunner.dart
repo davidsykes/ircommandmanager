@@ -15,6 +15,7 @@ class TestRunner {
 
     for (final test in tests) {
       try {
+        test.setUpMocks();
         test.setUpObjectUnderTest();
         test.runTest();
         numberOfPassingTests++;
@@ -24,12 +25,15 @@ class TestRunner {
         for (final extraCause in e.causes) {
           results.add(extraCause);
         }
+        results.add('-------------------');
       } on Exception catch (e) {
         // Anything else that is an exception
         results.add('Unknown exception: $e');
-      } catch (e) {
+      } catch (e, s) {
         // No specified type, handles all
         results.add('Fail: Unknown error: $e');
+        results.add('$s');
+        results.add('-------------------');
       }
     }
     results.add('$numberOfPassingTests tests pass');
