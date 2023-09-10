@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import '../dataobjects/plotsequence.dart';
 import '../logic/iplotsequencesunitsizescaler.dart';
 import '../logic/plotsequencesrangefinder.dart';
+import '../logic/plotsequencesrangescaler.dart';
 import '../logic/plotsequencesunitsizescaler.dart';
 import 'plotviewcontrolvariables.dart';
 
@@ -14,7 +15,9 @@ class PlotWindow extends CustomPainter {
 
   PlotWindow({required Listenable repaint}) : super(repaint: repaint) {
     var plotSequencesRangeFinder = PlotSequencesRangeFinder();
-    _scaler = PlotSequencesUnitSizeScaler(plotSequencesRangeFinder);
+    var plotSequencesRangeScaler = PlotSequencesRangeScaler();
+    _scaler = PlotSequencesUnitSizeScaler(
+        plotSequencesRangeFinder, plotSequencesRangeScaler);
   }
 
   @override
@@ -88,6 +91,7 @@ class PlotWindow extends CustomPainter {
     //   var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
 
     for (var plot in unitPlots) {
+      throw plot;
       //     plotTrace(plot, horizontalScaler, maxX, verticalScaler, canvas, paint);
     }
   }

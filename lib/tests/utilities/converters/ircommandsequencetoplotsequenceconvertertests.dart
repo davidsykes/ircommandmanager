@@ -27,20 +27,20 @@ class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {
     var plots = sequence.plots;
 
     assertEqual(plots.length, 7);
-    myAssert(plots[0].x == 0);
-    myAssert(plots[0].y == 0);
+    assertTrue(plots[0].x == 0);
+    assertTrue(plots[0].y == 0);
     assertEqual(plots[1].x, 1);
-    myAssert(plots[1].y == 0);
-    myAssert(plots[2].x == 1);
-    myAssert(plots[2].y == 1);
-    myAssert(plots[3].x == 2);
-    myAssert(plots[3].y == 1);
-    myAssert(plots[4].x == 2);
-    myAssert(plots[4].y == 0);
-    myAssert(plots[5].x == 3);
-    myAssert(plots[5].y == 0);
-    myAssert(plots[6].x == 3);
-    myAssert(plots[6].y == 1);
+    assertTrue(plots[1].y == 0);
+    assertTrue(plots[2].x == 1);
+    assertTrue(plots[2].y == 1);
+    assertTrue(plots[3].x == 2);
+    assertTrue(plots[3].y == 1);
+    assertTrue(plots[4].x == 2);
+    assertTrue(plots[4].y == 0);
+    assertTrue(plots[5].x == 3);
+    assertTrue(plots[5].y == 0);
+    assertTrue(plots[6].x == 3);
+    assertTrue(plots[6].y == 1);
   }
 
   void aSequenceCanHaveNoElements() {

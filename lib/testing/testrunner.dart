@@ -15,6 +15,7 @@ class TestRunner {
 
     for (final test in tests) {
       try {
+        test.setUpData();
         test.setUpMocks();
         test.setUpObjectUnderTest();
         test.runTest();

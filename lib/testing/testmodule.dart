@@ -4,6 +4,7 @@ import 'package:ircommandmanager/testing/testunit.dart';
 abstract class TestModule {
   Iterable<TestUnit> getTests();
 
+  void setUpData() {}
   void setUpMocks() {}
   void setUpObjectUnderTest() {}
 
@@ -11,7 +12,7 @@ abstract class TestModule {
     return TestUnit(testModule: this, action: action);
   }
 
-  void myAssert(bool value) {
+  void assertTrue(bool value) {
     if (!value) {
       throwAssert([]);
     }

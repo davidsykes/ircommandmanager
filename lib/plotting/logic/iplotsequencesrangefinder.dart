@@ -1,5 +1,7 @@
 import 'package:ircommandmanager/plotting/dataobjects/plotsequence.dart';
 
+import '../dataobjects/plotsequencesrange.dart';
+
 abstract class IPlotSequencesRangeFinder {
-  void calculateRange(List<PlotSequence> plotSequences);
+  PlotSequencesRange calculateRange(List<PlotSequence> plotSequences);
 }

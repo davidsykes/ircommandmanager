@@ -24,21 +24,21 @@ class TraceToLinesConverterTests extends TestModule {
 
     var plot = _converter.convertTraceToPlot(trace);
 
-    myAssert(plot.length == 7);
-    myAssert(plot[0][0] == 0);
-    myAssert(plot[0][1] == 0);
-    myAssert(plot[1][0] == 1);
-    myAssert(plot[1][1] == 0);
-    myAssert(plot[2][0] == 1);
-    myAssert(plot[2][1] == 1);
-    myAssert(plot[3][0] == 2);
-    myAssert(plot[3][1] == 1);
-    myAssert(plot[4][0] == 2);
-    myAssert(plot[4][1] == 0);
-    myAssert(plot[5][0] == 3);
-    myAssert(plot[5][1] == 0);
-    myAssert(plot[6][0] == 3);
-    myAssert(plot[6][1] == 1);
+    assertTrue(plot.length == 7);
+    assertTrue(plot[0][0] == 0);
+    assertTrue(plot[0][1] == 0);
+    assertTrue(plot[1][0] == 1);
+    assertTrue(plot[1][1] == 0);
+    assertTrue(plot[2][0] == 1);
+    assertTrue(plot[2][1] == 1);
+    assertTrue(plot[3][0] == 2);
+    assertTrue(plot[3][1] == 1);
+    assertTrue(plot[4][0] == 2);
+    assertTrue(plot[4][1] == 0);
+    assertTrue(plot[5][0] == 3);
+    assertTrue(plot[5][1] == 0);
+    assertTrue(plot[6][0] == 3);
+    assertTrue(plot[6][1] == 1);
   }
 
   TracePoints createSimpleTrace() {

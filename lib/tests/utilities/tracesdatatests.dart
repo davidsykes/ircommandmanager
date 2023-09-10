@@ -22,10 +22,10 @@ class TracesDataTests extends TestModule {
   void allTracesCanBeRetrieved() {
     var traces = _data.getAllTraces();
 
-    myAssert(traces.length == 3);
-    myAssert(!traces[0].isSelected());
-    myAssert(!traces[1].isSelected());
-    myAssert(!traces[2].isSelected());
+    assertTrue(traces.length == 3);
+    assertTrue(!traces[0].isSelected());
+    assertTrue(!traces[1].isSelected());
+    assertTrue(!traces[2].isSelected());
   }
 
   void tracesCanBeSelected() {

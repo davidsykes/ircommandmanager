@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../myappstate.dart';
 import '../testing/testrunner.dart';
+import '../tests/plotting/logic/plotsequencesrangefindertests.dart';
 import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
 import '../tests/utilities/converters/commandsequencetransferformattocommandsequenceconvertertests.dart';
 import '../tests/utilities/converters/ircommandsequencetoplotsequenceconvertertests.dart';
@@ -49,6 +50,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
     runner.addTests(CommandsListFromApiCommandsConverterTests());
     runner.addTests(IrCommandSequenceToPlotSequenceConverterTests());
     runner.addTests(PlotSequencesUnitSizeScalerTests());
+    runner.addTests(PlotSequencesRangeFinderTests());
 
     var results = runner.runTests();
 
