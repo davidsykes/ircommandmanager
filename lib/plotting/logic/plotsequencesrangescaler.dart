@@ -1,13 +1,18 @@
-import 'package:ircommandmanager/plotting/dataobjects/plotsequence.dart';
-
+import '../dataobjects/plotsequence.dart';
 import '../dataobjects/plotsequencesrange.dart';
+import 'iplotsequencerangescaler.dart';
 import 'iplotsequencesrangescaler.dart';
 
 class PlotSequencesRangeScaler extends IPlotSequencesRangeScaler {
+  IPlotSequenceRangeScaler _plotSequenceRangeScaler;
+
+  PlotSequencesRangeScaler(this._plotSequenceRangeScaler);
+
   @override
-  void scalePlotSequences(
+  List<PlotSequence> scalePlotSequences(
       List<PlotSequence> plotSequences, PlotSequencesRange range) {
-    // TODO: implement scalePlotSequences
-    throw 42;
+    var scaled = plotSequences
+        .map((e) => _plotSequenceRangeScaler.scalePlotSequence(e, range));
+    return scaled.toList();
   }
 }

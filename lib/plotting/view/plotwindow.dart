@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import '../dataobjects/plotsequence.dart';
 import '../logic/iplotsequencesunitsizescaler.dart';
+import '../logic/plotsequencerangescaler.dart';
 import '../logic/plotsequencesrangefinder.dart';
 import '../logic/plotsequencesrangescaler.dart';
 import '../logic/plotsequencesunitsizescaler.dart';
@@ -15,7 +16,9 @@ class PlotWindow extends CustomPainter {
 
   PlotWindow({required Listenable repaint}) : super(repaint: repaint) {
     var plotSequencesRangeFinder = PlotSequencesRangeFinder();
-    var plotSequencesRangeScaler = PlotSequencesRangeScaler();
+    var plotSequenceRangeScaler = PlotSequenceRangeScaler();
+    var plotSequencesRangeScaler =
+        PlotSequencesRangeScaler(plotSequenceRangeScaler);
     _scaler = PlotSequencesUnitSizeScaler(
         plotSequencesRangeFinder, plotSequencesRangeScaler);
   }
