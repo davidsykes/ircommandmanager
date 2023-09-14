@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import '../dataobjects/plotsequence.dart';
+import '../dataobjects/plotvalue.dart';
 import '../logic/iplotsequencesunitsizescaler.dart';
 import '../logic/plotsequencerangescaler.dart';
 import '../logic/plotsequencesrangefinder.dart';
 import '../logic/plotsequencesrangescaler.dart';
 import '../logic/plotsequencesunitsizescaler.dart';
+import '../logic/plotviewport.dart';
 import 'plotviewcontrolvariables.dart';
 
 class PlotWindow extends CustomPainter {
@@ -13,6 +15,7 @@ class PlotWindow extends CustomPainter {
   List<PlotSequence> unitPlots = List.empty();
 
   late IPlotSequencesUnitSizeScaler _scaler;
+  var _plotViewport = PlotViewport();
 
   PlotWindow({required Listenable repaint}) : super(repaint: repaint) {
     var plotSequencesRangeFinder = PlotSequencesRangeFinder();
@@ -94,14 +97,15 @@ class PlotWindow extends CustomPainter {
     //   var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
 
     for (var plot in unitPlots) {
-      plotTrace(canvas, paint, plot);
+      plotTrace(canvas, size, paint, plot);
       //     plotTrace(plot, horizontalScaler, maxX, verticalScaler, canvas, paint);
     }
   }
 
-  void plotTrace(Canvas canvas, Paint paint, PlotSequence plotSequence) {
+  void plotTrace(
+      Canvas canvas, Size size, Paint paint, PlotSequence plotSequence) {
     var plots = plotSequence.plots;
-
+    plots = _plotViewport.scaleToViewport(plots, size.width, size.height);
     var offsets = convertToOffsets(plots);
     canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
   }
@@ -124,8 +128,8 @@ class PlotWindow extends CustomPainter {
   //   canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
   // }
 
-  List<Offset> convertToOffsets(plot) {
-    var offsets = plot.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
+  List<Offset> convertToOffsets(List<PlotValue> plots) {
+    var offsets = plots.map((p) => Offset(p.x, p.y)).toList().cast<Offset>();
     return offsets;
   }
 }

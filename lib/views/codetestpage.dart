@@ -6,6 +6,7 @@ import '../tests/plotting/logic/plotsequencerangescalertests.dart';
 import '../tests/plotting/logic/plotsequencesrangefindertests.dart';
 import '../tests/plotting/logic/plotsequencesrangescalertests.dart';
 import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
+import '../tests/plotting/logic/plotviewporttests.dart';
 import '../tests/utilities/converters/commandsequencetransferformattocommandsequenceconvertertests.dart';
 import '../tests/utilities/converters/ircommandsequencetoplotsequenceconvertertests.dart';
 import '../tests/utilities/tracehorizontalscalertests.dart';
@@ -55,6 +56,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
     runner.addTests(PlotSequencesRangeFinderTests());
     runner.addTests(PlotSequencesRangeScalerTests());
     runner.addTests(PlotSequenceRangeScalerTests());
+    runner.addTests(PlotViewportTests());
 
     var results = runner.runTests();
 
