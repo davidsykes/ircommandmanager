@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../myappstate.dart';
 import '../testing/testrunner.dart';
+import '../tests/plotting/logic/plotsequencerangescalertests.dart';
 import '../tests/plotting/logic/plotsequencesrangefindertests.dart';
 import '../tests/plotting/logic/plotsequencesrangescalertests.dart';
 import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
@@ -53,6 +54,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
     runner.addTests(PlotSequencesUnitSizeScalerTests());
     runner.addTests(PlotSequencesRangeFinderTests());
     runner.addTests(PlotSequencesRangeScalerTests());
+    runner.addTests(PlotSequenceRangeScalerTests());
 
     var results = runner.runTests();
 

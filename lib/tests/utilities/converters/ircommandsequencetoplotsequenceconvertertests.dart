@@ -29,7 +29,7 @@ class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {
     assertEqual(plots.length, 7);
     assertTrue(plots[0].x == 0);
     assertTrue(plots[0].y == 0);
-    assertEqual(plots[1].x, 1);
+    assertEqual(plots[1].x, 1.0);
     assertTrue(plots[1].y == 0);
     assertTrue(plots[2].x == 1);
     assertTrue(plots[2].y == 1);

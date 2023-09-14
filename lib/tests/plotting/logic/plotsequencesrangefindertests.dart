@@ -25,10 +25,10 @@ class PlotSequencesRangeFinderTests extends TestModule {
 
     var range = _finder.calculateRange(plotSequences);
 
-    assertEqual(range.minx, 1);
-    assertEqual(range.maxx, 3);
-    assertEqual(range.miny, 2);
-    assertEqual(range.maxy, 4);
+    assertEqual(range.minx, 1.0);
+    assertEqual(range.maxx, 3.0);
+    assertEqual(range.miny, 2.0);
+    assertEqual(range.maxy, 4.0);
   }
 
   void aComplexRangeCanBeFound() {
@@ -39,10 +39,10 @@ class PlotSequencesRangeFinderTests extends TestModule {
 
     var range = _finder.calculateRange(plotSequences);
 
-    assertEqual(range.minx, 10);
-    assertEqual(range.maxx, 20);
-    assertEqual(range.miny, 5);
-    assertEqual(range.maxy, 25);
+    assertEqual(range.minx, 10.0);
+    assertEqual(range.maxx, 20.0);
+    assertEqual(range.miny, 5.0);
+    assertEqual(range.maxy, 25.0);
   }
 
   void ifThereAreNoSequencesTheRangeIsZero() {
@@ -50,10 +50,10 @@ class PlotSequencesRangeFinderTests extends TestModule {
 
     var range = _finder.calculateRange(plotSequences);
 
-    assertEqual(range.minx, 0);
-    assertEqual(range.maxx, 0);
-    assertEqual(range.miny, 0);
-    assertEqual(range.maxy, 0);
+    assertEqual(range.minx, 0.0);
+    assertEqual(range.maxx, 0.0);
+    assertEqual(range.miny, 0.0);
+    assertEqual(range.maxy, 0.0);
   }
 
   void ifASequenceHasNoPlotsItIsIgnored() {
@@ -65,10 +65,10 @@ class PlotSequencesRangeFinderTests extends TestModule {
 
     var range = _finder.calculateRange(plotSequences);
 
-    assertEqual(range.minx, 10);
-    assertEqual(range.maxx, 20);
-    assertEqual(range.miny, 5);
-    assertEqual(range.maxy, 25);
+    assertEqual(range.minx, 10.0);
+    assertEqual(range.maxx, 20.0);
+    assertEqual(range.miny, 5.0);
+    assertEqual(range.maxy, 25.0);
   }
 
   void ifSeveralSequencesHaveNoPlotsTheRangeIsZero() {
@@ -80,10 +80,10 @@ class PlotSequencesRangeFinderTests extends TestModule {
 
     var range = _finder.calculateRange(plotSequences);
 
-    assertEqual(range.minx, 0);
-    assertEqual(range.maxx, 0);
-    assertEqual(range.miny, 0);
-    assertEqual(range.maxy, 0);
+    assertEqual(range.minx, 0.0);
+    assertEqual(range.maxx, 0.0);
+    assertEqual(range.miny, 0.0);
+    assertEqual(range.maxy, 0.0);
   }
 
   //#region Supporting Code
@@ -93,7 +93,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
     _finder = PlotSequencesRangeFinder();
   }
 
-  List<PlotSequence> creatPlotSequencesltrb(List<List<int>> values) {
+  List<PlotSequence> creatPlotSequencesltrb(List<List<double>> values) {
     var seq = values.map((e) => PlotSequence([
           PlotValue(e[0], e[1]),
           PlotValue(e[2], e[1]),

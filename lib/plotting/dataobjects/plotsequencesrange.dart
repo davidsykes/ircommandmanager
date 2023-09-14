@@ -1,8 +1,8 @@
 class PlotSequencesRange {
-  int minx = 0;
-  int maxx = 0;
-  int miny = 0;
-  int maxy = 0;
+  double minx = 0;
+  double maxx = 0;
+  double miny = 0;
+  double maxy = 0;
 
   PlotSequencesRange(this.minx, this.maxx, this.miny, this.maxy);
 }

@@ -94,9 +94,16 @@ class PlotWindow extends CustomPainter {
     //   var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
 
     for (var plot in unitPlots) {
-      throw plot;
+      plotTrace(canvas, paint, plot);
       //     plotTrace(plot, horizontalScaler, maxX, verticalScaler, canvas, paint);
     }
+  }
+
+  void plotTrace(Canvas canvas, Paint paint, PlotSequence plotSequence) {
+    var plots = plotSequence.plots;
+
+    var offsets = convertToOffsets(plots);
+    canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
   }
 
   // void plotTrace(
@@ -117,8 +124,8 @@ class PlotWindow extends CustomPainter {
   //   canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
   // }
 
-  // List<Offset> convertToOffsets(plot) {
-  //   var offsets = plot.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
-  //   return offsets;
-  // }
+  List<Offset> convertToOffsets(plot) {
+    var offsets = plot.map((p) => Offset(p[0], p[1])).toList().cast<Offset>();
+    return offsets;
+  }
 }

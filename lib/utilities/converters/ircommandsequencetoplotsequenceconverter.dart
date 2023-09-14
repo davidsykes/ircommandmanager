@@ -8,13 +8,15 @@ class IrCommandSequenceToPlotSequenceConverter {
 
     var values = command.values;
     if (values.isNotEmpty) {
-      plots.add(PlotValue(values[0].time, values[0].value));
-      var lastValue = values[0].value;
+      plots.add(
+          PlotValue(values[0].time.toDouble(), values[0].value.toDouble()));
+      var lastValue = values[0].value.toDouble();
 
       for (var i = 1; i < values.length; i++) {
-        plots.add(PlotValue(values[i].time, lastValue));
-        plots.add(PlotValue(values[i].time, values[i].value));
-        lastValue = values[i].value;
+        plots.add(PlotValue(values[i].time.toDouble(), lastValue));
+        plots.add(
+            PlotValue(values[i].time.toDouble(), values[i].value.toDouble()));
+        lastValue = values[i].value.toDouble();
       }
     }
 
