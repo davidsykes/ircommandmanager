@@ -3,12 +3,13 @@ import '../../utilities/converters/commandsequencetransferformattocommandsequenc
 import '../../webaccess.dart';
 
 class IrCommandsData {
+  static const String ipAddress = '192.168.1.142:5001';
   //One instance, needs factory
   static IrCommandsData? _instance;
   factory IrCommandsData() => _instance ??= IrCommandsData._();
   IrCommandsData._();
 
-  WebAccess _webAccess = WebAccess('192.168.1.142:5001');
+  WebAccess _webAccess = WebAccess(ipAddress);
 
   List<IrCommandSequence> commandsList =
       List<IrCommandSequence>.empty(growable: true);

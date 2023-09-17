@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
 import '../../../../dataobjects/traces/tracepoint.dart';
+import '../../../../plotting/view/plotwindow.dart';
 import '../../ircommandsdata.dart';
 import 'ircommandsplotwindow.dart';
 
@@ -65,17 +66,35 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
       children: <Widget>[
         Expanded(
           flex: 25,
-          child: ListView(
-            children: makeIrCommandListWidgets(irCommandsData.commandsList),
-          ),
+          child:
+              makeWidgetIrCommandsSelectableList(irCommandsData.commandsList),
         ),
         Expanded(
           flex: 75,
+          child: makeWidgetPlotWindowWithEdging(_plotWindow.plotWindow),
+        ),
+      ],
+    );
+  }
+
+  Widget makeWidgetIrCommandsSelectableList(
+      List<IrCommandSequence> commandsList) {
+    return ListView(
+      children: makeIrCommandListWidgets(commandsList),
+    );
+  }
+
+  Widget makeWidgetPlotWindowWithEdging(PlotWindow plotWindow) {
+    return Column(
+      children: <Widget>[
+        Text(''),
+        Expanded(
           child: CustomPaint(
             size: Size.infinite,
             painter: _plotWindow.plotWindow,
           ),
         ),
+        Text(''),
       ],
     );
   }

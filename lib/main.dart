@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),
-                    label: Text('IR Commands'),
+                    label: Text('IR Controller'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),

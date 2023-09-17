@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tabs/ircommandstab/ircommandslisttabview.dart';
+import 'tabs/ircommandstab/ircontrollerstatustabview.dart';
 
 class IrCommandsPage extends StatefulWidget {
   @override
@@ -16,17 +17,17 @@ class _IrCommandsPageState extends State<IrCommandsPage> {
           appBar: AppBar(
             bottom: const TabBar(
               tabs: [
+                Tab(text: 'Status'),
                 Tab(text: 'Commands'),
-                Tab(icon: Icon(Icons.directions_transit)),
                 Tab(icon: Icon(Icons.directions_bike)),
               ],
             ),
-            title: const Text('IR Commands'),
+            title: const Text('IR Controller'),
           ),
           body: TabBarView(
             children: [
+              IrControllerStatusTabView(),
               IrCommandsListTabView(),
-              Icon(Icons.directions_transit),
               Icon(Icons.directions_bike),
             ],
           ),
