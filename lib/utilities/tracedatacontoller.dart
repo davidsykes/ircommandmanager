@@ -23,7 +23,7 @@ class TraceDataController implements ITraceDataController {
   }
 
   Future<TracesData> getTracesData() async {
-    final decoded = await webAccess.getWebData('tracenames');
+    final decoded = await webAccess.getJsonWebData('tracenames');
 
     var traces = List<TraceInfo>.empty(growable: true);
     for (var trace in decoded) {
@@ -49,7 +49,7 @@ class TraceDataController implements ITraceDataController {
   }
 
   Future<TracePoints> getTraceDetails(String fileName) async {
-    final rawPoints = await webAccess.getWebData('trace/$fileName');
+    final rawPoints = await webAccess.getJsonWebData('trace/$fileName');
 
     TracePoints td = TracePoints.fromJsonPoints(rawPoints);
     print('Get trace details for $fileName');

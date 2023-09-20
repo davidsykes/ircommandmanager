@@ -12,11 +12,17 @@ class WebAccess {
     return 'http://$ipAddress/$u';
   }
 
-  dynamic getWebData(String url) async {
+  dynamic getJsonWebData(String url) async {
     final httpPackageUrl = Uri.parse(makeUrl(url));
     final httpPackageInfo = await http.read(httpPackageUrl);
     final decoded = json.decode(httpPackageInfo);
     return decoded;
+  }
+
+  Future<String> getTextWebData(String url) async {
+    final httpPackageUrl = Uri.parse(makeUrl(url));
+    final httpPackageInfo = await http.read(httpPackageUrl);
+    return httpPackageInfo;
   }
 
   Future<String> post(String url) async {

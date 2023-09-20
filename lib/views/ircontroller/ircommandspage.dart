@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tabs/ircommandstab/ircommandslisttabview.dart';
-import 'tabs/ircommandstab/ircontrollerstatustabview.dart';
+import 'tabs/statustab/ircontrollerstatustabview.dart';
 
 class IrCommandsPage extends StatefulWidget {
   @override

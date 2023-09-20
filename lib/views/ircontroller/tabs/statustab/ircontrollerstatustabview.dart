@@ -52,10 +52,37 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
   }
 
   Widget makePage(IrCommandsData irCommandsData) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          flex: 50,
+          child: makeStatusListPage(irCommandsData),
+        ),
+        Expanded(
+          flex: 50,
+          child: makeStatusListPage(irCommandsData),
+        ),
+      ],
+    );
+  }
+
+  Widget makeStatusListPage(IrCommandsData irCommandsData) {
     var ipAddress = IrCommandsData.ipAddress;
+    var configuration = irCommandsData.configuration;
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('now then'),
       Text('ip address: $ipAddress'),
+      Text('Configuration: $configuration'),
+      ButtonBar(
+        alignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text('Show Test Plots'),
+          Checkbox(
+              value: irCommandsData.configurationIsRecorder(),
+              onChanged: (bool? x) => setState(() {
+                    irCommandsData.setConfiguration(x!);
+                  })),
+        ],
+      ),
     ]);
   }
 }
