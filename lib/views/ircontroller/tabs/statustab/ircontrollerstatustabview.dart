@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ircommandmanager/utilities/futures/futurebuilder.dart';
 import '../../ircommandsdata.dart';
 
 class IrControllerStatusTabView extends StatefulWidget {
@@ -60,7 +61,7 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
         ),
         Expanded(
           flex: 50,
-          child: makeStatusListPage(irCommandsData),
+          child: makeStatusLogsPage(irCommandsData),
         ),
       ],
     );
@@ -84,5 +85,14 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
         ],
       ),
     ]);
+  }
+
+  Future<TheData2> fetch() {
+    return Future<TheData2>.value(TheData2());
+  }
+
+  Widget makeStatusLogsPage(IrCommandsData irCommandsData) {
+    var maker = PageMaker();
+    return MyFutureBuilder.buildFuture(fetch, maker);
   }
 }
