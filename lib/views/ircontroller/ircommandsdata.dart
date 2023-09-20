@@ -44,4 +44,8 @@ class IrCommandsData {
   void setConfiguration(bool x) {
     configuration = x ? 'SDSD' : 'yrytyuyu';
   }
+
+  Future<String> loadLogData() {
+    return Future(() => 'yi de WTAFyi');
+  }
 }

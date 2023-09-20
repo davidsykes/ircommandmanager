@@ -87,12 +87,11 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
     ]);
   }
 
-  Future<TheData2> fetch() {
-    return Future<TheData2>.value(TheData2());
+  Widget makeStatusLogsPage(IrCommandsData irCommandsData) {
+    return MyFutureBuilder.buildFuture(irCommandsData.loadLogData, pageMaker);
   }
 
-  Widget makeStatusLogsPage(IrCommandsData irCommandsData) {
-    var maker = PageMaker();
-    return MyFutureBuilder.buildFuture(fetch, maker);
+  Widget pageMaker(String string) {
+    return Text(string);
   }
 }

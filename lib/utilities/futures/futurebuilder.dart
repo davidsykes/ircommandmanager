@@ -1,28 +1,14 @@
 import 'package:flutter/material.dart';
 
-class TheData2 extends Object {}
-
-//class TheDataFetcher {
-//  Future<TheData> getData() {
-//    return Future<TheData>.value(TheData());
-//  }
-//}
-
-class PageMaker<T extends Object> {
-  Widget makePage(T theData) {
-    return Text('Yo de yoereo');
-  }
-}
-
 class MyFutureBuilder {
   static buildFuture<T extends Object>(
-      Future<T> Function() dataFetcher, PageMaker<T> pageMaker) {
+      Future<T> Function() dataFetcher, Widget Function(T) pageMaker) {
     return FutureBuilder(
       future: dataFetcher(),
       builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
         List<Widget> children;
         if (snapshot.hasData) {
-          return pageMaker.makePage(snapshot.data!);
+          return pageMaker(snapshot.data!);
         } else if (snapshot.hasError) {
           children = <Widget>[
             const Icon(
