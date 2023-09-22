@@ -33,8 +33,7 @@ class CommandsListFromApiCommandsConverterTests extends TestModule {
 ]""";
     var data = json.decode(jsonCodes);
 
-    var codes =
-        CommandSequenceTransferFormatToCommandSequenceConverter.convert(data);
+    var codes = convertCommandSequenceTransferFormatToCommandSequence(data);
 
     assertEqual(codes.length, 1);
     assertEqual(codes[0].name, "3_3times");
