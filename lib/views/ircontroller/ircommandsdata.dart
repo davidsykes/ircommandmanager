@@ -24,11 +24,10 @@ class IrCommandsData {
 
   Future<IrCommandsData> _loadIrCommandsData() async {
     var codes = await _webAccess.getJsonWebData('codes');
-    commandsList =
-        CommandSequenceTransferFormatToCommandSequenceConverter.convert(codes);
+    commandsList = convertCommandSequenceTransferFormatToCommandSequence(codes);
 
-    var configuration =
-        await _webAccess.getTextWebData('option?option=sfdfsdf');
+    var configuration = await _webAccess
+        .getTextWebData('option?option=configuration.e6614143f502f');
 
     var cd = IrCommandsData();
     cd.commandsList = commandsList;
@@ -45,7 +44,11 @@ class IrCommandsData {
     configuration = x ? 'SDSD' : 'yrytyuyu';
   }
 
-  Future<String> loadLogData() {
-    return Future(() => 'yi de WTAFyi');
+  Future<List<String>> loadLogData() async {
+    var logsJson = await _webAccess.getJsonWebData('logs?count=10');
+
+    var logs = logsJson.map((l) => l['time'] + ' ' + l['text']);
+
+    return logs.toList().cast<String>();
   }
 }

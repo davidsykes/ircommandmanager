@@ -88,10 +88,10 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
   }
 
   Widget makeStatusLogsPage(IrCommandsData irCommandsData) {
-    return MyFutureBuilder.buildFuture(irCommandsData.loadLogData, pageMaker);
+    return createFutureBuilder(irCommandsData.loadLogData, pageMaker);
   }
 
-  Widget pageMaker(String string) {
-    return Text(string);
+  Widget pageMaker(List<String> string) {
+    return Text(string.join());
   }
 }
