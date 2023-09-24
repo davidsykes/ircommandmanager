@@ -37,11 +37,15 @@ class IrCommandsData {
   }
 
   bool configurationIsRecorder() {
-    return configuration == 'SDSD';
+    return configuration == 'irrecorder';
   }
 
-  void setConfiguration(bool x) {
-    configuration = x ? 'SDSD' : 'yrytyuyu';
+  Future<String> setConfiguration(bool x) async {
+    configuration = x ? 'irrecorder' : 'irtransmitter';
+
+    var url = 'setoption?name=configuration.e6614143f502f&value=$configuration';
+    var response = await _webAccess.put(url);
+    return response;
   }
 
   Future<List<String>> loadLogData() async {

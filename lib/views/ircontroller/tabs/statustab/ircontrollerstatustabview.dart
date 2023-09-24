@@ -76,7 +76,7 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
       ButtonBar(
         alignment: MainAxisAlignment.start,
         children: <Widget>[
-          Text('Show Test Plots'),
+          Text('Operate as a recorder'),
           Checkbox(
               value: irCommandsData.configurationIsRecorder(),
               onChanged: (bool? x) => setState(() {
@@ -92,6 +92,8 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
   }
 
   Widget pageMaker(List<String> string) {
-    return Text(string.join());
+    return Column(
+      children: string.map((s) => Text(s)).toList(),
+    );
   }
 }

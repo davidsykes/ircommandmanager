@@ -36,6 +36,17 @@ class WebAccess {
     return result.toString();
   }
 
+  Future<String> put(String url) async {
+    var result = await http.put(
+      Uri.parse(makeUrl(url)),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    return result.toString();
+  }
+
   void deleteTraces(Iterable<String> tracesToDelete) {
     for (var trace in tracesToDelete) {
       deleteTrace(trace);
