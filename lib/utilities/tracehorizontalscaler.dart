@@ -20,13 +20,16 @@ class TraceHorizontalScaler {
 
   List<List<double>> scaleToHorizontalExtent(
       {required List<List<double>> plot, required double maxX}) {
-    var horizontalScale = screenWidth / maxX * zoom;
-    var horizontalOffset = offset * screenWidth * zoom / 100;
+    if (maxX > 0) {
+      var horizontalScale = screenWidth / maxX * zoom;
+      var horizontalOffset = offset * screenWidth * zoom / 100;
 
-    var scaled =
-        plot.map((p) => [p[0] * horizontalScale - horizontalOffset, p[1]]);
+      var scaled =
+          plot.map((p) => [p[0] * horizontalScale - horizontalOffset, p[1]]);
 
-    return scaled.toList();
+      return scaled.toList();
+    }
+    return plot;
   }
 
   List<List<double>> scalePlotValuesToUnitRange(List<List<double>> scaled) {

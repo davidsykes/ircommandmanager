@@ -15,7 +15,8 @@ class TraceHorizontalScalerTests extends TestModule {
     return [
       createTest(theMaximumXValueIsCalculated),
       createTest(plotsCanBeScaledHorizontally),
-      createTest(plotsCanBeScaledVVerticallyToRangeFrom0To1),
+      createTest(aZeroHorizontalScaleDoesNothing),
+      createTest(plotsCanBeScaledVerticallyToRangeFrom0To1),
     ];
   }
 
@@ -38,7 +39,18 @@ class TraceHorizontalScalerTests extends TestModule {
     ]);
   }
 
-  void plotsCanBeScaledVVerticallyToRangeFrom0To1() {
+  void aZeroHorizontalScaleDoesNothing() {
+    var values = createSomeValues();
+
+    var max = _scaler.scaleToHorizontalExtent(plot: values[2], maxX: 0);
+
+    assertEqual(max, [
+      [0.0, 0.0],
+      [1.0, 1.0]
+    ]);
+  }
+
+  void plotsCanBeScaledVerticallyToRangeFrom0To1() {
     List<List<double>> values = [
       [10, 10],
       [10, 11],

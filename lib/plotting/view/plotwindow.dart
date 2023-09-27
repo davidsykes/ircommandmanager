@@ -110,24 +110,6 @@ class PlotWindow extends CustomPainter {
     canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
   }
 
-  // void plotTrace(
-  //     List<List<double>> plot,
-  //     TraceHorizontalScaler horizontalScaler,
-  //     double maxX,
-  //     TraceVerticalScaler traceVerticalScaler,
-  //     Canvas canvas,
-  //     Paint paint) {
-  //   var scaled =
-  //       horizontalScaler.scaleToHorizontalExtent(plot: plot, maxX: maxX);
-
-  //   scaled = horizontalScaler.scalePlotValuesToUnitRange(scaled);
-
-  //   scaled = traceVerticalScaler.scalePlot(0, scaled);
-
-  //   var offsets = convertToOffsets(scaled);
-  //   canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
-  // }
-
   List<Offset> convertToOffsets(List<PlotValue> plots) {
     var offsets = plots.map((p) => Offset(p.x, p.y)).toList().cast<Offset>();
     return offsets;
