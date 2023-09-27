@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
 import '../../../../dataobjects/traces/tracepoint.dart';
 import '../../../../plotting/view/plotwindow.dart';
+import '../../../../utilities/futures/futurebuilder.dart';
 import '../../ircommandsdata.dart';
 import 'ircommandsplotwindow.dart';
 
@@ -20,45 +21,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: IrCommandsData().loadIrCommandsData(),
-      builder: (BuildContext context, AsyncSnapshot<IrCommandsData> snapshot) {
-        List<Widget> children;
-        if (snapshot.hasData) {
-          return makePage(snapshot.data!);
-        } else if (snapshot.hasError) {
-          children = <Widget>[
-            const Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 60,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text('Error: ${snapshot.error}'),
-            ),
-          ];
-        } else {
-          children = const <Widget>[
-            SizedBox(
-              width: 60,
-              height: 60,
-              child: CircularProgressIndicator(),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 16),
-              child: Text('Awaiting result...'),
-            ),
-          ];
-        }
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: children,
-          ),
-        );
-      },
-    );
+    return createFutureBuilder(IrCommandsData().loadIrCommandsData, makePage);
   }
 
   Widget makePage(IrCommandsData irCommandsData) {
