@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ircommandmanager/utilities/futures/futurebuilder.dart';
+import 'package:ircommandmanager/widgets/futurebuilder.dart';
 import '../../ircommandsdata.dart';
 
 class IrControllerStatusTabView extends StatefulWidget {

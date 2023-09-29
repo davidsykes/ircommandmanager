@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
 import '../../../../dataobjects/traces/tracepoint.dart';
 import '../../../../plotting/view/plotwindow.dart';
-import '../../../../utilities/futures/futurebuilder.dart';
+import '../../../../widgets/overflowbar.dart';
+import '../../../../widgets/futurebuilder.dart';
 import '../../ircommandsdata.dart';
 import 'ircommandsplotwindow.dart';
+import 'ircontrollercommandslistoverflowbar.dart';
 
 class IrCommandsListTabView extends StatefulWidget {
   @override
@@ -42,8 +44,15 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
 
   Widget makeWidgetIrCommandsSelectableList(
       List<IrCommandSequence> commandsList) {
-    return ListView(
-      children: makeIrCommandListWidgets(commandsList),
+    return Column(
+      children: <Widget>[
+        createButtonBar(IrControllerCommandsListOverflowBar()),
+        Expanded(
+          child: ListView(
+            children: makeIrCommandListWidgets(commandsList),
+          ),
+        ),
+      ],
     );
   }
 
@@ -69,7 +78,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
       widgets.add(makeTappableWidget(command));
     }
 
-    widgets.add(Text(DateTime.now().millisecondsSinceEpoch.toString()));
+    widgets.add(Text('-----'));
 
     widgets.add(makeTappableWidget(makeTestCommand1()));
 
