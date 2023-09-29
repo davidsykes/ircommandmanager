@@ -64,7 +64,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
 
   List<Widget> makeTraceViewPage(MyAppState appState, TracesData traces) {
     return <Widget>[
-      ButtonBar(
+      OverflowBar(
         alignment: MainAxisAlignment.start,
         children: <Widget>[
           ElevatedButton(

@@ -46,7 +46,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
       List<IrCommandSequence> commandsList) {
     return Column(
       children: <Widget>[
-        createButtonBar(IrControllerCommandsListOverflowBar()),
+        createOverflowBar(IrControllerCommandsListOverflowBar()),
         Expanded(
           child: ListView(
             children: makeIrCommandListWidgets(commandsList),

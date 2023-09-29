@@ -28,7 +28,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
 
   List<Widget> makeTraceViewPage(MyAppState appState) {
     return <Widget>[
-      ButtonBar(
+      OverflowBar(
         alignment: MainAxisAlignment.start,
         children: <Widget>[
           Text('Show Test Plots'),

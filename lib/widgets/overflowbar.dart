@@ -4,7 +4,7 @@ abstract class IMyOverflowBar {
   List<Widget> getChildren();
 }
 
-Widget createButtonBar(IMyOverflowBar buttonBar) {
+Widget createOverflowBar(IMyOverflowBar overflowBar) {
   return (OverflowBar(
-      alignment: MainAxisAlignment.start, children: buttonBar.getChildren()));
+      alignment: MainAxisAlignment.start, children: overflowBar.getChildren()));
 }

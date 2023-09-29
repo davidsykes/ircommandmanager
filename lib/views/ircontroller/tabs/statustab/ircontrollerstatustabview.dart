@@ -73,7 +73,7 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text('ip address: $ipAddress'),
       Text('Configuration: $configuration'),
-      ButtonBar(
+      OverflowBar(
         alignment: MainAxisAlignment.start,
         children: <Widget>[
           Text('Operate as a recorder'),
