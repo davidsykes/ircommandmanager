@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
-import '../../../../dataobjects/traces/tracepoint.dart';
 import '../../../../plotting/view/plotwindow.dart';
+import '../../../../widgets/myselectablelist.dart';
 import '../../../../widgets/overflowbar.dart';
 import '../../../../widgets/futurebuilder.dart';
 import '../../ircommandsdata.dart';
@@ -16,14 +16,35 @@ class IrCommandsListTabView extends StatefulWidget {
 class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
   final _counter = ValueNotifier<int>(0);
   late IrCommandsPlotWindow _plotWindow;
+  late MySelectableList _selectableList;
 
   _IrCommandsListTabViewState() {
     _plotWindow = IrCommandsPlotWindow(repaint: _counter);
+    _selectableList = makeMySelectableList();
+  }
+
+  MySelectableList makeMySelectableList() {
+    return MySelectableList(selected: itemSelected);
+  }
+
+  void itemSelected(ISelectableItem sItem) {
+    setState(() {
+      _plotWindow.showCommand(sItem.item() as IrCommandSequence);
+      _counter.value++;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return createFutureBuilder(IrCommandsData().loadIrCommandsData, makePage);
+    return createFutureBuilder(loadIrCommandsDataAndMakeSelectables, makePage);
+  }
+
+  Future<IrCommandsData> loadIrCommandsDataAndMakeSelectables() async {
+    var commands = await IrCommandsData().loadIrCommandsData();
+    var selectables =
+        commands.commandsList.map((e) => SelectableItem(e.name, e)).toList();
+    _selectableList.selectables = selectables;
+    return commands;
   }
 
   Widget makePage(IrCommandsData irCommandsData) {
@@ -31,8 +52,8 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
       children: <Widget>[
         Expanded(
           flex: 25,
-          child:
-              makeWidgetIrCommandsSelectableList(irCommandsData.commandsList),
+          child: makeWidgetIrControllerCommandsManager(
+              irCommandsData.commandsList),
         ),
         Expanded(
           flex: 75,
@@ -42,15 +63,13 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     );
   }
 
-  Widget makeWidgetIrCommandsSelectableList(
+  Widget makeWidgetIrControllerCommandsManager(
       List<IrCommandSequence> commandsList) {
     return Column(
       children: <Widget>[
         createOverflowBar(IrControllerCommandsListOverflowBar()),
         Expanded(
-          child: ListView(
-            children: makeIrCommandListWidgets(commandsList),
-          ),
+          child: _selectableList.makeListWidget(),
         ),
       ],
     );
@@ -69,46 +88,5 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
         Text(''),
       ],
     );
-  }
-
-  List<Widget> makeIrCommandListWidgets(List<IrCommandSequence> commandsList) {
-    List<Widget> widgets = List.empty(growable: true);
-
-    for (var command in commandsList) {
-      widgets.add(makeTappableWidget(command));
-    }
-
-    widgets.add(Text('-----'));
-
-    widgets.add(makeTappableWidget(makeTestCommand1()));
-
-    return widgets;
-  }
-
-  void friday(IrCommandSequence command) {
-    setState(() {
-      _plotWindow.showCommand(command);
-      _counter.value++;
-    });
-  }
-
-  Widget makeTappableWidget(IrCommandSequence command) {
-    var widget = GestureDetector(
-      onTap: () {
-        friday(command);
-      },
-      child: Text(command.name),
-    );
-    return widget;
-  }
-
-  static IrCommandSequence makeTestCommand1() {
-    var cmd = IrCommandSequence('0to10');
-
-    var list = List<int>.generate(11, (i) => i);
-    var list2 = list.map((i) => TracePoint(time: i, value: i));
-    cmd.values = list2.toList();
-
-    return cmd;
   }
 }
