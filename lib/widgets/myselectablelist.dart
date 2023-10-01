@@ -13,10 +13,11 @@ class SelectableItem extends ISelectableItem {
 }
 
 class MySelectableList {
-  void Function(ISelectableItem sItem) selected;
+  void Function(ISelectableItem sItem)? _select;
   late List<ISelectableItem> selectables;
 
-  MySelectableList({required this.selected}) {
+  MySelectableList({void Function(ISelectableItem sItem)? select}) {
+    _select = select;
     selectables = List.empty();
   }
 
@@ -33,7 +34,10 @@ class MySelectableList {
   Widget makeTappableItem(ISelectableItem sItem) {
     return GestureDetector(
       onTap: () {
-        selected(sItem);
+        sItem.isSelected = !sItem.isSelected;
+        if (_select != null) {
+          _select!(sItem);
+        }
       },
       child: makeItem(sItem),
     );

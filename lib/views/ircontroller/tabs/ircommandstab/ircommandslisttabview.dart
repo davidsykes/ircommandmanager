@@ -24,12 +24,12 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
   }
 
   MySelectableList makeMySelectableList() {
-    return MySelectableList(selected: itemSelected);
+    return MySelectableList(select: itemSelected);
   }
 
   void itemSelected(ISelectableItem sItem) {
     setState(() {
-      _plotWindow.showCommand(sItem.item() as IrCommandSequence);
+      _plotWindow.showCommand(sItem.item as IrCommandSequence);
       _counter.value++;
     });
   }
