@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ircommandmanager/webaccess.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
 import '../../../../plotting/view/plotwindow.dart';
 import '../../../../widgets/myselectablelist.dart';
@@ -85,17 +86,20 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     );
   }
 
-  void sendButtonPressed() {
+  void sendButtonPressed() async {
     var commandsToSend = _selectableList!.selectedItems;
+    var webAccess = WebAccess('192.168.1.75');
+    String results = '';
 
     for (var c in commandsToSend) {
-      print(c.name);
+      var result = await webAccess.getTextWebData('code/${c.name}');
+      results = results + result;
     }
 
     setState(() {
       _showCommandResults = true;
     });
-    print('whoo');
+    print(results);
   }
 
   Widget makeWidgetPlotWindowWithEdging(PlotWindow plotWindow) {
