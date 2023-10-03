@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
 
-abstract class ISelectableItem {
-  final String name;
-  final dynamic item;
+class SelectableItem<T> {
+  String name;
+  T item;
   bool isSelected = false;
-
-  ISelectableItem(this.name, this.item);
+  SelectableItem(this.name, this.item);
 }
 
-class SelectableItem extends ISelectableItem {
-  SelectableItem(String name, dynamic item) : super(name, item);
-}
+class MySelectableList<T> {
+  void Function(T sItem)? _select;
+  late List<SelectableItem<T>> selectables;
 
-class MySelectableList {
-  void Function(ISelectableItem sItem)? _select;
-  late List<ISelectableItem> selectables;
-
-  MySelectableList({void Function(ISelectableItem sItem)? select}) {
+  MySelectableList({void Function(T sItem)? select}) {
     _select = select;
     selectables = List.empty();
   }
@@ -27,23 +22,28 @@ class MySelectableList {
     );
   }
 
+  List<T> get selectedItems => selectables
+      .where((element) => element.isSelected)
+      .map((e) => e.item)
+      .toList();
+
   List<Widget> makeItemsList() {
     return selectables.map((e) => makeTappableItem(e)).toList();
   }
 
-  Widget makeTappableItem(ISelectableItem sItem) {
+  Widget makeTappableItem(SelectableItem<T> sItem) {
     return GestureDetector(
       onTap: () {
         sItem.isSelected = !sItem.isSelected;
         if (_select != null) {
-          _select!(sItem);
+          _select!(sItem.item);
         }
       },
       child: makeItem(sItem),
     );
   }
 
-  Widget makeItem(ISelectableItem sItem) {
+  Widget makeItem(SelectableItem<T> sItem) {
     return Text(sItem.name,
         style: sItem.isSelected
             ? const TextStyle(fontWeight: FontWeight.bold)

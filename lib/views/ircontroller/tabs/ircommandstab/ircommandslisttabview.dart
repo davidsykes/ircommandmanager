@@ -16,20 +16,20 @@ class IrCommandsListTabView extends StatefulWidget {
 class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
   final _counter = ValueNotifier<int>(0);
   late IrCommandsPlotWindow _plotWindow;
-  late MySelectableList _selectableList;
+  MySelectableList<IrCommandSequence>? _selectableList;
+  bool _showCommandResults = false;
 
   _IrCommandsListTabViewState() {
     _plotWindow = IrCommandsPlotWindow(repaint: _counter);
-    _selectableList = makeMySelectableList();
   }
 
-  MySelectableList makeMySelectableList() {
-    return MySelectableList(select: itemSelected);
+  MySelectableList<IrCommandSequence> makeMySelectableList() {
+    return MySelectableList<IrCommandSequence>(select: itemSelected);
   }
 
-  void itemSelected(ISelectableItem sItem) {
+  void itemSelected(IrCommandSequence sItem) {
     setState(() {
-      _plotWindow.showCommand(sItem.item as IrCommandSequence);
+      _plotWindow.showCommand(sItem);
       _counter.value++;
     });
   }
@@ -41,9 +41,12 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
 
   Future<IrCommandsData> loadIrCommandsDataAndMakeSelectables() async {
     var commands = await IrCommandsData().loadIrCommandsData();
-    var selectables =
-        commands.commandsList.map((e) => SelectableItem(e.name, e)).toList();
-    _selectableList.selectables = selectables;
+    if (_selectableList == null) {
+      _selectableList = makeMySelectableList();
+      var selectables =
+          commands.commandsList.map((e) => SelectableItem(e.name, e)).toList();
+      _selectableList!.selectables = selectables;
+    }
     return commands;
   }
 
@@ -52,27 +55,47 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
       children: <Widget>[
         Expanded(
           flex: 25,
-          child: makeWidgetIrControllerCommandsManager(
-              irCommandsData.commandsList),
+          child: makeWidgetIrControllerCommandsManager(),
         ),
         Expanded(
           flex: 75,
-          child: makeWidgetPlotWindowWithEdging(_plotWindow.plotWindow),
+          child: chooseBetweenPlotWindowAndCommandResult(),
         ),
       ],
     );
   }
 
-  Widget makeWidgetIrControllerCommandsManager(
-      List<IrCommandSequence> commandsList) {
+  Widget chooseBetweenPlotWindowAndCommandResult() {
+    if (_showCommandResults) {
+      return Text('Show results');
+    } else {
+      return makeWidgetPlotWindowWithEdging(_plotWindow.plotWindow);
+    }
+  }
+
+  Widget makeWidgetIrControllerCommandsManager() {
     return Column(
       children: <Widget>[
-        createOverflowBar(IrControllerCommandsListOverflowBar()),
+        createOverflowBar(
+            IrControllerCommandsListOverflowBar(sendButtonPressed)),
         Expanded(
-          child: _selectableList.makeListWidget(),
+          child: _selectableList!.makeListWidget(),
         ),
       ],
     );
+  }
+
+  void sendButtonPressed() {
+    var commandsToSend = _selectableList!.selectedItems;
+
+    for (var c in commandsToSend) {
+      print(c.name);
+    }
+
+    setState(() {
+      _showCommandResults = true;
+    });
+    print('whoo');
   }
 
   Widget makeWidgetPlotWindowWithEdging(PlotWindow plotWindow) {

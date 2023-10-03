@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-Widget createElevatedButton(void Function() onPressed) {
+Widget createElevatedButton(String text, void Function() onPressed) {
   return ElevatedButton(
       onPressed: () {
         onPressed();
       },
-      child: Text('Select All'));
+      child: Text(text));
 }
