@@ -71,7 +71,7 @@ class _IrControllerStatusTabView extends State<IrControllerStatusTabView> {
     var ipAddress = IrCommandsData.ipAddress;
     var configuration = irCommandsData.configuration;
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('ip address: $ipAddress'),
+      Text('ir services ip address: $ipAddress'),
       Text('Configuration: $configuration'),
       OverflowBar(
         alignment: MainAxisAlignment.start,
