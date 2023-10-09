@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../dataobjects/traces/selectabletraceinfo.dart';
 import '../dataobjects/traces/tracesdata.dart';
 import '../myappstate.dart';
+import '../webservices/scopetraces/scopetraceaccess.dart';
 
 class ViewTraceListPage extends StatefulWidget {
   const ViewTraceListPage({super.key});
@@ -125,8 +126,9 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
 
   static Future<TracesData> getTraces(MyAppState appState) async {
     try {
-      var traces =
-          await appState.getTraceDataController().getTracesDataFuture();
+      var traces = await ScopeTraceAccess()
+          .getTraceDataController()
+          .getTracesDataFuture();
       return traces;
     } catch (e) {
       return Future.error('Error getting traces: $e');
@@ -139,7 +141,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
         .where((trace) => trace.isSelected())
         .map((trace) => trace.traceInfo.fileName);
 
-    appState.deleteTraces(tracesToDelete);
+    ScopeTraceAccess().deleteTraces(tracesToDelete);
   }
 
   void selectAllTraces(TracesData traces) {
@@ -151,6 +153,6 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
   }
 
   void refreshTraces(MyAppState appState) {
-    appState.getTraceDataController().refreshTraces();
+    ScopeTraceAccess().getTraceDataController().refreshTraces();
   }
 }

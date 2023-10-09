@@ -4,6 +4,7 @@ import '../plotting/view/plotviewcontrolvariables.dart';
 import '../dataobjects/traces/traceinfo.dart';
 import '../myappstate.dart';
 import '../tracepainter.dart';
+import '../webservices/scopetraces/scopetraceaccess.dart';
 
 class TracePlotPage extends StatefulWidget {
   @override
@@ -73,8 +74,9 @@ class _TracePlotPageState extends State<TracePlotPage> {
 
   static Future<List<TraceInfo>> getSelectedTracesWithDetails(
       MyAppState appState) async {
-    var traces =
-        await appState.getTraceDataController().getSelectedTracesWithDetails();
+    var traces = await ScopeTraceAccess()
+        .getTraceDataController()
+        .getSelectedTracesWithDetails();
     return traces;
   }
 
