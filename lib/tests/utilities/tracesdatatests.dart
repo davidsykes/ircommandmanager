@@ -1,7 +1,7 @@
 import '../../dataobjects/traces/traceinfo.dart';
 import '../../dataobjects/traces/tracesdata.dart';
-import '../../testing/testmodule.dart';
-import '../../testing/testunit.dart';
+import '../../testframework/testmodule.dart';
+import '../../testframework/testunit.dart';
 
 class TracesDataTests extends TestModule {
   late TracesData _data;

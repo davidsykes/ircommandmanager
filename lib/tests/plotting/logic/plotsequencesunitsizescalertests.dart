@@ -4,8 +4,8 @@ import '../../../plotting/dataobjects/plotvalue.dart';
 import '../../../plotting/logic/iplotsequencesrangefinder.dart';
 import '../../../plotting/logic/iplotsequencesrangescaler.dart';
 import '../../../plotting/logic/plotsequencesunitsizescaler.dart';
-import '../../../testing/testmodule.dart';
-import '../../../testing/testunit.dart';
+import '../../../testframework/testmodule.dart';
+import '../../../testframework/testunit.dart';
 
 class PlotSequencesUnitSizeScalerTests extends TestModule {
   late PlotSequencesUnitSizeScaler _scaler;

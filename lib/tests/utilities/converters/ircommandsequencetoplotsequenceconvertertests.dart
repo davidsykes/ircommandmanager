@@ -1,7 +1,7 @@
 import 'package:ircommandmanager/dataobjects/traces/tracepoint.dart';
 import '../../../dataobjects/ircommandsequence.dart';
-import '../../../testing/testmodule.dart';
-import '../../../testing/testunit.dart';
+import '../../../testframework/testmodule.dart';
+import '../../../testframework/testunit.dart';
 import '../../../utilities/converters/ircommandsequencetoplotsequenceconverter.dart';
 
 class IrCommandSequenceToPlotSequenceConverterTests extends TestModule {

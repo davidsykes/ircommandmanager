@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ircommandmanager/webaccess.dart';
+import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
 import '../../../../plotting/view/plotwindow.dart';
 import '../../../../widgets/myselectablelist.dart';

@@ -1,6 +1,6 @@
 import '../../dataobjects/ircommandsequence.dart';
 import '../../utilities/converters/commandsequencetransferformattocommandsequenceconverter.dart';
-import '../../webaccess.dart';
+import '../../webservices/webaccess.dart';
 
 class IrCommandsData {
   static const String ipAddress = '192.168.1.142:5001';

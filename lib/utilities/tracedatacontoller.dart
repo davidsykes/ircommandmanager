@@ -1,4 +1,4 @@
-import 'package:ircommandmanager/webaccess.dart';
+import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../dataobjects/traces/traceinfo.dart';
 import '../dataobjects/traces/tracepoints.dart';
 import '../dataobjects/traces/tracesdata.dart';

@@ -1,5 +1,5 @@
-import 'package:ircommandmanager/testing/testmodule.dart';
-import 'package:ircommandmanager/testing/testunit.dart';
+import 'package:ircommandmanager/testframework/testmodule.dart';
+import 'package:ircommandmanager/testframework/testunit.dart';
 
 class TestRunner {
   List<TestUnit> tests = List.empty(growable: true);

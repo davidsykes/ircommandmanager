@@ -1,5 +1,5 @@
-import '../../testing/testmodule.dart';
-import '../../testing/testunit.dart';
+import '../../testframework/testmodule.dart';
+import '../../testframework/testunit.dart';
 import '../../utilities/tracehorizontalscaler.dart';
 
 class TraceHorizontalScalerTests extends TestModule {

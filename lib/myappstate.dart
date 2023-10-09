@@ -3,7 +3,7 @@ import 'plotting/view/plotviewcontrolvariables.dart';
 import 'dataobjects/testing/testtracedatacontroller.dart';
 import 'utilities/itracedatacontroller.dart';
 import 'utilities/tracedatacontoller.dart';
-import 'webaccess.dart';
+import 'webservices/webaccess.dart';
 
 class MyAppState extends ChangeNotifier {
   late WebAccess webAccess;

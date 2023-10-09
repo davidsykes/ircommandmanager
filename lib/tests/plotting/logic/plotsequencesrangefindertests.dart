@@ -1,8 +1,8 @@
 import '../../../plotting/dataobjects/plotsequence.dart';
 import '../../../plotting/dataobjects/plotvalue.dart';
 import '../../../plotting/logic/plotsequencesrangefinder.dart';
-import '../../../testing/testmodule.dart';
-import '../../../testing/testunit.dart';
+import '../../../testframework/testmodule.dart';
+import '../../../testframework/testunit.dart';
 
 class PlotSequencesRangeFinderTests extends TestModule {
   late PlotSequencesRangeFinder _finder;

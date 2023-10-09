@@ -3,8 +3,8 @@ import 'package:ircommandmanager/plotting/dataobjects/plotsequencesrange.dart';
 import 'package:ircommandmanager/plotting/dataobjects/plotvalue.dart';
 
 import '../../../plotting/logic/plotsequencerangescaler.dart';
-import '../../../testing/testmodule.dart';
-import '../../../testing/testunit.dart';
+import '../../../testframework/testmodule.dart';
+import '../../../testframework/testunit.dart';
 
 class PlotSequenceRangeScalerTests extends TestModule {
   late PlotSequenceRangeScaler _scaler;

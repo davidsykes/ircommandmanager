@@ -1,7 +1,7 @@
 import 'package:ircommandmanager/plotting/dataobjects/plotvalue.dart';
 import 'package:ircommandmanager/plotting/logic/plotviewport.dart';
-import 'package:ircommandmanager/testing/testmodule.dart';
-import 'package:ircommandmanager/testing/testunit.dart';
+import 'package:ircommandmanager/testframework/testmodule.dart';
+import 'package:ircommandmanager/testframework/testunit.dart';
 
 class PlotViewportTests extends TestModule {
   late PlotViewport _viewport;
