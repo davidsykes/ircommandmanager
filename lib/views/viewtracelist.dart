@@ -26,7 +26,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
         builder: (BuildContext context, AsyncSnapshot<TracesData> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
-            children = makeTraceViewPage(appState, snapshot.data!);
+            children = makeTraceViewPage(snapshot.data!);
           } else if (snapshot.hasError) {
             children = <Widget>[
               const Icon(
@@ -63,7 +63,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     );
   }
 
-  List<Widget> makeTraceViewPage(MyAppState appState, TracesData traces) {
+  List<Widget> makeTraceViewPage(TracesData traces) {
     return <Widget>[
       OverflowBar(
         alignment: MainAxisAlignment.start,
@@ -71,14 +71,14 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
           ElevatedButton(
               onPressed: () {
                 setState(() {
-                  refreshTraces(appState);
+                  refreshTraces();
                 });
               },
               child: Text('Refresh')),
           ElevatedButton(
               onPressed: () {
                 setState(() {
-                  deleteTraces(traces, appState);
+                  deleteTraces(traces);
                 });
               },
               child: Text('Delete')),
@@ -89,28 +89,18 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
                 });
               },
               child: Text('Select All')),
-          Text(
-            'Show Test Plots',
-            style: TextStyle(fontSize: 18),
-          ),
-          Checkbox(
-              value: appState.showTestPlots,
-              onChanged: (bool? x) => setState(() {
-                    appState.showTestPlots = !appState.showTestPlots;
-                  })),
         ],
       ),
       Expanded(
           child: ListView(
         children: <Widget>[
-          for (var p in traces.getAllTraces()) makeTraceListItem(appState, p)
+          for (var p in traces.getAllTraces()) makeTraceListItem(p)
         ],
       )),
     ];
   }
 
-  Widget makeTraceListItem(
-      MyAppState appState, SelectableTraceInfo selectableTrace) {
+  Widget makeTraceListItem(SelectableTraceInfo selectableTrace) {
     var trace = selectableTrace.traceInfo;
     return ListTile(
       leading: Checkbox(
@@ -135,7 +125,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     }
   }
 
-  void deleteTraces(TracesData traces, MyAppState appState) {
+  void deleteTraces(TracesData traces) {
     var tracesToDelete = traces
         .getAllTraces()
         .where((trace) => trace.isSelected())
@@ -152,7 +142,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     }
   }
 
-  void refreshTraces(MyAppState appState) {
+  void refreshTraces() {
     ScopeTraceAccess().getTraceDataController().refreshTraces();
   }
 }
