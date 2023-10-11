@@ -5,6 +5,7 @@ import 'myappstate.dart';
 import 'views/ircontroller/ircommandspage.dart';
 import 'views/traceplotpage.dart';
 import 'views/viewtracelist.dart';
+import 'views/viewtracelist2.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var selectedIndex = 3;
+  var selectedIndex = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +46,15 @@ class _MyHomePageState extends State<MyHomePage> {
         page = ViewTraceListPage();
         break;
       case 1:
-        page = TracePlotPage();
+        page = ViewTraceListPage2();
         break;
       case 2:
-        page = IrCommandsPage();
+        page = TracePlotPage();
         break;
       case 3:
+        page = IrCommandsPage();
+        break;
+      case 4:
         page = CodeTestPage();
         break;
       default:
@@ -68,6 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   NavigationRailDestination(
                     icon: Icon(Icons.home),
                     label: Text('Traces'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.home),
+                    label: Text('Traces2'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),

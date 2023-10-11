@@ -9,11 +9,11 @@ class SelectableItem<T> {
 
 class MySelectableList<T> {
   void Function(T sItem)? _select;
-  late List<SelectableItem<T>> selectables;
+  late List<SelectableItem<T>> _selectables;
 
   MySelectableList({void Function(T sItem)? select}) {
     _select = select;
-    selectables = List.empty();
+    _selectables = List.empty();
   }
 
   Widget makeListWidget() {
@@ -22,13 +22,17 @@ class MySelectableList<T> {
     );
   }
 
-  List<T> get selectedItems => selectables
+  void refresh(List<T> items, String Function(T item) getName) {
+    _selectables = items.map((e) => SelectableItem(getName(e), e)).toList();
+  }
+
+  List<T> get selectedItems => _selectables
       .where((element) => element.isSelected)
       .map((e) => e.item)
       .toList();
 
   List<Widget> makeItemsList() {
-    return selectables.map((e) => makeTappableItem(e)).toList();
+    return _selectables.map((e) => makeTappableItem(e)).toList();
   }
 
   Widget makeTappableItem(SelectableItem<T> sItem) {

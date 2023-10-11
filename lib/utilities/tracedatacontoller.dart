@@ -2,6 +2,7 @@ import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../dataobjects/traces/traceinfo.dart';
 import '../dataobjects/traces/tracepoints.dart';
 import '../dataobjects/traces/tracesdata.dart';
+import '../webservices/scopetraces/scopetraceaccess.dart';
 import 'itracedatacontroller.dart';
 
 class TraceDataController implements ITraceDataController {
@@ -23,16 +24,7 @@ class TraceDataController implements ITraceDataController {
   }
 
   Future<TracesData> getTracesData() async {
-    final decoded = await webAccess.getJsonWebData('tracenames');
-
-    var traces = List<TraceInfo>.empty(growable: true);
-    for (var trace in decoded) {
-      traces.add(TraceInfo(
-          name: trace['tracename'],
-          fileName: trace['tracepath'],
-          traceCount: trace['tracecount'],
-          traceLength: trace['tracelength']));
-    }
+    List<TraceInfo> traces = await ScopeTraceAccess().getScopeTraces();
 
     return TracesData(traces);
   }
