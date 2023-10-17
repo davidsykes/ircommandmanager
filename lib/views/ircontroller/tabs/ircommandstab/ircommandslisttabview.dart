@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
-import '../../../../plotting/view/plotwindow.dart';
 import '../../../../potentiallibrary/widgets/myselectablelist.dart';
 import '../../../../potentiallibrary/widgets/overflowbar.dart';
 import '../../../../potentiallibrary/widgets/futurebuilder.dart';
@@ -69,7 +68,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     if (_showCommandResults) {
       return Text('Show results');
     } else {
-      return makeWidgetPlotWindowWithEdging(_plotWindow.plotWindow);
+      return makeWidgetPlotWindowWithEdging();
     }
   }
 
@@ -101,7 +100,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     print(results);
   }
 
-  Widget makeWidgetPlotWindowWithEdging(PlotWindow plotWindow) {
+  Widget makeWidgetPlotWindowWithEdging() {
     return Column(
       children: <Widget>[
         Text(''),

@@ -8,7 +8,6 @@ class Cacheable<T> {
   Future<T> getData() async {
     if (data == null) {
       data = await retrieveData();
-      print('erre');
       if (data != null) {
         refreshData(data as T);
       }
