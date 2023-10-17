@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../widgets/elevatedbutton.dart';
-import '../../../../widgets/overflowbar.dart';
+import '../../../../potentiallibrary/widgets/elevatedbutton.dart';
+import '../../../../potentiallibrary/widgets/overflowbar.dart';
 
 class IrControllerCommandsListOverflowBar extends IMyOverflowBar {
   void Function() sendButtonPressed;

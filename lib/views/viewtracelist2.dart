@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../dataobjects/traces/traceinfo.dart';
+import '../potentiallibrary/tools/cacheableobject.dart';
 import '../webservices/scopetraces/scopetraceaccess.dart';
-import '../widgets/futurebuilder.dart';
-import '../widgets/myselectablelist.dart';
+import '../potentiallibrary/widgets/futurebuilder.dart';
+import '../potentiallibrary/widgets/myselectablelist.dart';
 
 class ViewTraceListPage2 extends StatefulWidget {
   const ViewTraceListPage2({super.key});
@@ -12,10 +13,12 @@ class ViewTraceListPage2 extends StatefulWidget {
 }
 
 class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
+  late Cacheable<List<TraceInfo>> cachedTraces;
   late MySelectableList<TraceInfo> selectableList;
 
   _ViewTraceListPage2FutureBuilder() {
     selectableList = MySelectableList(select: onTraceSelected);
+    cachedTraces = Cacheable<List<TraceInfo>>(loadTraces, refreshTraceList);
   }
 
   @override
@@ -72,6 +75,10 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   }
 
   Future<List<TraceInfo>> getTraces() async {
+    return await cachedTraces.getData();
+  }
+
+  Future<List<TraceInfo>> loadTraces() async {
     try {
       var traces = await ScopeTraceAccess().getScopeTraces();
       refreshTraceList(traces);
