@@ -81,24 +81,8 @@ class PlotWindow extends CustomPainter {
   }
 
   void drawPlots(Canvas canvas, Size size, Paint paint) {
-    //   var horizontalScaler = TraceHorizontalScaler(
-    //       screenWidth: size.width,
-    //       zoom: plotViewControlVariables.zoom,
-    //       offset: plotViewControlVariables.offset);
-
-    //   var verticalScaler = TraceVerticalScaler(
-    //       screenHeight: size.height, traceCount: traces.length);
-
-    //   var tracesToPlot = traces
-    //       .map((t) => IrCommandSequenceToPlotSequenceConverter()
-    //           .convertTraceToPlot(t.traceDetails!))
-    //       .toList();
-
-    //   var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
-
     for (var plot in unitPlots) {
       plotTrace(canvas, size, paint, plot);
-      //     plotTrace(plot, horizontalScaler, maxX, verticalScaler, canvas, paint);
     }
   }
 

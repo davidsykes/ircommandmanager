@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'potentiallibrary/graphs/graphwindowmanager.dart';
 import 'views/codetestpage.dart';
 import 'myappstate.dart';
 import 'views/ircontroller/ircommandspage.dart';
@@ -36,7 +37,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var selectedIndex = 4;
+  var selectedIndex = 5;
+  var graphWindow = GraphWindowManager();
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +48,18 @@ class _MyHomePageState extends State<MyHomePage> {
         page = ViewTraceListPage();
         break;
       case 1:
-        page = ViewTraceListPage2();
+        page = ViewTraceListPage2(graphWindow);
         break;
       case 2:
         page = TracePlotPage();
         break;
       case 3:
-        page = IrCommandsPage();
+        page = graphWindow;
         break;
       case 4:
+        page = IrCommandsPage();
+        break;
+      case 5:
         page = CodeTestPage();
         break;
       default:
@@ -80,6 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),
                     label: Text('Trace Plots'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.favorite),
+                    label: Text('Trace Plots2'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import '../dataobjects/traces/traceinfo.dart';
+import '../potentiallibrary/graphs/graphwindowmanager.dart';
 import '../potentiallibrary/tools/cacheableobject.dart';
 import '../webservices/scopetraces/scopetraceaccess.dart';
 import '../potentiallibrary/widgets/futurebuilder.dart';
 import '../potentiallibrary/widgets/myselectablelist.dart';
 
 class ViewTraceListPage2 extends StatefulWidget {
-  const ViewTraceListPage2({super.key});
+  final IGraphWindowManager graphWindowManager;
+  const ViewTraceListPage2(this.graphWindowManager, {super.key});
 
   @override
-  State<ViewTraceListPage2> createState() => _ViewTraceListPage2FutureBuilder();
+  State<ViewTraceListPage2> createState() =>
+      _ViewTraceListPage2FutureBuilder();
 }
 
 class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
@@ -44,6 +47,13 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
       OverflowBar(
         alignment: MainAxisAlignment.start,
         children: <Widget>[
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  addTracesToPlots();
+                });
+              },
+              child: Text('Add to plots')),
           ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -90,6 +100,12 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
 
   void refreshTraceList(List<TraceInfo> traces) {
     selectableList.refresh(traces, (TraceInfo t) => t.name);
+  }
+
+  void addTracesToPlots() {
+    print("TODO");
+    var selectedTraces = selectableList.selectedItems;
+    widget.graphWindowManager.addDataSeries(selectedTraces)
   }
 
   void deleteTraces(List<TraceInfo> traces) {
