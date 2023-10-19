@@ -2,14 +2,14 @@ import '../../dataobjects/traces/tracepoint.dart';
 import '../../dataobjects/traces/tracepoints.dart';
 import '../../testframework/testmodule.dart';
 import '../../testframework/testunit.dart';
-import '../../utilities/tracetolinesconverter.dart';
+import '../../utilities/tracepointstographdataseriesconverter.dart';
 
-class TraceToLinesConverterTests extends TestModule {
-  late TraceToLinesConverter _converter;
+class TracePointsToGraphDataSeriesConverterTests extends TestModule {
+  late TracePointsToGraphDataSeriesConverter _converter;
 
   @override
   void setUpObjectUnderTest() {
-    _converter = TraceToLinesConverter();
+    _converter = TracePointsToGraphDataSeriesConverter();
   }
 
   @override
@@ -22,7 +22,8 @@ class TraceToLinesConverterTests extends TestModule {
   void aSimpleTraceIsConverted() {
     var trace = createSimpleTrace();
 
-    var plot = _converter.convertTraceToPlot(trace);
+    var series = _converter.convertTracePointsToGraphDataSeries(trace);
+    var plot = series.data;
 
     assertTrue(plot.length == 7);
     assertTrue(plot[0][0] == 0);

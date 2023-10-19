@@ -1,7 +1,8 @@
 import '../dataobjects/traces/tracepoints.dart';
+import '../potentiallibrary/graphs/graphdataseries.dart';
 
-class TraceToLinesConverter {
-  List<List<double>> convertTraceToPlot(TracePoints tracePoints) {
+class TracePointsToGraphDataSeriesConverter {
+  GraphDataSeries convertTracePointsToGraphDataSeries(TracePoints tracePoints) {
     var points = tracePoints.points;
     var pointsToConvert = points.length;
     var currentPoint = 0;
@@ -19,6 +20,6 @@ class TraceToLinesConverter {
       lasty = y;
     }
 
-    return plots;
+    return GraphDataSeries(plots);
   }
 }

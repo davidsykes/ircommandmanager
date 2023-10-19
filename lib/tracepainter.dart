@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'utilities/tracetolinesconverter.dart';
+import 'utilities/tracepointstographdataseriesconverter.dart';
 import 'plotting/view/plotviewcontrolvariables.dart';
 import 'dart:ui' as ui;
 import 'dataobjects/traces/traceinfo.dart';
@@ -59,8 +59,10 @@ class MyPainter extends CustomPainter {
     var verticalScaler = TraceVerticalScaler(
         screenHeight: size.height, traceCount: traces.length);
 
+    var converter = TracePointsToGraphDataSeriesConverter();
     var tracesToPlot = traces
-        .map((t) => TraceToLinesConverter().convertTraceToPlot(t.traceDetails!))
+        .map((t) =>
+            converter.convertTracePointsToGraphDataSeries(t.traceDetails!).data)
         .toList();
 
     var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);

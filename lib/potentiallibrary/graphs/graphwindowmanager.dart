@@ -3,14 +3,14 @@ import 'graphdataseries.dart';
 import 'graphwindowpainter.dart';
 
 abstract class IGraphWindowManager {
-  void addDataSeries(List<GraphDataSeries> series) {}
+  void addDataSeries(Iterable<GraphDataSeries> series) {}
 }
 
 class GraphWindowManager extends StatefulWidget implements IGraphWindowManager {
   @override
   State<GraphWindowManager> createState() => _GraphWindowManagerState();
   @override
-  void addDataSeries(List<GraphDataSeries> series) {
+  void addDataSeries(Iterable<GraphDataSeries> series) {
     // TODO: implement dos
   }
 }

@@ -11,7 +11,7 @@ import '../tests/utilities/converters/commandsequencetransferformattocommandsequ
 import '../tests/utilities/converters/ircommandsequencetoplotsequenceconvertertests.dart';
 import '../tests/utilities/tracehorizontalscalertests.dart';
 import '../tests/utilities/tracesdatatests.dart';
-import '../tests/utilities/tracetolinesconvertertests.dart';
+import '../tests/utilities/tracepointstographdataseriesconvertertests.dart';
 import '../tests/utilities/traceverticalscalertests.dart';
 
 class CodeTestPage extends StatefulWidget {
@@ -46,7 +46,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
   List<Widget> runTestsAndReturnResults() {
     var runner = TestRunner();
 
-    runner.addTests(TraceToLinesConverterTests());
+    runner.addTests(TracePointsToGraphDataSeriesConverterTests());
     runner.addTests(TraceHorizontalScalerTests());
     runner.addTests(TraceVerticalScalerTests());
     runner.addTests(TracesDataTests());
