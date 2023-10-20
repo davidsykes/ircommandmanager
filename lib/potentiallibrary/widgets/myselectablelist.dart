@@ -18,7 +18,7 @@ class MySelectableList<T> {
 
   Widget makeListWidget() {
     return ListView(
-      children: makeItemsList(),
+      children: _makeItemsList(),
     );
   }
 
@@ -31,11 +31,11 @@ class MySelectableList<T> {
       .map((e) => e.item)
       .toList();
 
-  List<Widget> makeItemsList() {
-    return _selectables.map((e) => makeTappableItem(e)).toList();
+  List<Widget> _makeItemsList() {
+    return _selectables.map((e) => _makeTappableItem(e)).toList();
   }
 
-  Widget makeTappableItem(SelectableItem<T> sItem) {
+  Widget _makeTappableItem(SelectableItem<T> sItem) {
     return GestureDetector(
       onTap: () {
         sItem.isSelected = !sItem.isSelected;
@@ -43,11 +43,11 @@ class MySelectableList<T> {
           _select!(sItem.item);
         }
       },
-      child: makeItem(sItem),
+      child: _makeItem(sItem),
     );
   }
 
-  Widget makeItem(SelectableItem<T> sItem) {
+  Widget _makeItem(SelectableItem<T> sItem) {
     return Text(sItem.name,
         style: sItem.isSelected
             ? const TextStyle(fontWeight: FontWeight.bold)

@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import '../dataobjects/traces/traceinfo.dart';
-import '../potentiallibrary/graphs/graphwindowmanager.dart';
-import '../potentiallibrary/tools/cacheableobject.dart';
+import '../globalvariables.dart';
+import '../potentiallibrary/tools/cacheddataloader.dart';
 import '../utilities/tracepointstographdataseriesconverter.dart';
 import '../webservices/scopetraces/scopetraceaccess.dart';
 import '../potentiallibrary/widgets/futurebuilder.dart';
 import '../potentiallibrary/widgets/myselectablelist.dart';
 
 class ViewTraceListPage2 extends StatefulWidget {
-  final IGraphWindowManager graphWindowManager;
-  const ViewTraceListPage2(this.graphWindowManager, {super.key});
+  final GlobalVariables globalVariables;
+  const ViewTraceListPage2(this.globalVariables, {super.key});
 
   @override
   State<ViewTraceListPage2> createState() => _ViewTraceListPage2FutureBuilder();
 }
 
 class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
-  late Cacheable<List<TraceInfo>> cachedTraces;
+  CachedDataLoader<List<TraceInfo>>? cachedTracesLoader;
   late MySelectableList<TraceInfo> selectableList;
 
   _ViewTraceListPage2FutureBuilder() {
     selectableList = MySelectableList(select: onTraceSelected);
-    cachedTraces = Cacheable<List<TraceInfo>>(loadTraces, refreshTraceList);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    cachedTracesLoader = CachedDataLoader<List<TraceInfo>>(
+        widget.globalVariables.cachedTraces, loadTraces, refreshTraceList);
   }
 
   @override
@@ -78,14 +84,13 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
         ],
       ),
       Expanded(
-          child: ListView(
-        children: selectableList.makeItemsList(),
-      )),
+        child: selectableList.makeListWidget(),
+      ),
     ];
   }
 
   Future<List<TraceInfo>> getTraces() async {
-    return await cachedTraces.getData();
+    return await cachedTracesLoader!.getData();
   }
 
   Future<List<TraceInfo>> loadTraces() async {
@@ -108,7 +113,7 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
     var converter = TracePointsToGraphDataSeriesConverter();
     var dataSeries = selectedTraces.map(
         (e) => converter.convertTracePointsToGraphDataSeries(e.traceDetails!));
-    widget.graphWindowManager.addDataSeries(dataSeries);
+    widget.globalVariables.graphWindowManager.addDataSeries(dataSeries);
   }
 
   void deleteTraces(List<TraceInfo> traces) {

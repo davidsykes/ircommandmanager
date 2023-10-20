@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'potentiallibrary/graphs/graphwindowmanager.dart';
+import 'globalvariables.dart';
 import 'views/codetestpage.dart';
 import 'myappstate.dart';
 import 'views/ircontroller/ircommandspage.dart';
@@ -38,7 +38,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var selectedIndex = 5;
-  var graphWindow = GraphWindowManager();
+  var globalVariables = GlobalVariables();
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +48,13 @@ class _MyHomePageState extends State<MyHomePage> {
         page = ViewTraceListPage();
         break;
       case 1:
-        page = ViewTraceListPage2(graphWindow);
+        page = ViewTraceListPage2(globalVariables);
         break;
       case 2:
         page = TracePlotPage();
         break;
       case 3:
-        page = graphWindow;
+        page = globalVariables.graphWindowManager;
         break;
       case 4:
         page = IrCommandsPage();
