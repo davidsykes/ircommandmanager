@@ -1,22 +1,17 @@
 import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../../dataobjects/traces/traceinfo.dart';
+import '../../dataobjects/traces/tracepoints.dart';
 import '../../utilities/itracedatacontroller.dart';
 import '../../utilities/tracedatacontoller.dart';
 
 class ScopeTraceAccess {
   //One instance, needs factory
+  late WebAccess _webAccess;
+
   static ScopeTraceAccess? _instance;
   factory ScopeTraceAccess() => _instance ??= ScopeTraceAccess._();
   ScopeTraceAccess._() {
     _webAccess = WebAccess('192.168.1.142:5000');
-  }
-
-  late WebAccess _webAccess;
-  ITraceDataController? actualTraceDataController;
-
-  ITraceDataController getTraceDataController() {
-    actualTraceDataController ??= TraceDataController(webAccess: _webAccess);
-    return actualTraceDataController!;
   }
 
   Future<List<TraceInfo>> getScopeTraces() async {
@@ -32,6 +27,31 @@ class ScopeTraceAccess {
     }
 
     return traces;
+  }
+
+  Future<List<TraceInfo>> getScopeTraceDetails(
+      List<TraceInfo> selectedTraces) async {
+    for (var trace in selectedTraces) {
+      trace.traceDetails ??= await getTraceDetails(trace.fileName);
+    }
+    return selectedTraces;
+  }
+
+  Future<TracePoints> getTraceDetails(String fileName) async {
+    final rawPoints = await _webAccess.getJsonWebData('trace/$fileName');
+
+    TracePoints td = TracePoints.fromJsonPoints(rawPoints);
+    print('Get trace details for $fileName');
+    return td;
+  }
+
+  // TODO Everything below here is to go
+
+  ITraceDataController? actualTraceDataController;
+
+  ITraceDataController getTraceDataController() {
+    actualTraceDataController ??= TraceDataController(webAccess: _webAccess);
+    return actualTraceDataController!;
   }
 
   void deleteTraces(Iterable<String> tracesToDelete) {

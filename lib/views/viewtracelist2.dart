@@ -17,17 +17,19 @@ class ViewTraceListPage2 extends StatefulWidget {
 
 class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   CachedDataLoader<List<TraceInfo>>? cachedTracesLoader;
-  late MySelectableList<TraceInfo> selectableList;
+  late MySelectableList<TraceInfo> selectableListWidget;
 
   _ViewTraceListPage2FutureBuilder() {
-    selectableList = MySelectableList(select: onTraceSelected);
+    selectableListWidget = MySelectableList(select: onTraceSelected);
   }
 
   @override
   void initState() {
     super.initState();
     cachedTracesLoader = CachedDataLoader<List<TraceInfo>>(
-        widget.globalVariables.cachedTraces, loadTraces, refreshTraceList);
+        widget.globalVariables.cachedTraces,
+        loadTraces,
+        refreshTraceListWidget);
   }
 
   @override
@@ -84,7 +86,7 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
         ],
       ),
       Expanded(
-        child: selectableList.makeListWidget(),
+        child: selectableListWidget.makeListWidget(),
       ),
     ];
   }
@@ -96,20 +98,21 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   Future<List<TraceInfo>> loadTraces() async {
     try {
       var traces = await ScopeTraceAccess().getScopeTraces();
-      refreshTraceList(traces);
+      refreshTraceListWidget(traces);
       return traces;
     } catch (e) {
       return Future.error('Error getting traces: $e');
     }
   }
 
-  void refreshTraceList(List<TraceInfo> traces) {
-    selectableList.refresh(traces, (TraceInfo t) => t.name);
+  void refreshTraceListWidget(List<TraceInfo> traces) {
+    selectableListWidget.refresh(traces, (TraceInfo t) => t.name);
   }
 
-  void addTracesToPlots() {
-    print("TODO");
-    var selectedTraces = selectableList.selectedItems;
+  Future<void> addTracesToPlots() async {
+    var selectedTraces = selectableListWidget.selectedItems;
+    selectedTraces =
+        await ScopeTraceAccess().getScopeTraceDetails(selectedTraces);
     var converter = TracePointsToGraphDataSeriesConverter();
     var dataSeries = selectedTraces.map(
         (e) => converter.convertTracePointsToGraphDataSeries(e.traceDetails!));
@@ -117,6 +120,7 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   }
 
   void deleteTraces(List<TraceInfo> traces) {
+    // TODO: implement deleteTraces
     // var tracesToDelete = traces
     //     .getAllTraces()
     //     .where((trace) => trace.isSelected())
@@ -126,6 +130,7 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   }
 
   void selectAllTraces(List<TraceInfo> traces) {
+    // TODO: implement selectAllTraces
     // for (var trace in traces.getAllTraces()) {
     //   if (!trace.isSelected()) {
     //     trace.toggle();
@@ -138,8 +143,6 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   }
 
   void onTraceSelected(TraceInfo sItem) {
-    setState(() {
-      print(selectableList.selectedItems.length);
-    });
+    setState(() {});
   }
 }

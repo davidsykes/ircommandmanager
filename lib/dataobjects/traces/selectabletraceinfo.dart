@@ -1,5 +1,6 @@
 import 'traceinfo.dart';
 
+// TODO This is redundant
 class SelectableTraceInfo {
   final TraceInfo traceInfo;
   bool _selected = false;

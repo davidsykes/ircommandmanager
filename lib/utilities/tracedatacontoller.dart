@@ -6,6 +6,7 @@ import '../webservices/scopetraces/scopetraceaccess.dart';
 import 'itracedatacontroller.dart';
 
 class TraceDataController implements ITraceDataController {
+  // TODO To be removed
   late WebAccess webAccess;
   late Future<TracesData> _getTracesDataFuture;
 
@@ -50,7 +51,6 @@ class TraceDataController implements ITraceDataController {
 
   @override
   void deleteTraces(Iterable<String> tracesToDelete) {
-    //webAccess.deleteTraces(tracesToDelete);
     for (var trace in tracesToDelete) {
       deleteTrace(trace);
     }

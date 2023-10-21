@@ -1,6 +1,7 @@
 import 'selectabletraceinfo.dart';
 import 'traceinfo.dart';
 
+// TODO This is redundant
 class TracesData {
   late List<SelectableTraceInfo> _traces;
 

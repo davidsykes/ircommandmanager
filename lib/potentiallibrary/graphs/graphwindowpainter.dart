@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
+import 'graphwindowdata.dart';
 
 class GraphWindowPainter extends CustomPainter {
+  final GraphWindowData graphWindowData;
+
+  GraphWindowPainter(this.graphWindowData);
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()

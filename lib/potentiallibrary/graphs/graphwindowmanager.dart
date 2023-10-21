@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'graphdataseries.dart';
+import 'graphwindowdata.dart';
 import 'graphwindowpainter.dart';
 
 abstract class IGraphWindowManager {
@@ -7,19 +8,23 @@ abstract class IGraphWindowManager {
 }
 
 class GraphWindowManager extends StatefulWidget implements IGraphWindowManager {
+  final graphWindowData = GraphWindowData();
+
   @override
   State<GraphWindowManager> createState() => _GraphWindowManagerState();
+
   @override
-  void addDataSeries(Iterable<GraphDataSeries> series) {
-    // TODO: implement dos
+  void addDataSeries(Iterable<GraphDataSeries> serieses) {
+    for (final series in serieses) {
+      graphWindowData.seriesToDisplay.add(series);
+    }
   }
 }
 
 class _GraphWindowManagerState extends State<GraphWindowManager> {
-  var graphWindowPainter = GraphWindowPainter();
-
   @override
   Widget build(BuildContext context) {
+    var graphWindowPainter = GraphWindowPainter(widget.graphWindowData);
     return Column(
       children: [
         OverflowBar(alignment: MainAxisAlignment.start, children: [
