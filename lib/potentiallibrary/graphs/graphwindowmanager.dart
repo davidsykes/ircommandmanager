@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'graphdataseries.dart';
+import 'seriesdata/graphdataseries.dart';
 import 'graphwindowdata.dart';
 import 'graphwindowpainter.dart';
 

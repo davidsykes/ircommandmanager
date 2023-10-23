@@ -1,3 +1,5 @@
+import '../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
+
 class TraceHorizontalScaler {
   final double screenWidth;
   final int zoom;
@@ -6,12 +8,12 @@ class TraceHorizontalScaler {
   TraceHorizontalScaler(
       {required this.screenWidth, required this.zoom, required this.offset});
 
-  double getMaximumXValue(List<List<List<double>>> values) {
+  double getMaximumXValue(List<List<GraphDataPoint>> values) {
     double maxx = 0;
-    for (List<List<double>> plot in values) {
-      for (List<double> p in plot) {
-        if (p[0] > maxx) {
-          maxx = p[0];
+    for (final plot in values) {
+      for (final p in plot) {
+        if (p.x > maxx) {
+          maxx = p.x;
         }
       }
     }

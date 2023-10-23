@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
-import '../dataobjects/plotsequence.dart';
-import '../dataobjects/plotvalue.dart';
+import '../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
+import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import '../logic/iplotsequencesunitsizescaler.dart';
 import '../logic/plotsequencerangescaler.dart';
 import '../logic/plotsequencesrangefinder.dart';
@@ -11,8 +11,8 @@ import '../logic/plotviewport.dart';
 import 'plotviewcontrolvariables.dart';
 
 class PlotWindow extends CustomPainter {
-  List<PlotSequence> plotSequences = List.empty();
-  List<PlotSequence> unitPlots = List.empty();
+  List<GraphDataSeries> plotSequences = List.empty();
+  List<GraphDataSeries> unitPlots = List.empty();
 
   late IPlotSequencesUnitSizeScaler _scaler;
   var _plotViewport = PlotViewport();
@@ -71,7 +71,7 @@ class PlotWindow extends CustomPainter {
     canvas.drawPoints(ui.PointMode.polygon, points, paint);
   }
 
-  void setPlot(PlotSequence plot) {
+  void setPlot(GraphDataSeries plot) {
     plotSequences = [plot];
     scalePlotsToUnitSize();
   }
@@ -87,14 +87,14 @@ class PlotWindow extends CustomPainter {
   }
 
   void plotTrace(
-      Canvas canvas, Size size, Paint paint, PlotSequence plotSequence) {
+      Canvas canvas, Size size, Paint paint, GraphDataSeries plotSequence) {
     var plots = plotSequence.plots;
     plots = _plotViewport.scaleToViewport(plots, size.width, size.height);
     var offsets = convertToOffsets(plots);
     canvas.drawPoints(ui.PointMode.polygon, offsets, paint);
   }
 
-  List<Offset> convertToOffsets(List<PlotValue> plots) {
+  List<Offset> convertToOffsets(List<GraphDataPoint> plots) {
     var offsets = plots.map((p) => Offset(p.x, p.y)).toList().cast<Offset>();
     return offsets;
   }

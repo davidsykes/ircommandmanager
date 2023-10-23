@@ -23,23 +23,23 @@ class TracePointsToGraphDataSeriesConverterTests extends TestModule {
     var trace = createSimpleTrace();
 
     var series = _converter.convertTracePointsToGraphDataSeries(trace);
-    var plot = series.data;
+    var plot = series.plots;
 
     assertTrue(plot.length == 7);
-    assertTrue(plot[0][0] == 0);
-    assertTrue(plot[0][1] == 0);
-    assertTrue(plot[1][0] == 1);
-    assertTrue(plot[1][1] == 0);
-    assertTrue(plot[2][0] == 1);
-    assertTrue(plot[2][1] == 1);
-    assertTrue(plot[3][0] == 2);
-    assertTrue(plot[3][1] == 1);
-    assertTrue(plot[4][0] == 2);
-    assertTrue(plot[4][1] == 0);
-    assertTrue(plot[5][0] == 3);
-    assertTrue(plot[5][1] == 0);
-    assertTrue(plot[6][0] == 3);
-    assertTrue(plot[6][1] == 1);
+    assertTrue(plot[0].x == 0);
+    assertTrue(plot[0].y == 0);
+    assertTrue(plot[1].x == 1);
+    assertTrue(plot[1].y == 0);
+    assertTrue(plot[2].x == 1);
+    assertTrue(plot[2].y == 1);
+    assertTrue(plot[3].x == 2);
+    assertTrue(plot[3].y == 1);
+    assertTrue(plot[4].x == 2);
+    assertTrue(plot[4].y == 0);
+    assertTrue(plot[5].x == 3);
+    assertTrue(plot[5].y == 0);
+    assertTrue(plot[6].x == 3);
+    assertTrue(plot[6].y == 1);
   }
 
   TracePoints createSimpleTrace() {

@@ -1,6 +1,6 @@
-import '../../../plotting/dataobjects/plotsequence.dart';
-import '../../../plotting/dataobjects/plotvalue.dart';
 import '../../../plotting/logic/plotsequencesrangefinder.dart';
+import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
+import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import '../../../testframework/testmodule.dart';
 import '../../../testframework/testunit.dart';
 
@@ -46,7 +46,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
   }
 
   void ifThereAreNoSequencesTheRangeIsZero() {
-    var plotSequences = List<PlotSequence>.empty();
+    var plotSequences = List<GraphDataSeries>.empty();
 
     var range = _finder.calculateRange(plotSequences);
 
@@ -61,7 +61,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
       [10, 10, 20, 20],
       [12, 5, 18, 25],
     ]);
-    plotSequences.add(PlotSequence(List<PlotValue>.empty()));
+    plotSequences.add(GraphDataSeries(List<GraphDataPoint>.empty()));
 
     var range = _finder.calculateRange(plotSequences);
 
@@ -73,9 +73,9 @@ class PlotSequencesRangeFinderTests extends TestModule {
 
   void ifSeveralSequencesHaveNoPlotsTheRangeIsZero() {
     var plotSequences = [
-      PlotSequence(List<PlotValue>.empty()),
-      PlotSequence(List<PlotValue>.empty()),
-      PlotSequence(List<PlotValue>.empty()),
+      GraphDataSeries(List<GraphDataPoint>.empty()),
+      GraphDataSeries(List<GraphDataPoint>.empty()),
+      GraphDataSeries(List<GraphDataPoint>.empty()),
     ];
 
     var range = _finder.calculateRange(plotSequences);
@@ -93,12 +93,12 @@ class PlotSequencesRangeFinderTests extends TestModule {
     _finder = PlotSequencesRangeFinder();
   }
 
-  List<PlotSequence> creatPlotSequencesltrb(List<List<double>> values) {
-    var seq = values.map((e) => PlotSequence([
-          PlotValue(e[0], e[1]),
-          PlotValue(e[2], e[1]),
-          PlotValue(e[2], e[3]),
-          PlotValue(e[0], e[1]),
+  List<GraphDataSeries> creatPlotSequencesltrb(List<List<double>> values) {
+    var seq = values.map((e) => GraphDataSeries([
+          GraphDataPoint(e[0], e[1]),
+          GraphDataPoint(e[2], e[1]),
+          GraphDataPoint(e[2], e[3]),
+          GraphDataPoint(e[0], e[1]),
         ]));
     return seq.toList();
   }

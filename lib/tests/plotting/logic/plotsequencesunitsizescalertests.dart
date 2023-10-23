@@ -1,9 +1,9 @@
-import '../../../plotting/dataobjects/plotsequence.dart';
 import '../../../plotting/dataobjects/plotsequencesrange.dart';
-import '../../../plotting/dataobjects/plotvalue.dart';
 import '../../../plotting/logic/iplotsequencesrangefinder.dart';
 import '../../../plotting/logic/iplotsequencesrangescaler.dart';
 import '../../../plotting/logic/plotsequencesunitsizescaler.dart';
+import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
+import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import '../../../testframework/testmodule.dart';
 import '../../../testframework/testunit.dart';
 
@@ -12,7 +12,7 @@ class PlotSequencesUnitSizeScalerTests extends TestModule {
   late MockPlotSequencesRangeFinder mockPlotSequencesRangeFinder;
   late MockPlotSequencesRangeScaler mockPlotSequencesRangeScaler;
   var plotSequencesCalculatedRange = PlotSequencesRange(1, 2, 3, 4);
-  late List<PlotSequence> _scaledPlotSequences;
+  late List<GraphDataSeries> _scaledPlotSequences;
 
   @override
   Iterable<TestUnit> getTests() {
@@ -54,7 +54,7 @@ class PlotSequencesUnitSizeScalerTests extends TestModule {
   @override
   setUpData() {
     _scaledPlotSequences = [
-      PlotSequence([PlotValue(1, 2)])
+      GraphDataSeries([GraphDataPoint(1, 2)])
     ];
   }
 
@@ -72,36 +72,36 @@ class PlotSequencesUnitSizeScalerTests extends TestModule {
         mockPlotSequencesRangeFinder, mockPlotSequencesRangeScaler);
   }
 
-  List<PlotSequence> creatPlotSequences() {
+  List<GraphDataSeries> creatPlotSequences() {
     return [
-      PlotSequence([PlotValue(100, 100)])
+      GraphDataSeries([GraphDataPoint(100, 100)])
     ];
   }
 }
 
 class MockPlotSequencesRangeFinder extends IPlotSequencesRangeFinder {
-  List<PlotSequence> sequences = List.empty();
+  List<GraphDataSeries> sequences = List.empty();
   PlotSequencesRange range;
 
   MockPlotSequencesRangeFinder(this.range);
 
   @override
-  PlotSequencesRange calculateRange(List<PlotSequence> plotSequences) {
+  PlotSequencesRange calculateRange(List<GraphDataSeries> plotSequences) {
     sequences = plotSequences;
     return range;
   }
 }
 
 class MockPlotSequencesRangeScaler extends IPlotSequencesRangeScaler {
-  List<PlotSequence> sequences = List.empty();
+  List<GraphDataSeries> sequences = List.empty();
   late PlotSequencesRange plotSequencesRange;
-  late List<PlotSequence> _scaledPlotSequences;
+  late List<GraphDataSeries> _scaledPlotSequences;
 
   MockPlotSequencesRangeScaler(this._scaledPlotSequences);
 
   @override
-  List<PlotSequence> scalePlotSequences(
-      List<PlotSequence> plotSequences, PlotSequencesRange range) {
+  List<GraphDataSeries> scalePlotSequences(
+      List<GraphDataSeries> plotSequences, PlotSequencesRange range) {
     sequences = plotSequences;
     plotSequencesRange = range;
     return _scaledPlotSequences;

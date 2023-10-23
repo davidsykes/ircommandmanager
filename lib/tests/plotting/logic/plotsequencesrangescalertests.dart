@@ -1,8 +1,8 @@
-import '../../../plotting/dataobjects/plotsequence.dart';
 import '../../../plotting/dataobjects/plotsequencesrange.dart';
-import '../../../plotting/dataobjects/plotvalue.dart';
 import '../../../plotting/logic/iplotsequencerangescaler.dart';
 import '../../../plotting/logic/plotsequencesrangescaler.dart';
+import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
+import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import '../../../testframework/testmodule.dart';
 import '../../../testframework/testunit.dart';
 
@@ -10,12 +10,12 @@ class PlotSequencesRangeScalerTests extends TestModule {
   late PlotSequencesRangeScaler _scaler;
   late MockPlotSequenceRangeScaler _mockPlotSequenceRangeScaler;
   late PlotSequencesRange _plotSequencesRange;
-  late PlotSequence _unscaledPlotSequence1;
-  late PlotSequence _unscaledPlotSequence2;
-  late PlotSequence _unscaledPlotSequence3;
-  late PlotSequence _scaledPlotSequence1;
-  late PlotSequence _scaledPlotSequence2;
-  late PlotSequence _scaledPlotSequence3;
+  late GraphDataSeries _unscaledPlotSequence1;
+  late GraphDataSeries _unscaledPlotSequence2;
+  late GraphDataSeries _unscaledPlotSequence3;
+  late GraphDataSeries _scaledPlotSequence1;
+  late GraphDataSeries _scaledPlotSequence2;
+  late GraphDataSeries _scaledPlotSequence3;
 
   @override
   Iterable<TestUnit> getTests() {
@@ -42,12 +42,12 @@ class PlotSequencesRangeScalerTests extends TestModule {
   @override
   void setUpData() {
     _plotSequencesRange = PlotSequencesRange(1, 2, 3, 4);
-    _unscaledPlotSequence1 = PlotSequence([PlotValue(1, 2)]);
-    _unscaledPlotSequence2 = PlotSequence([PlotValue(2, 2)]);
-    _unscaledPlotSequence3 = PlotSequence([PlotValue(3, 2)]);
-    _scaledPlotSequence1 = PlotSequence([PlotValue(4, 2)]);
-    _scaledPlotSequence2 = PlotSequence([PlotValue(5, 2)]);
-    _scaledPlotSequence3 = PlotSequence([PlotValue(6, 2)]);
+    _unscaledPlotSequence1 = GraphDataSeries([GraphDataPoint(1, 2)]);
+    _unscaledPlotSequence2 = GraphDataSeries([GraphDataPoint(2, 2)]);
+    _unscaledPlotSequence3 = GraphDataSeries([GraphDataPoint(3, 2)]);
+    _scaledPlotSequence1 = GraphDataSeries([GraphDataPoint(4, 2)]);
+    _scaledPlotSequence2 = GraphDataSeries([GraphDataPoint(5, 2)]);
+    _scaledPlotSequence3 = GraphDataSeries([GraphDataPoint(6, 2)]);
   }
 
   @override
@@ -70,14 +70,14 @@ class PlotSequencesRangeScalerTests extends TestModule {
 }
 
 class MockPlotSequenceRangeScaler extends IPlotSequenceRangeScaler {
-  List<PlotSequence> from;
-  List<PlotSequence> to;
+  List<GraphDataSeries> from;
+  List<GraphDataSeries> to;
   PlotSequencesRange range;
   MockPlotSequenceRangeScaler(this.from, this.to, this.range);
 
   @override
-  PlotSequence scalePlotSequence(
-      PlotSequence plotSequence, PlotSequencesRange range) {
+  GraphDataSeries scalePlotSequence(
+      GraphDataSeries plotSequence, PlotSequencesRange range) {
     for (var i = 0; i < from.length; i++) {
       if (from[i] == plotSequence) {
         return to[i];

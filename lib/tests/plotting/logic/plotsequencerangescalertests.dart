@@ -1,14 +1,13 @@
-import 'package:ircommandmanager/plotting/dataobjects/plotsequence.dart';
 import 'package:ircommandmanager/plotting/dataobjects/plotsequencesrange.dart';
-import 'package:ircommandmanager/plotting/dataobjects/plotvalue.dart';
-
+import 'package:ircommandmanager/potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 import '../../../plotting/logic/plotsequencerangescaler.dart';
+import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import '../../../testframework/testmodule.dart';
 import '../../../testframework/testunit.dart';
 
 class PlotSequenceRangeScalerTests extends TestModule {
   late PlotSequenceRangeScaler _scaler;
-  late PlotSequence _plotSequence;
+  late GraphDataSeries _plotSequence;
   late PlotSequencesRange _plotSequencesRange;
 
   @override
@@ -21,11 +20,11 @@ class PlotSequenceRangeScalerTests extends TestModule {
   void aSequenceisScaled() {
     var scaled = _scaler.scalePlotSequence(_plotSequence, _plotSequencesRange);
 
-    assertEqual(scaled.plots[0], PlotValue(0, 0));
-    assertEqual(scaled.plots[1], PlotValue(1, 0));
-    assertEqual(scaled.plots[2], PlotValue(0, 1));
-    assertEqual(scaled.plots[3], PlotValue(1, 1));
-    assertEqual(scaled.plots[4], PlotValue(0.5, 0.5));
+    assertEqual(scaled.plots[0], GraphDataPoint(0, 0));
+    assertEqual(scaled.plots[1], GraphDataPoint(1, 0));
+    assertEqual(scaled.plots[2], GraphDataPoint(0, 1));
+    assertEqual(scaled.plots[3], GraphDataPoint(1, 1));
+    assertEqual(scaled.plots[4], GraphDataPoint(0.5, 0.5));
   }
 
   //#region Supporting Code
@@ -33,12 +32,12 @@ class PlotSequenceRangeScalerTests extends TestModule {
   @override
   void setUpData() {
     _plotSequencesRange = PlotSequencesRange(10, 20, 300, 400);
-    _plotSequence = PlotSequence([
-      PlotValue(10, 300),
-      PlotValue(20, 300),
-      PlotValue(10, 400),
-      PlotValue(20, 400),
-      PlotValue(15, 350),
+    _plotSequence = GraphDataSeries([
+      GraphDataPoint(10, 300),
+      GraphDataPoint(20, 300),
+      GraphDataPoint(10, 400),
+      GraphDataPoint(20, 400),
+      GraphDataPoint(15, 350),
     ]);
   }
 

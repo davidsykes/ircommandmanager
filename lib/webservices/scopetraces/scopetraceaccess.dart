@@ -1,8 +1,8 @@
 import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../../dataobjects/traces/traceinfo.dart';
 import '../../dataobjects/traces/tracepoints.dart';
-import '../../utilities/itracedatacontroller.dart';
-import '../../utilities/tracedatacontoller.dart';
+import '../../forremoval/itracedatacontroller.dart';
+import '../../forremoval/tracedatacontoller.dart';
 
 class ScopeTraceAccess {
   //One instance, needs factory

@@ -1,4 +1,4 @@
-import 'graphdataseries.dart';
+import 'seriesdata/graphdataseries.dart';
 
 class GraphWindowData {
   final List<GraphDataSeries> seriesToDisplay = List.empty(growable: true);

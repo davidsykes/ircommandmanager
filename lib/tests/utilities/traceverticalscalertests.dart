@@ -1,6 +1,6 @@
+import '../../forremoval/traceverticalscaler.dart';
 import '../../testframework/testmodule.dart';
 import '../../testframework/testunit.dart';
-import '../../utilities/traceverticalscaler.dart';
 
 class TraceVerticalScalerTests extends TestModule {
   late TraceVerticalScaler _scaler;

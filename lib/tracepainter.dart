@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'forremoval/stuff.dart';
+import 'forremoval/tracehorizontalscaler.dart';
+import 'forremoval/traceverticalscaler.dart';
 import 'utilities/tracepointstographdataseriesconverter.dart';
 import 'plotting/view/plotviewcontrolvariables.dart';
 import 'dart:ui' as ui;
 import 'dataobjects/traces/traceinfo.dart';
-import 'utilities/tracehorizontalscaler.dart';
-import 'utilities/traceverticalscaler.dart';
 
 class MyPainter extends CustomPainter {
   final PlotViewControlVariables plotViewControlVariables;
@@ -61,14 +62,16 @@ class MyPainter extends CustomPainter {
 
     var converter = TracePointsToGraphDataSeriesConverter();
     var tracesToPlot = traces
-        .map((t) =>
-            converter.convertTracePointsToGraphDataSeries(t.traceDetails!).data)
+        .map((t) => converter
+            .convertTracePointsToGraphDataSeries(t.traceDetails!)
+            .plots)
         .toList();
 
     var maxX = horizontalScaler.getMaximumXValue(tracesToPlot);
 
     for (var plot in tracesToPlot) {
-      plotTrace(plot, horizontalScaler, maxX, verticalScaler, canvas, paint);
+      plotTrace(graphDataSeriesToDoubles(plot), horizontalScaler, maxX,
+          verticalScaler, canvas, paint);
     }
   }
 

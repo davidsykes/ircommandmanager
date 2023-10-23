@@ -1,8 +1,8 @@
-class PlotValue {
+class GraphDataPoint {
   double x = 0;
   double y = 0;
 
-  PlotValue(this.x, this.y);
+  GraphDataPoint(this.x, this.y);
 
   Map<String, dynamic> toJson() => {'x': x, 'y': y};
 }

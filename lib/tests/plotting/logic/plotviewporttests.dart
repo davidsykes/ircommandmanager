@@ -1,7 +1,8 @@
-import 'package:ircommandmanager/plotting/dataobjects/plotvalue.dart';
 import 'package:ircommandmanager/plotting/logic/plotviewport.dart';
 import 'package:ircommandmanager/testframework/testmodule.dart';
 import 'package:ircommandmanager/testframework/testunit.dart';
+
+import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 
 class PlotViewportTests extends TestModule {
   late PlotViewport _viewport;
@@ -15,21 +16,21 @@ class PlotViewportTests extends TestModule {
 
   void aSimpleSequenceIsScaledToFitTheViewport() {
     var plotSequences = [
-      PlotValue(0, 0),
-      PlotValue(1, 0),
-      PlotValue(1, 1),
-      PlotValue(0, 1),
-      PlotValue(0.5, 0.5),
+      GraphDataPoint(0, 0),
+      GraphDataPoint(1, 0),
+      GraphDataPoint(1, 1),
+      GraphDataPoint(0, 1),
+      GraphDataPoint(0.5, 0.5),
     ];
 
     var results = _viewport.scaleToViewport(plotSequences, 100, 200);
 
     assertEqual(results, [
-      PlotValue(0, 0),
-      PlotValue(100, 0),
-      PlotValue(100, 200),
-      PlotValue(0, 200),
-      PlotValue(50, 100),
+      GraphDataPoint(0, 0),
+      GraphDataPoint(100, 0),
+      GraphDataPoint(100, 200),
+      GraphDataPoint(0, 200),
+      GraphDataPoint(50, 100),
     ]);
   }
 

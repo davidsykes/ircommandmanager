@@ -1,5 +1,4 @@
-import 'package:ircommandmanager/plotting/dataobjects/plotsequence.dart';
-
+import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import 'iplotsequencesrangefinder.dart';
 import 'iplotsequencesrangescaler.dart';
 import 'iplotsequencesunitsizescaler.dart';
@@ -12,7 +11,7 @@ class PlotSequencesUnitSizeScaler extends IPlotSequencesUnitSizeScaler {
       this._plotSequencesRangeFinder, this._plotSequencesRangeScaler);
 
   @override
-  List<PlotSequence> scaleToUnitSize(List<PlotSequence> plotSequences) {
+  List<GraphDataSeries> scaleToUnitSize(List<GraphDataSeries> plotSequences) {
     var range = _plotSequencesRangeFinder.calculateRange(plotSequences);
     var scaledSequences =
         _plotSequencesRangeScaler.scalePlotSequences(plotSequences, range);

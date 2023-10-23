@@ -1,11 +1,11 @@
 import 'dart:math';
-import '../dataobjects/plotsequence.dart';
+import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import '../dataobjects/plotsequencesrange.dart';
 import 'iplotsequencesrangefinder.dart';
 
 class PlotSequencesRangeFinder extends IPlotSequencesRangeFinder {
   @override
-  PlotSequencesRange calculateRange(List<PlotSequence> plotSequences) {
+  PlotSequencesRange calculateRange(List<GraphDataSeries> plotSequences) {
     var validSequences =
         plotSequences.where((s) => s.plots.isNotEmpty).toList();
 
@@ -22,7 +22,7 @@ class PlotSequencesRangeFinder extends IPlotSequencesRangeFinder {
     return range;
   }
 
-  PlotSequencesRange _calculateRange(PlotSequence sequence) {
+  PlotSequencesRange _calculateRange(GraphDataSeries sequence) {
     var plots = sequence.plots;
     var range =
         PlotSequencesRange(plots[0].x, plots[0].x, plots[0].y, plots[0].y);

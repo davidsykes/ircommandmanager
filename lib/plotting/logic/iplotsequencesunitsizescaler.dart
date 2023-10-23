@@ -1,5 +1,5 @@
-import 'package:ircommandmanager/plotting/dataobjects/plotsequence.dart';
+import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 
 abstract class IPlotSequencesUnitSizeScaler {
-  List<PlotSequence> scaleToUnitSize(List<PlotSequence> plotSequences);
+  List<GraphDataSeries> scaleToUnitSize(List<GraphDataSeries> plotSequences);
 }

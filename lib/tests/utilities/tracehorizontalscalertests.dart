@@ -1,6 +1,8 @@
+import '../../forremoval/stuff.dart';
+import '../../forremoval/tracehorizontalscaler.dart';
+import '../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 import '../../testframework/testmodule.dart';
 import '../../testframework/testunit.dart';
-import '../../utilities/tracehorizontalscaler.dart';
 
 class TraceHorizontalScalerTests extends TestModule {
   late TraceHorizontalScaler _scaler;
@@ -31,7 +33,8 @@ class TraceHorizontalScalerTests extends TestModule {
   void plotsCanBeScaledHorizontally() {
     var values = createSomeValues();
 
-    var max = _scaler.scaleToHorizontalExtent(plot: values[2], maxX: 1);
+    var max = _scaler.scaleToHorizontalExtent(
+        plot: graphDataSeriesToDoubles(values[2]), maxX: 1);
 
     assertEqual(max, [
       [0.0, 0.0],
@@ -42,7 +45,8 @@ class TraceHorizontalScalerTests extends TestModule {
   void aZeroHorizontalScaleDoesNothing() {
     var values = createSomeValues();
 
-    var max = _scaler.scaleToHorizontalExtent(plot: values[2], maxX: 0);
+    var max = _scaler.scaleToHorizontalExtent(
+        plot: graphDataSeriesToDoubles(values[2]), maxX: 0);
 
     assertEqual(max, [
       [0.0, 0.0],
@@ -64,20 +68,11 @@ class TraceHorizontalScalerTests extends TestModule {
     assertEqual(newValues[2], [10.0, 1.0]);
   }
 
-  List<List<List<double>>> createSomeValues() {
+  List<List<GraphDataPoint>> createSomeValues() {
     return [
-      [
-        [0, 0],
-        [5, 1]
-      ],
-      [
-        [0, 0],
-        [1, 10]
-      ],
-      [
-        [0, 0],
-        [1, 1]
-      ],
+      [GraphDataPoint(0, 0), GraphDataPoint(5, 1)],
+      [GraphDataPoint(0, 0), GraphDataPoint(1, 10)],
+      [GraphDataPoint(0, 0), GraphDataPoint(1, 1)],
     ];
   }
 }
