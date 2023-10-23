@@ -1,7 +1,7 @@
 import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
-import '../dataobjects/plotsequencesrange.dart';
+import '../../potentiallibrary/graphs/scaling/graphseriesextent.dart';
 
 abstract class IPlotSequencesRangeScaler {
   List<GraphDataSeries> scalePlotSequences(
-      List<GraphDataSeries> plotSequences, PlotSequencesRange range);
+      List<GraphDataSeries> plotSequences, GraphSeriesExtent range);
 }

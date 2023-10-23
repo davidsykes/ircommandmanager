@@ -1,4 +1,4 @@
-import '../../../plotting/dataobjects/plotsequencesrange.dart';
+import '../../../potentiallibrary/graphs/scaling/graphseriesextent.dart';
 import '../../../plotting/logic/iplotsequencerangescaler.dart';
 import '../../../plotting/logic/plotsequencesrangescaler.dart';
 import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
@@ -9,7 +9,7 @@ import '../../../testframework/testunit.dart';
 class PlotSequencesRangeScalerTests extends TestModule {
   late PlotSequencesRangeScaler _scaler;
   late MockPlotSequenceRangeScaler _mockPlotSequenceRangeScaler;
-  late PlotSequencesRange _plotSequencesRange;
+  late GraphSeriesExtent _plotSequencesRange;
   late GraphDataSeries _unscaledPlotSequence1;
   late GraphDataSeries _unscaledPlotSequence2;
   late GraphDataSeries _unscaledPlotSequence3;
@@ -41,7 +41,7 @@ class PlotSequencesRangeScalerTests extends TestModule {
 
   @override
   void setUpData() {
-    _plotSequencesRange = PlotSequencesRange(1, 2, 3, 4);
+    _plotSequencesRange = GraphSeriesExtent(1, 2, 3, 4);
     _unscaledPlotSequence1 = GraphDataSeries([GraphDataPoint(1, 2)]);
     _unscaledPlotSequence2 = GraphDataSeries([GraphDataPoint(2, 2)]);
     _unscaledPlotSequence3 = GraphDataSeries([GraphDataPoint(3, 2)]);
@@ -72,12 +72,12 @@ class PlotSequencesRangeScalerTests extends TestModule {
 class MockPlotSequenceRangeScaler extends IPlotSequenceRangeScaler {
   List<GraphDataSeries> from;
   List<GraphDataSeries> to;
-  PlotSequencesRange range;
+  GraphSeriesExtent range;
   MockPlotSequenceRangeScaler(this.from, this.to, this.range);
 
   @override
   GraphDataSeries scalePlotSequence(
-      GraphDataSeries plotSequence, PlotSequencesRange range) {
+      GraphDataSeries plotSequence, GraphSeriesExtent range) {
     for (var i = 0; i < from.length; i++) {
       if (from[i] == plotSequence) {
         return to[i];

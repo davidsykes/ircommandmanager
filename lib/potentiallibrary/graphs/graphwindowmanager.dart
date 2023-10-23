@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'scaling/graphseriesextentcalculator.dart';
 import 'seriesdata/graphdataseries.dart';
 import 'graphwindowdata.dart';
 import 'graphwindowpainter.dart';
@@ -9,6 +10,7 @@ abstract class IGraphWindowManager {
 
 class GraphWindowManager extends StatefulWidget implements IGraphWindowManager {
   final graphWindowData = GraphWindowData();
+  final _graphSeriesExtentCalculator = GraphSeriesExtentCalculator();
 
   @override
   State<GraphWindowManager> createState() => _GraphWindowManagerState();
@@ -18,6 +20,12 @@ class GraphWindowManager extends StatefulWidget implements IGraphWindowManager {
     for (final series in serieses) {
       graphWindowData.seriesToDisplay.add(series);
     }
+    _recalculateGraphSeriesExtent();
+  }
+
+  void _recalculateGraphSeriesExtent() {
+    graphWindowData.graphSeriesExtent = _graphSeriesExtentCalculator
+        .calculateRange(graphWindowData.seriesToDisplay);
   }
 }
 

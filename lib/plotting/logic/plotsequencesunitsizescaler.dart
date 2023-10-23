@@ -1,10 +1,10 @@
+import '../../potentiallibrary/graphs/scaling/graphseriesextentcalculator.dart';
 import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
-import 'iplotsequencesrangefinder.dart';
 import 'iplotsequencesrangescaler.dart';
 import 'iplotsequencesunitsizescaler.dart';
 
 class PlotSequencesUnitSizeScaler extends IPlotSequencesUnitSizeScaler {
-  IPlotSequencesRangeFinder _plotSequencesRangeFinder;
+  IGraphSeriesExtentCalculator _plotSequencesRangeFinder;
   IPlotSequencesRangeScaler _plotSequencesRangeScaler;
 
   PlotSequencesUnitSizeScaler(

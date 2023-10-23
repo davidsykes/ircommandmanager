@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../myappstate.dart';
 import '../testframework/testrunner.dart';
 import '../tests/plotting/logic/plotsequencerangescalertests.dart';
-import '../tests/plotting/logic/plotsequencesrangefindertests.dart';
+import '../tests/potentiallibrary/graphs/scaling/graphseriesextentcalculatortests.dart';
 import '../tests/plotting/logic/plotsequencesrangescalertests.dart';
 import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
 import '../tests/plotting/logic/plotviewporttests.dart';
@@ -53,7 +53,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
     runner.addTests(CommandsListFromApiCommandsConverterTests());
     runner.addTests(IrCommandSequenceToPlotSequenceConverterTests());
     runner.addTests(PlotSequencesUnitSizeScalerTests());
-    runner.addTests(PlotSequencesRangeFinderTests());
+    runner.addTests(GraphSeriesExtentCalculatorTests());
     runner.addTests(PlotSequencesRangeScalerTests());
     runner.addTests(PlotSequenceRangeScalerTests());
     runner.addTests(PlotViewportTests());

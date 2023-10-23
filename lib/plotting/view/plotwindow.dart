@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
+import '../../potentiallibrary/graphs/scaling/graphseriesextentcalculator.dart';
 import '../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import '../logic/iplotsequencesunitsizescaler.dart';
 import '../logic/plotsequencerangescaler.dart';
-import '../logic/plotsequencesrangefinder.dart';
 import '../logic/plotsequencesrangescaler.dart';
 import '../logic/plotsequencesunitsizescaler.dart';
 import '../logic/plotviewport.dart';
@@ -18,7 +18,7 @@ class PlotWindow extends CustomPainter {
   var _plotViewport = PlotViewport();
 
   PlotWindow({required Listenable repaint}) : super(repaint: repaint) {
-    var plotSequencesRangeFinder = PlotSequencesRangeFinder();
+    var plotSequencesRangeFinder = GraphSeriesExtentCalculator();
     var plotSequenceRangeScaler = PlotSequenceRangeScaler();
     var plotSequencesRangeScaler =
         PlotSequencesRangeScaler(plotSequenceRangeScaler);

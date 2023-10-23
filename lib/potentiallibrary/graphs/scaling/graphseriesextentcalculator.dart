@@ -1,16 +1,20 @@
 import 'dart:math';
-import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
-import '../dataobjects/plotsequencesrange.dart';
-import 'iplotsequencesrangefinder.dart';
 
-class PlotSequencesRangeFinder extends IPlotSequencesRangeFinder {
+import '../seriesdata/graphdataseries.dart';
+import 'graphseriesextent.dart';
+
+abstract class IGraphSeriesExtentCalculator {
+  GraphSeriesExtent calculateRange(List<GraphDataSeries> plotSequences);
+}
+
+class GraphSeriesExtentCalculator extends IGraphSeriesExtentCalculator {
   @override
-  PlotSequencesRange calculateRange(List<GraphDataSeries> plotSequences) {
+  GraphSeriesExtent calculateRange(List<GraphDataSeries> plotSequences) {
     var validSequences =
         plotSequences.where((s) => s.plots.isNotEmpty).toList();
 
     if (validSequences.isEmpty) {
-      return PlotSequencesRange(0, 0, 0, 0);
+      return GraphSeriesExtent(0, 0, 0, 0);
     }
 
     var range = _calculateRange(validSequences[0]);
@@ -22,10 +26,10 @@ class PlotSequencesRangeFinder extends IPlotSequencesRangeFinder {
     return range;
   }
 
-  PlotSequencesRange _calculateRange(GraphDataSeries sequence) {
+  GraphSeriesExtent _calculateRange(GraphDataSeries sequence) {
     var plots = sequence.plots;
     var range =
-        PlotSequencesRange(plots[0].x, plots[0].x, plots[0].y, plots[0].y);
+        GraphSeriesExtent(plots[0].x, plots[0].x, plots[0].y, plots[0].y);
 
     for (var plot in plots) {
       if (plot.x < range.minx) {
@@ -42,9 +46,9 @@ class PlotSequencesRangeFinder extends IPlotSequencesRangeFinder {
     return range;
   }
 
-  PlotSequencesRange addRanges(
-      PlotSequencesRange range, PlotSequencesRange rangeToAdd) {
-    return PlotSequencesRange(
+  GraphSeriesExtent addRanges(
+      GraphSeriesExtent range, GraphSeriesExtent rangeToAdd) {
+    return GraphSeriesExtent(
         min(range.minx, rangeToAdd.minx),
         max(range.maxx, rangeToAdd.maxx),
         min(range.miny, rangeToAdd.miny),

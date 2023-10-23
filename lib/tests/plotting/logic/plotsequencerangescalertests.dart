@@ -1,4 +1,4 @@
-import 'package:ircommandmanager/plotting/dataobjects/plotsequencesrange.dart';
+import 'package:ircommandmanager/potentiallibrary/graphs/scaling/graphseriesextent.dart';
 import 'package:ircommandmanager/potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 import '../../../plotting/logic/plotsequencerangescaler.dart';
 import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
@@ -8,7 +8,7 @@ import '../../../testframework/testunit.dart';
 class PlotSequenceRangeScalerTests extends TestModule {
   late PlotSequenceRangeScaler _scaler;
   late GraphDataSeries _plotSequence;
-  late PlotSequencesRange _plotSequencesRange;
+  late GraphSeriesExtent _plotSequencesRange;
 
   @override
   Iterable<TestUnit> getTests() {
@@ -31,7 +31,7 @@ class PlotSequenceRangeScalerTests extends TestModule {
 
   @override
   void setUpData() {
-    _plotSequencesRange = PlotSequencesRange(10, 20, 300, 400);
+    _plotSequencesRange = GraphSeriesExtent(10, 20, 300, 400);
     _plotSequence = GraphDataSeries([
       GraphDataPoint(10, 300),
       GraphDataPoint(20, 300),

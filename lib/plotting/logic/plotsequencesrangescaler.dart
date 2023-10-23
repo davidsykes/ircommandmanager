@@ -1,5 +1,5 @@
 import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
-import '../dataobjects/plotsequencesrange.dart';
+import '../../potentiallibrary/graphs/scaling/graphseriesextent.dart';
 import 'iplotsequencerangescaler.dart';
 import 'iplotsequencesrangescaler.dart';
 
@@ -10,7 +10,7 @@ class PlotSequencesRangeScaler extends IPlotSequencesRangeScaler {
 
   @override
   List<GraphDataSeries> scalePlotSequences(
-      List<GraphDataSeries> plotSequences, PlotSequencesRange range) {
+      List<GraphDataSeries> plotSequences, GraphSeriesExtent range) {
     var scaled = plotSequences
         .map((e) => _plotSequenceRangeScaler.scalePlotSequence(e, range));
     return scaled.toList();

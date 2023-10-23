@@ -1,7 +1,7 @@
-import '../../../plotting/dataobjects/plotsequencesrange.dart';
-import '../../../plotting/logic/iplotsequencesrangefinder.dart';
+import '../../../potentiallibrary/graphs/scaling/graphseriesextent.dart';
 import '../../../plotting/logic/iplotsequencesrangescaler.dart';
 import '../../../plotting/logic/plotsequencesunitsizescaler.dart';
+import '../../../potentiallibrary/graphs/scaling/graphseriesextentcalculator.dart';
 import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 import '../../../testframework/testmodule.dart';
@@ -9,9 +9,9 @@ import '../../../testframework/testunit.dart';
 
 class PlotSequencesUnitSizeScalerTests extends TestModule {
   late PlotSequencesUnitSizeScaler _scaler;
-  late MockPlotSequencesRangeFinder mockPlotSequencesRangeFinder;
+  late MockGraphSeriesExtentCalculator mockGraphSeriesExtentCalculator;
   late MockPlotSequencesRangeScaler mockPlotSequencesRangeScaler;
-  var plotSequencesCalculatedRange = PlotSequencesRange(1, 2, 3, 4);
+  var plotSequencesCalculatedRange = GraphSeriesExtent(1, 2, 3, 4);
   late List<GraphDataSeries> _scaledPlotSequences;
 
   @override
@@ -28,7 +28,7 @@ class PlotSequencesUnitSizeScalerTests extends TestModule {
 
     _scaler.scaleToUnitSize(plotSequences);
 
-    assertSameObject(mockPlotSequencesRangeFinder.sequences, plotSequences);
+    assertSameObject(mockGraphSeriesExtentCalculator.sequences, plotSequences);
   }
 
   void plotSequencesArePassedToThePlotSequencesScaler() {
@@ -60,8 +60,8 @@ class PlotSequencesUnitSizeScalerTests extends TestModule {
 
   @override
   setUpMocks() {
-    mockPlotSequencesRangeFinder =
-        MockPlotSequencesRangeFinder(plotSequencesCalculatedRange);
+    mockGraphSeriesExtentCalculator =
+        MockGraphSeriesExtentCalculator(plotSequencesCalculatedRange);
     mockPlotSequencesRangeScaler =
         MockPlotSequencesRangeScaler(_scaledPlotSequences);
   }
@@ -69,7 +69,7 @@ class PlotSequencesUnitSizeScalerTests extends TestModule {
   @override
   void setUpObjectUnderTest() {
     _scaler = PlotSequencesUnitSizeScaler(
-        mockPlotSequencesRangeFinder, mockPlotSequencesRangeScaler);
+        mockGraphSeriesExtentCalculator, mockPlotSequencesRangeScaler);
   }
 
   List<GraphDataSeries> creatPlotSequences() {
@@ -79,14 +79,14 @@ class PlotSequencesUnitSizeScalerTests extends TestModule {
   }
 }
 
-class MockPlotSequencesRangeFinder extends IPlotSequencesRangeFinder {
+class MockGraphSeriesExtentCalculator extends IGraphSeriesExtentCalculator {
   List<GraphDataSeries> sequences = List.empty();
-  PlotSequencesRange range;
+  GraphSeriesExtent range;
 
-  MockPlotSequencesRangeFinder(this.range);
+  MockGraphSeriesExtentCalculator(this.range);
 
   @override
-  PlotSequencesRange calculateRange(List<GraphDataSeries> plotSequences) {
+  GraphSeriesExtent calculateRange(List<GraphDataSeries> plotSequences) {
     sequences = plotSequences;
     return range;
   }
@@ -94,14 +94,14 @@ class MockPlotSequencesRangeFinder extends IPlotSequencesRangeFinder {
 
 class MockPlotSequencesRangeScaler extends IPlotSequencesRangeScaler {
   List<GraphDataSeries> sequences = List.empty();
-  late PlotSequencesRange plotSequencesRange;
+  late GraphSeriesExtent plotSequencesRange;
   late List<GraphDataSeries> _scaledPlotSequences;
 
   MockPlotSequencesRangeScaler(this._scaledPlotSequences);
 
   @override
   List<GraphDataSeries> scalePlotSequences(
-      List<GraphDataSeries> plotSequences, PlotSequencesRange range) {
+      List<GraphDataSeries> plotSequences, GraphSeriesExtent range) {
     sequences = plotSequences;
     plotSequencesRange = range;
     return _scaledPlotSequences;

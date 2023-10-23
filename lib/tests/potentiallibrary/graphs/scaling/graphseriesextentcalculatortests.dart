@@ -1,11 +1,11 @@
-import '../../../plotting/logic/plotsequencesrangefinder.dart';
-import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
-import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
-import '../../../testframework/testmodule.dart';
-import '../../../testframework/testunit.dart';
+import '../../../../potentiallibrary/graphs/scaling/graphseriesextentcalculator.dart';
+import '../../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
+import '../../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
+import '../../../../testframework/testmodule.dart';
+import '../../../../testframework/testunit.dart';
 
-class PlotSequencesRangeFinderTests extends TestModule {
-  late PlotSequencesRangeFinder _finder;
+class GraphSeriesExtentCalculatorTests extends TestModule {
+  late GraphSeriesExtentCalculator _calculator;
 
   @override
   Iterable<TestUnit> getTests() {
@@ -23,7 +23,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
       [1, 2, 3, 4]
     ]);
 
-    var range = _finder.calculateRange(plotSequences);
+    var range = _calculator.calculateRange(plotSequences);
 
     assertEqual(range.minx, 1.0);
     assertEqual(range.maxx, 3.0);
@@ -37,7 +37,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
       [12, 5, 18, 25],
     ]);
 
-    var range = _finder.calculateRange(plotSequences);
+    var range = _calculator.calculateRange(plotSequences);
 
     assertEqual(range.minx, 10.0);
     assertEqual(range.maxx, 20.0);
@@ -48,7 +48,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
   void ifThereAreNoSequencesTheRangeIsZero() {
     var plotSequences = List<GraphDataSeries>.empty();
 
-    var range = _finder.calculateRange(plotSequences);
+    var range = _calculator.calculateRange(plotSequences);
 
     assertEqual(range.minx, 0.0);
     assertEqual(range.maxx, 0.0);
@@ -63,7 +63,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
     ]);
     plotSequences.add(GraphDataSeries(List<GraphDataPoint>.empty()));
 
-    var range = _finder.calculateRange(plotSequences);
+    var range = _calculator.calculateRange(plotSequences);
 
     assertEqual(range.minx, 10.0);
     assertEqual(range.maxx, 20.0);
@@ -78,7 +78,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
       GraphDataSeries(List<GraphDataPoint>.empty()),
     ];
 
-    var range = _finder.calculateRange(plotSequences);
+    var range = _calculator.calculateRange(plotSequences);
 
     assertEqual(range.minx, 0.0);
     assertEqual(range.maxx, 0.0);
@@ -90,7 +90,7 @@ class PlotSequencesRangeFinderTests extends TestModule {
 
   @override
   void setUpObjectUnderTest() {
-    _finder = PlotSequencesRangeFinder();
+    _calculator = GraphSeriesExtentCalculator();
   }
 
   List<GraphDataSeries> creatPlotSequencesltrb(List<List<double>> values) {
