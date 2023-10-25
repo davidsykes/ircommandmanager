@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = TracePlotPage();
         break;
       case 3:
-        page = globalVariables.graphWindowManager;
+        page = globalVariables.graphWindowWidget;
         break;
       case 4:
         page = IrCommandsPage();

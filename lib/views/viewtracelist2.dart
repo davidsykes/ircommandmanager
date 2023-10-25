@@ -116,7 +116,7 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
     var converter = TracePointsToGraphDataSeriesConverter();
     var dataSeries = selectedTraces.map(
         (e) => converter.convertTracePointsToGraphDataSeries(e.traceDetails!));
-    widget.globalVariables.graphWindowManager.addDataSeries(dataSeries);
+    widget.globalVariables.graphWindowWidget.addDataSeries(dataSeries);
   }
 
   void deleteTraces(List<TraceInfo> traces) {

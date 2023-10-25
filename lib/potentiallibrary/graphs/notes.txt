@@ -1,6 +1,27 @@
 Graph data is contained in GraphDataSeries objects.
-These are an array of GraphDataPoint objects, each with doulbe x and y
+These are an array of GraphDataPoint objects, each with double x and y
 
 Whenever a series is added to or removed from the collection to show the GraphSeriesExtentCalculator calculates the GraphSeriesExtent.
 This is the top left right and bottom coordinates of a square that will contain all the series to plot
+
+
+The graphSeriesExtent is the whole range of data values
+
+                   et
+        *************************
+		*      vt               *
+		*     *****             *
+		*   vl*   *vr           *
+	 el	*     *   *             * er
+		*     *vb**             *
+		*                       *
+		*                       *
+		*                       *
+        *************************
+                   eb
+
+
+The canvas is the plotting area with 0,0 bottom left and width,height as right, top
+
+The viewport is the portion of the data that is to be seen. 0,0 is left bottom, 1,1 is right top
 
