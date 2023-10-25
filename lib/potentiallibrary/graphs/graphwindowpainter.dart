@@ -17,7 +17,7 @@ class GraphWindowPainter extends CustomPainter {
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.butt;
 
-    drawTestPattern(canvas, size, paint);
+    //drawTestPattern(canvas, size, paint);
 
     for (var series in graphWindowData.dataSeries) {
       _plotSeries(series, canvas, size, paint);
@@ -62,6 +62,7 @@ class GraphWindowPainter extends CustomPainter {
     var vt = 1;
     var cw = size.width;
     var ch = size.height;
+    var bw = 0.05;
     double lx = 0;
     double ly = 0;
     bool firstPoint = true;
@@ -70,10 +71,10 @@ class GraphWindowPainter extends CustomPainter {
       var y = point.y;
       var xa = (x - el) / (er - el);
       var xb = (xa - vl) / (vr - vl);
-      var xc = xb * cw;
+      var xc = (xb * (1 - bw * 2) + bw) * cw;
       var ya = (y - eb) / (et - eb);
       var yb = (ya - vb) / (vt - vb);
-      var yc = yb * ch;
+      var yc = (yb * (1 - bw * 2) + bw) * ch;
 
       if (firstPoint) {
         firstPoint = false;

@@ -21,7 +21,23 @@ The graphSeriesExtent is the whole range of data values
                    eb
 
 
-The canvas is the plotting area with 0,0 bottom left and width,height as right, top
+The canvas width cw and height ch is the plotting area with 0,0 bottom left and width,height as right, top
+
+The border is the proportion of the canvas around the edges that is to be kept clear. bw ranges from 0 to 1
 
 The viewport is the portion of the data that is to be seen. 0,0 is left bottom, 1,1 is right top
+
+A coordinate x is converted to a position along the extent from 0 left to 1 right
+
+a = (x - el) / (er - el)
+
+The viewport is expanded to fill the area 0,0 - 1,1
+
+b = (a - vl) / (vr - vl)
+
+and then scaled to the width of the area inside the drawing border
+
+c = (b + bw) * (cw - bw*2)
+
+
 
