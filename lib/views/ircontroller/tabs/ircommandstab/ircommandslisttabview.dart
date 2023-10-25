@@ -43,8 +43,10 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     var commands = await IrCommandsData().loadIrCommandsData();
     if (_selectableList == null) {
       _selectableList = makeMySelectableList();
-      _selectableList!
-          .refresh(commands.commandsList, (IrCommandSequence s) => s.name);
+      _selectableList!.refresh(
+          commands.commandsList,
+          (IrCommandSequence s) => s.name,
+          (IrCommandSequence s) => "IrCommandSequence");
     }
     return commands;
   }

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class SelectableItem<T> {
   String name;
+  String subtitle;
   T item;
   bool isSelected = false;
-  SelectableItem(this.name, this.item);
+  SelectableItem(this.name, this.subtitle, this.item);
 }
 
 class MySelectableList<T> {
@@ -22,8 +23,11 @@ class MySelectableList<T> {
     );
   }
 
-  void refresh(List<T> items, String Function(T item) getName) {
-    _selectables = items.map((e) => SelectableItem(getName(e), e)).toList();
+  void refresh(List<T> items, String Function(T item) getName,
+      String Function(T item) getSubtitle) {
+    _selectables = items
+        .map((e) => SelectableItem(getName(e), getSubtitle(e), e))
+        .toList();
   }
 
   List<T> get selectedItems => _selectables
@@ -48,9 +52,12 @@ class MySelectableList<T> {
   }
 
   Widget _makeItem(SelectableItem<T> sItem) {
-    return Text(sItem.name,
-        style: sItem.isSelected
-            ? const TextStyle(fontWeight: FontWeight.bold)
-            : const TextStyle(fontWeight: FontWeight.normal));
+    return ListTile(
+      title: Text(sItem.name,
+          style: sItem.isSelected
+              ? const TextStyle(fontWeight: FontWeight.bold)
+              : const TextStyle(fontWeight: FontWeight.normal)),
+      subtitle: Text(sItem.subtitle),
+    );
   }
 }

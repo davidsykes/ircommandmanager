@@ -68,21 +68,21 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
                   refreshTraces();
                 });
               },
-              child: Text('Refresh')),
+              child: Text('RefreshUT')),
           ElevatedButton(
               onPressed: () {
                 setState(() {
                   deleteTraces(traces);
                 });
               },
-              child: Text('Delete')),
+              child: Text('DeleteUT')),
           ElevatedButton(
               onPressed: () {
                 setState(() {
                   selectAllTraces(traces);
                 });
               },
-              child: Text('Select All')),
+              child: Text('Select AllUT')),
         ],
       ),
       Expanded(
@@ -106,7 +106,8 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   }
 
   void refreshTraceListWidget(List<TraceInfo> traces) {
-    selectableListWidget.refresh(traces, (TraceInfo t) => t.name);
+    selectableListWidget.refresh(traces, (TraceInfo t) => t.name,
+        (TraceInfo t) => '${t.traceCount} traces. ${t.traceLength}uS');
   }
 
   Future<void> addTracesToPlots() async {
