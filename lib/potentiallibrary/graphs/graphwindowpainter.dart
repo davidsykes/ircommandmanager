@@ -70,6 +70,7 @@ class GraphWindowPainter extends CustomPainter {
       var x = point.x;
       var y = point.y;
       var xa = (x - el) / (er - el);
+      xa = includeZoomAndPan(xa);
       var xb = (xa - vl) / (vr - vl);
       var xc = (xb * (1 - bw * 2) + bw) * cw;
       var ya = (y - eb) / (et - eb);
@@ -85,5 +86,11 @@ class GraphWindowPainter extends CustomPainter {
       lx = xc;
       ly = yc;
     }
+  }
+
+  double includeZoomAndPan(double xa) {
+    var zoom = graphWindowData.zoom;
+    var pan = graphWindowData.offset / 100.0;
+    return (xa - pan) * zoom;
   }
 }

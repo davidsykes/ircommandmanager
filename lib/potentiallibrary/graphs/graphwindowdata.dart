@@ -3,6 +3,9 @@ import 'scaling/graphseriesextentcalculator.dart';
 import 'seriesdata/graphdataseries.dart';
 
 class GraphWindowData {
+  int zoom = 1;
+  int offset = 0;
+
   final _graphSeriesExtentCalculator = GraphSeriesExtentCalculator();
   final List<GraphDataSeries> dataSeries = List.empty(growable: true);
   var graphSeriesExtent = GraphSeriesExtent(0, 0, 0, 0);
