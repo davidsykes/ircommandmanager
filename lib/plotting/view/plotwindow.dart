@@ -8,7 +8,6 @@ import '../logic/plotsequencerangescaler.dart';
 import '../logic/plotsequencesrangescaler.dart';
 import '../logic/plotsequencesunitsizescaler.dart';
 import '../logic/plotviewport.dart';
-import 'plotviewcontrolvariables.dart';
 
 // TODO This is to go
 
@@ -38,11 +37,7 @@ class PlotWindow extends CustomPainter {
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.butt;
 
-    var pvcv = PlotViewControlVariables();
-
-    if (pvcv.showTestPlot) {
-      drawTestPattern(canvas, size, paint);
-    }
+    drawTestPattern(canvas, size, paint);
 
     drawPlots(canvas, size, paint);
   }
