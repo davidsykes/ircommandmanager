@@ -9,10 +9,7 @@ import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
 import '../tests/plotting/logic/plotviewporttests.dart';
 import '../tests/utilities/converters/commandsequencetransferformattocommandsequenceconvertertests.dart';
 import '../tests/utilities/converters/ircommandsequencetoplotsequenceconvertertests.dart';
-import '../tests/utilities/tracehorizontalscalertests.dart';
-import '../tests/utilities/tracesdatatests.dart';
 import '../tests/utilities/tracepointstographdataseriesconvertertests.dart';
-import '../tests/utilities/traceverticalscalertests.dart';
 
 class CodeTestPage extends StatefulWidget {
   @override
@@ -47,9 +44,6 @@ class _CodeTestPageState extends State<CodeTestPage> {
     var runner = TestRunner();
 
     runner.addTests(TracePointsToGraphDataSeriesConverterTests());
-    runner.addTests(TraceHorizontalScalerTests());
-    runner.addTests(TraceVerticalScalerTests());
-    runner.addTests(TracesDataTests());
     runner.addTests(CommandsListFromApiCommandsConverterTests());
     runner.addTests(IrCommandSequenceToPlotSequenceConverterTests());
     runner.addTests(PlotSequencesUnitSizeScalerTests());

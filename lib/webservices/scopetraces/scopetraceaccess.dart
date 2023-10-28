@@ -1,8 +1,6 @@
 import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../../dataobjects/traces/traceinfo.dart';
 import '../../dataobjects/traces/tracepoints.dart';
-import '../../forremoval/itracedatacontroller.dart';
-import '../../forremoval/tracedatacontoller.dart';
 
 class ScopeTraceAccess {
   //One instance, needs factory
@@ -45,16 +43,16 @@ class ScopeTraceAccess {
     return td;
   }
 
-  // TODO Everything below here is to go
-
-  ITraceDataController? actualTraceDataController;
-
-  ITraceDataController getTraceDataController() {
-    actualTraceDataController ??= TraceDataController(webAccess: _webAccess);
-    return actualTraceDataController!;
+  void deleteTraces(Iterable<String> tracesToDelete) {
+    for (var trace in tracesToDelete) {
+      deleteTrace(trace);
+    }
+    //refreshTraces();
   }
 
-  void deleteTraces(Iterable<String> tracesToDelete) {
-    getTraceDataController().deleteTraces(tracesToDelete);
+  void deleteTrace(String trace) async {
+    var result = await _webAccess.post('delete/$trace');
+
+    print(result);
   }
 }

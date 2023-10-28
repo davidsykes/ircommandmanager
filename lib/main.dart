@@ -4,8 +4,6 @@ import 'globalvariables.dart';
 import 'views/codetestpage.dart';
 import 'myappstate.dart';
 import 'views/ircontroller/ircommandspage.dart';
-import 'views/traceplotpage.dart';
-import 'views/viewtracelist.dart';
 import 'views/viewtracelist2.dart';
 
 void main() {
@@ -45,13 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = ViewTraceListPage();
+        page = ViewTraceListPage2(globalVariables);
         break;
       case 1:
         page = ViewTraceListPage2(globalVariables);
         break;
       case 2:
-        page = TracePlotPage();
+        page = globalVariables.graphWindowWidget;
         break;
       case 3:
         page = globalVariables.graphWindowWidget;

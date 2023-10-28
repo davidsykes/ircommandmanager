@@ -140,7 +140,8 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   }
 
   void refreshTraces() {
-    ScopeTraceAccess().getTraceDataController().refreshTraces();
+    // TODO: implement deleteTraces
+    //ScopeTraceAccess().getTraceDataController().refreshTraces();
   }
 
   void onTraceSelected(TraceInfo sItem) {
