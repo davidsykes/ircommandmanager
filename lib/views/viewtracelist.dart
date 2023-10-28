@@ -68,7 +68,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
                   refreshTraces();
                 });
               },
-              child: Text('RefreshUT')),
+              child: Text('Refresh')),
           ElevatedButton(
               onPressed: () {
                 setState(() {
