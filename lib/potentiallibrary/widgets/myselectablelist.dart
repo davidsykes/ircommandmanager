@@ -9,11 +9,11 @@ class SelectableItem<T> {
 }
 
 class MySelectableList<T> {
-  void Function(T sItem)? _select;
+  void Function(T sItem)? _onSelect;
   late List<SelectableItem<T>> _selectables;
 
-  MySelectableList({void Function(T sItem)? select}) {
-    _select = select;
+  MySelectableList({void Function(T sItem)? onSelect}) {
+    _onSelect = onSelect;
     _selectables = List.empty();
   }
 
@@ -35,6 +35,15 @@ class MySelectableList<T> {
       .map((e) => e.item)
       .toList();
 
+  void selectAll() {
+    for (var item in _selectables) {
+      if (!item.isSelected && _onSelect != null) {
+        _onSelect!(item.item);
+      }
+      item.isSelected = true;
+    }
+  }
+
   List<Widget> _makeItemsList() {
     return _selectables.map((e) => _makeTappableItem(e)).toList();
   }
@@ -43,8 +52,8 @@ class MySelectableList<T> {
     return GestureDetector(
       onTap: () {
         sItem.isSelected = !sItem.isSelected;
-        if (_select != null) {
-          _select!(sItem.item);
+        if (_onSelect != null) {
+          _onSelect!(sItem.item);
         }
       },
       child: _makeItem(sItem),

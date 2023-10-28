@@ -4,7 +4,7 @@ import 'globalvariables.dart';
 import 'views/codetestpage.dart';
 import 'myappstate.dart';
 import 'views/ircontroller/ircommandspage.dart';
-import 'views/viewtracelist2.dart';
+import 'views/viewtracelist.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var selectedIndex = 5;
+  var selectedIndex = 3;
   var globalVariables = GlobalVariables();
 
   @override
@@ -43,21 +43,15 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = ViewTraceListPage2(globalVariables);
+        page = ViewTraceListPage(globalVariables);
         break;
       case 1:
-        page = ViewTraceListPage2(globalVariables);
+        page = globalVariables.graphWindowWidget;
         break;
       case 2:
-        page = globalVariables.graphWindowWidget;
-        break;
-      case 3:
-        page = globalVariables.graphWindowWidget;
-        break;
-      case 4:
         page = IrCommandsPage();
         break;
-      case 5:
+      case 3:
         page = CodeTestPage();
         break;
       default:
@@ -77,16 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     label: Text('Traces'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.home),
-                    label: Text('Traces2'),
-                  ),
-                  NavigationRailDestination(
                     icon: Icon(Icons.favorite),
                     label: Text('Trace Plots'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('Trace Plots2'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),

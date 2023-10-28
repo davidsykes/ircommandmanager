@@ -7,20 +7,20 @@ import '../webservices/scopetraces/scopetraceaccess.dart';
 import '../potentiallibrary/widgets/futurebuilder.dart';
 import '../potentiallibrary/widgets/myselectablelist.dart';
 
-class ViewTraceListPage2 extends StatefulWidget {
+class ViewTraceListPage extends StatefulWidget {
   final GlobalVariables globalVariables;
-  const ViewTraceListPage2(this.globalVariables, {super.key});
+  const ViewTraceListPage(this.globalVariables, {super.key});
 
   @override
-  State<ViewTraceListPage2> createState() => _ViewTraceListPage2FutureBuilder();
+  State<ViewTraceListPage> createState() => _ViewTraceListPageFutureBuilder();
 }
 
-class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
+class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
   CachedDataLoader<List<TraceInfo>>? cachedTracesLoader;
   late MySelectableList<TraceInfo> selectableListWidget;
 
-  _ViewTraceListPage2FutureBuilder() {
-    selectableListWidget = MySelectableList(select: onTraceSelected);
+  _ViewTraceListPageFutureBuilder() {
+    selectableListWidget = MySelectableList(onSelect: onTraceSelected);
   }
 
   @override
@@ -82,7 +82,7 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
                   selectAllTraces(traces);
                 });
               },
-              child: Text('Select AllUT')),
+              child: Text('Select All')),
         ],
       ),
       Expanded(
@@ -131,12 +131,7 @@ class _ViewTraceListPage2FutureBuilder extends State<ViewTraceListPage2> {
   }
 
   void selectAllTraces(List<TraceInfo> traces) {
-    // TODO: implement selectAllTraces
-    // for (var trace in traces.getAllTraces()) {
-    //   if (!trace.isSelected()) {
-    //     trace.toggle();
-    //   }
-    // }
+    selectableListWidget.selectAll();
   }
 
   void refreshTraces() {

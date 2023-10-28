@@ -10,6 +10,8 @@ import '../logic/plotsequencesunitsizescaler.dart';
 import '../logic/plotviewport.dart';
 import 'plotviewcontrolvariables.dart';
 
+// TODO This is to go
+
 class PlotWindow extends CustomPainter {
   List<GraphDataSeries> plotSequences = List.empty();
   List<GraphDataSeries> unitPlots = List.empty();

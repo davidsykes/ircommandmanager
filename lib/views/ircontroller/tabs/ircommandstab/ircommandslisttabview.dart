@@ -24,7 +24,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
   }
 
   MySelectableList<IrCommandSequence> makeMySelectableList() {
-    return MySelectableList<IrCommandSequence>(select: itemSelected);
+    return MySelectableList<IrCommandSequence>(onSelect: itemSelected);
   }
 
   void itemSelected(IrCommandSequence sItem) {
