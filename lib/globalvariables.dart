@@ -4,5 +4,5 @@ import 'potentiallibrary/tools/cacheddata.dart';
 
 class GlobalVariables {
   var graphWindowWidget = GraphWindowWidget();
-  var cachedTraces = CachedDataX<List<TraceInfo>>();
+  var cachedTraces = CachedData<List<TraceInfo>>();
 }

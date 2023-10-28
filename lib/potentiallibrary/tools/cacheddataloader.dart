@@ -1,7 +1,7 @@
 import 'cacheddata.dart';
 
 class CachedDataLoader<T> {
-  CachedDataX _data;
+  CachedData _data;
   Future<T> Function() _retrieveData;
   void Function(T) _onDataLoaded;
 
@@ -19,5 +19,9 @@ class CachedDataLoader<T> {
       }
     }
     return _data.data!;
+  }
+
+  void refresh() {
+    _data.data = null;
   }
 }

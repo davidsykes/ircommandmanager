@@ -75,7 +75,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
                   deleteTraces(traces);
                 });
               },
-              child: Text('DeleteUT')),
+              child: Text('Delete')),
           ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -121,13 +121,9 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
   }
 
   void deleteTraces(List<TraceInfo> traces) {
-    // TODO: implement deleteTraces
-    // var tracesToDelete = traces
-    //     .getAllTraces()
-    //     .where((trace) => trace.isSelected())
-    //     .map((trace) => trace.traceInfo.fileName);
-
-    // ScopeTraceAccess().deleteTraces(tracesToDelete);
+    var tracesToDelete =
+        selectableListWidget.selectedItems.map((e) => e.fileName);
+    ScopeTraceAccess().deleteTraces(tracesToDelete);
   }
 
   void selectAllTraces(List<TraceInfo> traces) {
@@ -135,8 +131,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
   }
 
   void refreshTraces() {
-    // TODO: implement deleteTraces
-    //ScopeTraceAccess().getTraceDataController().refreshTraces();
+    cachedTracesLoader!.refresh();
   }
 
   void onTraceSelected(TraceInfo sItem) {

@@ -1,3 +1,3 @@
-class CachedDataX<T> {
+class CachedData<T> {
   T? data;
 }

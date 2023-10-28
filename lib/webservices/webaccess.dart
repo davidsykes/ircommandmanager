@@ -33,7 +33,9 @@ class WebAccess {
       },
     );
 
-    return result.toString();
+    var code = result.statusCode;
+    var body = result.body;
+    return '$code : $body';
   }
 
   Future<String> put(String url) async {
