@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = globalVariables.graphWindowWidget;
         break;
       case 2:
-        page = IrCommandsPage();
+        page = IrCommandsPage(globalVariables);
         break;
       case 3:
         page = CodeTestPage();

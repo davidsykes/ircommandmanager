@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
+import '../../../../globalvariables.dart';
 import '../../../../potentiallibrary/tools/cacheddataloader2.dart';
 import '../../../../potentiallibrary/widgets/myselectablelist.dart';
 import '../../../../potentiallibrary/widgets/overflowbar.dart';
 import '../../../../potentiallibrary/widgets/futurebuilder.dart';
+import '../../../../utilities/tracepointstographdataseriesconverter.dart';
 import '../../ircommandsdata.dart';
 import 'ircommandsplotwindow.dart';
 import 'ircontrollercommandslistoverflowbar.dart';
 
 class IrCommandsListTabView extends StatefulWidget {
+  final GlobalVariables globalVariables;
+  const IrCommandsListTabView(this.globalVariables, {super.key});
+
   @override
   State<IrCommandsListTabView> createState() => _IrCommandsListTabViewState();
 }
@@ -52,8 +57,8 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
 
   Future<List<IrCommandSequence>> loadIrCommandsDataAndMakeSelectables() async {
     var commands = await _irCommandSequences.getData();
-    _selectableList.refresh(commands, (IrCommandSequence s) => s.name,
-        (IrCommandSequence s) => "IrCommandSequence");
+    // _selectableList.refresh(commands, (IrCommandSequence s) => s.name,
+    //     (IrCommandSequence s) => "IrCommandSequence");
 
     return commands;
   }
@@ -110,8 +115,11 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
   }
 
   void plotButtonPressed() {
-    // TODO plotButtonPressed
     var commandsToPlot = _selectableList.selectedItems;
+    var converter = TracePointsToGraphDataSeriesConverter();
+    var dataSeries = commandsToPlot
+        .map((e) => converter.convertTracePointsToGraphDataSeries(e));
+    widget.globalVariables.graphWindowWidget.addDataSeries(dataSeries);
   }
 
   Widget makeWidgetPlotWindowWithEdging() {

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../globalvariables.dart';
 import 'tabs/ircommandstab/ircommandslisttabview.dart';
 import 'tabs/statustab/ircontrollerstatustabview.dart';
 
 class IrCommandsPage extends StatefulWidget {
+  final GlobalVariables globalVariables;
+  const IrCommandsPage(this.globalVariables, {super.key});
+
   @override
   State<IrCommandsPage> createState() => _IrCommandsPageState();
 }
@@ -27,7 +31,7 @@ class _IrCommandsPageState extends State<IrCommandsPage> {
           body: TabBarView(
             children: [
               IrControllerStatusTabView(),
-              IrCommandsListTabView(),
+              IrCommandsListTabView(widget.globalVariables),
               Icon(Icons.directions_bike),
             ],
           ),
