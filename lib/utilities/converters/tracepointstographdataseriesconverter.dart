@@ -1,6 +1,6 @@
-import '../dataobjects/traces/tracepoints.dart';
-import '../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
-import '../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
+import '../../dataobjects/traces/tracepoints.dart';
+import '../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
+import '../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
 
 class TracePointsToGraphDataSeriesConverter {
   GraphDataSeries convertTracePointsToGraphDataSeries(TracePoints tracePoints) {

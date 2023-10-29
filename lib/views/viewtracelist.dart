@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../dataobjects/traces/traceinfo.dart';
 import '../globalvariables.dart';
 import '../potentiallibrary/tools/cacheddataloader.dart';
-import '../utilities/tracepointstographdataseriesconverter.dart';
+import '../utilities/converters/tracepointstographdataseriesconverter.dart';
 import '../webservices/scopetraces/scopetraceaccess.dart';
 import '../potentiallibrary/widgets/futurebuilder.dart';
 import '../potentiallibrary/widgets/myselectablelist.dart';

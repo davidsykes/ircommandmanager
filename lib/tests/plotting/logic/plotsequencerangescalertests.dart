@@ -2,8 +2,8 @@ import 'package:ircommandmanager/potentiallibrary/graphs/scaling/graphseriesexte
 import 'package:ircommandmanager/potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 import '../../../plotting/logic/plotsequencerangescaler.dart';
 import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
-import '../../../testframework/testmodule.dart';
-import '../../../testframework/testunit.dart';
+import '../../../potentiallibrary/testframework/testmodule.dart';
+import '../../../potentiallibrary/testframework/testunit.dart';
 
 class PlotSequenceRangeScalerTests extends TestModule {
   late PlotSequenceRangeScaler _scaler;

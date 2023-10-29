@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:ircommandmanager/testframework/testunit.dart';
+import 'package:ircommandmanager/potentiallibrary/testframework/testunit.dart';
 
 abstract class TestModule {
   Iterable<TestUnit> getTests();

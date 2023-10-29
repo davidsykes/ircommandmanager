@@ -6,7 +6,7 @@ import '../../../../potentiallibrary/tools/cacheddataloader2.dart';
 import '../../../../potentiallibrary/widgets/myselectablelist.dart';
 import '../../../../potentiallibrary/widgets/overflowbar.dart';
 import '../../../../potentiallibrary/widgets/futurebuilder.dart';
-import '../../../../utilities/tracepointstographdataseriesconverter.dart';
+import '../../../../utilities/converters/tracepointstographdataseriesconverter.dart';
 import '../../ircommandsdata.dart';
 import 'ircommandsplotwindow.dart';
 import 'ircontrollercommandslistoverflowbar.dart';

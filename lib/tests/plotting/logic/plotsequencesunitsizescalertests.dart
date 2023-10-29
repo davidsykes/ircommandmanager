@@ -4,8 +4,8 @@ import '../../../plotting/logic/plotsequencesunitsizescaler.dart';
 import '../../../potentiallibrary/graphs/scaling/graphseriesextentcalculator.dart';
 import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 import '../../../potentiallibrary/graphs/seriesdata/graphdataseries.dart';
-import '../../../testframework/testmodule.dart';
-import '../../../testframework/testunit.dart';
+import '../../../potentiallibrary/testframework/testmodule.dart';
+import '../../../potentiallibrary/testframework/testunit.dart';
 
 class PlotSequencesUnitSizeScalerTests extends TestModule {
   late PlotSequencesUnitSizeScaler _scaler;

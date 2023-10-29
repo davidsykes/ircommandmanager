@@ -1,6 +1,6 @@
 import 'dart:convert';
-import '../../../testframework/testmodule.dart';
-import '../../../testframework/testunit.dart';
+import '../../../potentiallibrary/testframework/testmodule.dart';
+import '../../../potentiallibrary/testframework/testunit.dart';
 import '../../../utilities/converters/commandsequencetransferformattocommandsequenceconverter.dart';
 
 class CommandsListFromApiCommandsConverterTests extends TestModule {

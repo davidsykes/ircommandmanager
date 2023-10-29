@@ -1,4 +1,4 @@
-import 'package:ircommandmanager/testframework/testmodule.dart';
+import 'package:ircommandmanager/potentiallibrary/testframework/testmodule.dart';
 
 class TestUnit {
   TestModule testModule;

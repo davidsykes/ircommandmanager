@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
 import '../../../../plotting/view/plotwindow.dart';
-import '../../../../utilities/tracepointstographdataseriesconverter.dart';
+import '../../../../utilities/converters/tracepointstographdataseriesconverter.dart';
 
 class IrCommandsPlotWindow {
   late PlotWindow plotWindow;

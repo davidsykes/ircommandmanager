@@ -1,8 +1,8 @@
 import '../../dataobjects/traces/tracepoint.dart';
 import '../../dataobjects/traces/tracepoints.dart';
-import '../../testframework/testmodule.dart';
-import '../../testframework/testunit.dart';
-import '../../utilities/tracepointstographdataseriesconverter.dart';
+import '../../potentiallibrary/testframework/testmodule.dart';
+import '../../potentiallibrary/testframework/testunit.dart';
+import '../../utilities/converters/tracepointstographdataseriesconverter.dart';
 
 class TracePointsToGraphDataSeriesConverterTests extends TestModule {
   late TracePointsToGraphDataSeriesConverter _converter;

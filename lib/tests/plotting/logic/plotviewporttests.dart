@@ -1,6 +1,6 @@
 import 'package:ircommandmanager/plotting/logic/plotviewport.dart';
-import 'package:ircommandmanager/testframework/testmodule.dart';
-import 'package:ircommandmanager/testframework/testunit.dart';
+import 'package:ircommandmanager/potentiallibrary/testframework/testmodule.dart';
+import 'package:ircommandmanager/potentiallibrary/testframework/testunit.dart';
 
 import '../../../potentiallibrary/graphs/seriesdata/graphdatapoint.dart';
 

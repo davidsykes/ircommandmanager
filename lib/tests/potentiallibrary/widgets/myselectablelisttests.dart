@@ -1,6 +1,6 @@
 import '../../../potentiallibrary/widgets/myselectablelist.dart';
-import '../../../testframework/testmodule.dart';
-import '../../../testframework/testunit.dart';
+import '../../../potentiallibrary/testframework/testmodule.dart';
+import '../../../potentiallibrary/testframework/testunit.dart';
 
 class MySelectableListTests extends TestModule {
   late MySelectableList<String> _list;

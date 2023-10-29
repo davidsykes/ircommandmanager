@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../myappstate.dart';
-import '../testframework/testrunner.dart';
+import '../potentiallibrary/testframework/testrunner.dart';
 import '../tests/plotting/logic/plotsequencerangescalertests.dart';
 import '../tests/potentiallibrary/graphs/scaling/graphseriesextentcalculatortests.dart';
 import '../tests/plotting/logic/plotsequencesrangescalertests.dart';
