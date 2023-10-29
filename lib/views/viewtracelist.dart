@@ -65,6 +65,13 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
           ElevatedButton(
               onPressed: () {
                 setState(() {
+                  sendTraceForConverting();
+                });
+              },
+              child: Text('Convert')),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
                   refreshTraces();
                 });
               },
@@ -110,7 +117,7 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
         (TraceInfo t) => '${t.traceCount} traces. ${t.traceLength}uS');
   }
 
-  Future<void> addTracesToPlots() async {
+  void addTracesToPlots() async {
     var selectedTraces = selectableListWidget.selectedItems;
     selectedTraces =
         await ScopeTraceAccess().getScopeTraceDetails(selectedTraces);
@@ -120,10 +127,19 @@ class _ViewTraceListPageFutureBuilder extends State<ViewTraceListPage> {
     widget.globalVariables.graphWindowWidget.addDataSeries(dataSeries);
   }
 
+  void sendTraceForConverting() async {
+    var selectedTraces = selectableListWidget.selectedItems;
+    selectedTraces =
+        await ScopeTraceAccess().getScopeTraceDetails(selectedTraces);
+    widget.globalVariables.codeToBeConverted
+        .setCodeForConversion(selectedTraces[0].traceDetails!);
+  }
+
   void deleteTraces(List<TraceInfo> traces) {
     var tracesToDelete =
         selectableListWidget.selectedItems.map((e) => e.fileName);
     ScopeTraceAccess().deleteTraces(tracesToDelete);
+    refreshTraces();
   }
 
   void selectAllTraces(List<TraceInfo> traces) {

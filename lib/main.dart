@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'globalvariables.dart';
+import 'views/codeconverterpage.dart';
 import 'views/codetestpage.dart';
 import 'myappstate.dart';
 import 'views/ircontroller/ircommandspage.dart';
@@ -35,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var selectedIndex = 3;
+  var selectedIndex = 4;
   var globalVariables = GlobalVariables();
 
   @override
@@ -52,6 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
         page = IrCommandsPage(globalVariables);
         break;
       case 3:
+        page = CodeConverterPage(globalVariables.codeToBeConverted);
+        break;
+      case 4:
         page = CodeTestPage();
         break;
       default:
@@ -77,6 +81,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),
                     label: Text('IR Controller'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.favorite),
+                    label: Text('Converter'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),
