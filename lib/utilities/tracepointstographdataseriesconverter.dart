@@ -8,17 +8,20 @@ class TracePointsToGraphDataSeriesConverter {
     var pointsToConvert = points.length;
     var currentPoint = 0;
     var plots = List<GraphDataPoint>.empty(growable: true);
-    var lasty = points[currentPoint].value.toDouble();
-    plots.add(GraphDataPoint(points[currentPoint].time.toDouble(), lasty));
-    currentPoint++;
 
-    while (currentPoint < pointsToConvert) {
-      var x = points[currentPoint].time.toDouble();
-      var y = points[currentPoint].value.toDouble();
-      plots.add(GraphDataPoint(x, lasty));
-      plots.add(GraphDataPoint(x, y));
+    if (pointsToConvert > 0) {
+      var lasty = points[currentPoint].value.toDouble();
+      plots.add(GraphDataPoint(points[currentPoint].time.toDouble(), lasty));
       currentPoint++;
-      lasty = y;
+
+      while (currentPoint < pointsToConvert) {
+        var x = points[currentPoint].time.toDouble();
+        var y = points[currentPoint].value.toDouble();
+        plots.add(GraphDataPoint(x, lasty));
+        plots.add(GraphDataPoint(x, y));
+        currentPoint++;
+        lasty = y;
+      }
     }
 
     return GraphDataSeries(plots);

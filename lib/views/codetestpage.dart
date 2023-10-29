@@ -9,7 +9,6 @@ import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
 import '../tests/plotting/logic/plotviewporttests.dart';
 import '../tests/potentiallibrary/widgets/myselectablelisttests.dart';
 import '../tests/utilities/converters/commandsequencetransferformattocommandsequenceconvertertests.dart';
-import '../tests/utilities/converters/ircommandsequencetoplotsequenceconvertertests.dart';
 import '../tests/utilities/tracepointstographdataseriesconvertertests.dart';
 
 class CodeTestPage extends StatefulWidget {
@@ -46,7 +45,6 @@ class _CodeTestPageState extends State<CodeTestPage> {
 
     runner.addTests(TracePointsToGraphDataSeriesConverterTests());
     runner.addTests(CommandsListFromApiCommandsConverterTests());
-    runner.addTests(IrCommandSequenceToPlotSequenceConverterTests());
     runner.addTests(PlotSequencesUnitSizeScalerTests());
     runner.addTests(GraphSeriesExtentCalculatorTests());
     runner.addTests(PlotSequencesRangeScalerTests());

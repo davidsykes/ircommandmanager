@@ -19,7 +19,7 @@ IrCommandSequence _makeIrCommand(c) {
   var points = c['waveform'];
   var points1 = points.map((p) => TracePoint(time: p['t'], value: p['v']));
   List<TracePoint> points2 = points1.toList().cast<TracePoint>();
-  cmd.values = points2;
+  cmd.points = points2;
 
   return cmd;
 }

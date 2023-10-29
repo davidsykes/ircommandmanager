@@ -37,12 +37,12 @@ class CommandsListFromApiCommandsConverterTests extends TestModule {
 
     assertEqual(codes.length, 1);
     assertEqual(codes[0].name, "3_3times");
-    assertEqual(codes[0].values.length, 3);
-    assertEqual(codes[0].values[0].time, 0);
-    assertEqual(codes[0].values[0].value, 0);
-    assertEqual(codes[0].values[1].time, 2405);
-    assertEqual(codes[0].values[1].value, 1);
-    assertEqual(codes[0].values[2].time, 3005);
-    assertEqual(codes[0].values[2].value, 0);
+    assertEqual(codes[0].points.length, 3);
+    assertEqual(codes[0].points[0].time, 0);
+    assertEqual(codes[0].points[0].value, 0);
+    assertEqual(codes[0].points[1].time, 2405);
+    assertEqual(codes[0].points[1].value, 1);
+    assertEqual(codes[0].points[2].time, 3005);
+    assertEqual(codes[0].points[2].value, 0);
   }
 }

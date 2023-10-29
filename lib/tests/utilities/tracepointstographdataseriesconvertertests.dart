@@ -16,6 +16,7 @@ class TracePointsToGraphDataSeriesConverterTests extends TestModule {
   Iterable<TestUnit> getTests() {
     return [
       createTest(aSimpleTraceIsConverted),
+      createTest(aSequenceCanHaveNoElements),
     ];
   }
 
@@ -40,6 +41,16 @@ class TracePointsToGraphDataSeriesConverterTests extends TestModule {
     assertTrue(plot[5].y == 0);
     assertTrue(plot[6].x == 3);
     assertTrue(plot[6].y == 1);
+  }
+
+  void aSequenceCanHaveNoElements() {
+    var commandSequence = TracePoints(List.empty(growable: false));
+
+    var sequence =
+        _converter.convertTracePointsToGraphDataSeries(commandSequence);
+    var plots = sequence.plots;
+
+    assertEqual(plots.length, 0);
   }
 
   TracePoints createSimpleTrace() {

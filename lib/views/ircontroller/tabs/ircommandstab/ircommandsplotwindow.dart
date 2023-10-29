@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import '../../../../dataobjects/ircommandsequence.dart';
 import '../../../../plotting/view/plotwindow.dart';
-import '../../../../utilities/converters/ircommandsequencetoplotsequenceconverter.dart';
+import '../../../../utilities/tracepointstographdataseriesconverter.dart';
 
 class IrCommandsPlotWindow {
   late PlotWindow plotWindow;
-  IrCommandSequenceToPlotSequenceConverter converter =
-      IrCommandSequenceToPlotSequenceConverter();
+  TracePointsToGraphDataSeriesConverter converter =
+      TracePointsToGraphDataSeriesConverter();
 
   IrCommandsPlotWindow({required Listenable repaint}) {
     plotWindow = PlotWindow(repaint: repaint);
   }
 
   void showCommand(IrCommandSequence command) {
-    var plot = converter.convert(command);
+    var plot = converter.convertTracePointsToGraphDataSeries(command);
     plotWindow.setPlot(plot);
   }
 }

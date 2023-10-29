@@ -1,10 +1,7 @@
-import 'traces/tracepoint.dart';
+import 'traces/tracepoints.dart';
 
-class IrCommandSequence {
+class IrCommandSequence extends TracePoints {
   final String name;
-  late List<TracePoint> values;
 
-  IrCommandSequence(this.name) {
-    values = List.empty(growable: false);
-  }
+  IrCommandSequence(this.name) : super(List.empty(growable: false));
 }

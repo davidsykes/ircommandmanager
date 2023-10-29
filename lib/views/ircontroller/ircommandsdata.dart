@@ -12,6 +12,35 @@ class IrCommandsData {
 
   WebAccess _webAccess = WebAccess(ipAddress);
 
+  Future<List<IrCommandSequence>> loadIrCommandSequences() async {
+    var codes = await _webAccess.getJsonWebData('codes');
+    commandsList = convertCommandSequenceTransferFormatToCommandSequence(codes);
+
+    return commandsList;
+  }
+
+  bool configurationIsRecorder() {
+    return configuration == 'irrecorder';
+  }
+
+  Future<String> setConfiguration(bool x) async {
+    configuration = x ? 'irrecorder' : 'irtransmitter';
+
+    var url = 'setoption?name=configuration.e6614143f502f&value=$configuration';
+    var response = await _webAccess.put(url);
+    return response;
+  }
+
+  Future<List<String>> loadLogData() async {
+    var logsJson = await _webAccess.getJsonWebData('logs?count=10');
+
+    var logs = logsJson.map((l) => l['time'] + ' ' + l['text']);
+
+    return logs.toList().cast<String>();
+  }
+
+  // TODO Review everything below here
+
   List<IrCommandSequence> commandsList =
       List<IrCommandSequence>.empty(growable: true);
   String configuration = 'unknown';
@@ -34,25 +63,5 @@ class IrCommandsData {
     cd.configuration = configuration;
 
     return cd;
-  }
-
-  bool configurationIsRecorder() {
-    return configuration == 'irrecorder';
-  }
-
-  Future<String> setConfiguration(bool x) async {
-    configuration = x ? 'irrecorder' : 'irtransmitter';
-
-    var url = 'setoption?name=configuration.e6614143f502f&value=$configuration';
-    var response = await _webAccess.put(url);
-    return response;
-  }
-
-  Future<List<String>> loadLogData() async {
-    var logsJson = await _webAccess.getJsonWebData('logs?count=10');
-
-    var logs = logsJson.map((l) => l['time'] + ' ' + l['text']);
-
-    return logs.toList().cast<String>();
   }
 }
