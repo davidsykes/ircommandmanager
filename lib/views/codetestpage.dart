@@ -8,6 +8,7 @@ import '../tests/plotting/logic/plotsequencesrangescalertests.dart';
 import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
 import '../tests/plotting/logic/plotviewporttests.dart';
 import '../tests/potentiallibrary/widgets/myselectablelisttests.dart';
+import '../tests/tracetoircodeconversion/tracetoircodeconvertertests.dart';
 import '../tests/utilities/converters/commandsequencetransferformattocommandsequenceconvertertests.dart';
 import '../tests/utilities/tracepointstographdataseriesconvertertests.dart';
 
@@ -51,6 +52,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
     runner.addTests(PlotSequenceRangeScalerTests());
     runner.addTests(PlotViewportTests());
     runner.addTests(MySelectableListTests());
+    runner.addTests(TraceToIrCodeConverterTests());
 
     var results = runner.runTests();
 

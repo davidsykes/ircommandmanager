@@ -39,20 +39,17 @@ class ScopeTraceAccess {
     final rawPoints = await _webAccess.getJsonWebData('trace/$fileName');
 
     TracePoints td = TracePoints.fromJsonPoints(rawPoints);
-    print('Get trace details for $fileName');
     return td;
   }
 
-  void deleteTraces(Iterable<String> tracesToDelete) {
+  Future<void> deleteTraces(Iterable<String> tracesToDelete) async {
     for (var trace in tracesToDelete) {
-      deleteTrace(trace);
+      await deleteTrace(trace);
     }
-    //refreshTraces();
   }
 
-  void deleteTrace(String trace) async {
+  Future<void> deleteTrace(String trace) async {
     var result = await _webAccess.post('delete/$trace');
-
     print(result);
   }
 }

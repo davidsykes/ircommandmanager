@@ -1,4 +1,4 @@
-import 'codeconversion/codetobeconverted.dart';
+import 'tracetoircodeconversion/codetobeconverted.dart';
 import 'dataobjects/traces/traceinfo.dart';
 import 'potentiallibrary/graphs/graphwindowwidget.dart';
 import 'potentiallibrary/tools/cacheddata.dart';

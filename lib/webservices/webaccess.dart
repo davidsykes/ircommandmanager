@@ -48,21 +48,4 @@ class WebAccess {
 
     return result.toString();
   }
-
-  void deleteTraces(Iterable<String> tracesToDelete) {
-    for (var trace in tracesToDelete) {
-      deleteTrace(trace);
-    }
-  }
-
-  void deleteTrace(String trace) async {
-    var result = await http.post(
-      Uri.parse(makeUrl('delete/$trace')),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    );
-
-    print(result);
-  }
 }
