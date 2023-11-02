@@ -6,17 +6,16 @@ class TracePointsToGraphDataSeriesConverter {
   GraphDataSeries convertTracePointsToGraphDataSeries(TracePoints tracePoints) {
     var points = tracePoints.points;
     var pointsToConvert = points.length;
-    var currentPoint = 0;
     var plots = List<GraphDataPoint>.empty(growable: true);
 
     if (pointsToConvert > 0) {
-      var lasty = points[currentPoint].value.toDouble();
-      plots.add(GraphDataPoint(points[currentPoint].time.toDouble(), lasty));
-      currentPoint++;
+      var lasty = translateValue(points[0].value);
+      plots.add(GraphDataPoint(points[0].time.toDouble(), lasty));
+      var currentPoint = 0;
 
       while (currentPoint < pointsToConvert) {
         var x = points[currentPoint].time.toDouble();
-        var y = points[currentPoint].value.toDouble();
+        var y = translateValue(points[currentPoint].value);
         plots.add(GraphDataPoint(x, lasty));
         plots.add(GraphDataPoint(x, y));
         currentPoint++;
@@ -25,5 +24,9 @@ class TracePointsToGraphDataSeriesConverter {
     }
 
     return GraphDataSeries(plots);
+  }
+
+  double translateValue(int value) {
+    return value > 127 ? 0 : 1;
   }
 }

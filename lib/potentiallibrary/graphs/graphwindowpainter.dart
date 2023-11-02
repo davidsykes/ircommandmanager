@@ -20,7 +20,9 @@ class GraphWindowPainter extends CustomPainter {
     //drawTestPattern(canvas, size, paint);
 
     for (var series in graphWindowData.dataSeries) {
-      _plotSeries(series, canvas, size, paint);
+      if (series.enable) {
+        _plotSeries(series, canvas, size, paint);
+      }
     }
   }
 

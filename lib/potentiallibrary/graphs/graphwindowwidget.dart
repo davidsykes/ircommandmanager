@@ -25,30 +25,10 @@ class _GraphWindowWidgetState extends State<GraphWindowWidget> {
     var graphWindowPainter = GraphWindowPainter(widget._graphWindowData);
     return Column(
       children: [
-        ButtonBar(alignment: MainAxisAlignment.start, children: [
-          Text('Zoom'),
-          Slider(
-              value: widget._graphWindowData.zoom.toDouble() * 4,
-              min: 4,
-              max: 100,
-              label: widget._graphWindowData.zoom.toString(),
-              onChanged: (double value) {
-                setState(() {
-                  widget._graphWindowData.zoom = (value / 4).round();
-                });
-              }),
-          Text('Pan'),
-          Slider(
-              value: widget._graphWindowData.offset.toDouble(),
-              min: 0,
-              max: 99,
-              label: widget._graphWindowData.offset.toString(),
-              onChanged: (double value) {
-                setState(() {
-                  widget._graphWindowData.offset = value.round();
-                });
-              }),
-        ]),
+        ButtonBar(
+          alignment: MainAxisAlignment.start,
+          children: _makeButtonBarChildren(),
+        ),
         Expanded(
             child: CustomPaint(
           size: Size.infinite,
@@ -56,5 +36,48 @@ class _GraphWindowWidgetState extends State<GraphWindowWidget> {
         ))
       ],
     );
+  }
+
+  List<Widget> _makeButtonBarChildren() {
+    var children = List<Widget>.empty(growable: true);
+    children.add(Text('Zoom'));
+    children.add(_makeZoomSlider());
+    children.add(Text('Pan'));
+    children.add(_makePanSlider());
+    var graphs = widget._graphWindowData.dataSeries;
+    for (var graph in graphs) {
+      children.add(Checkbox(
+          value: graph.enable,
+          onChanged: (bool? x) => setState(() {
+                graph.enable = !graph.enable;
+              })));
+    }
+    return children;
+  }
+
+  Widget _makeZoomSlider() {
+    return Slider(
+        value: widget._graphWindowData.zoom.toDouble() * 4,
+        min: 4,
+        max: 100,
+        label: widget._graphWindowData.zoom.toString(),
+        onChanged: (double value) {
+          setState(() {
+            widget._graphWindowData.zoom = (value / 4).round();
+          });
+        });
+  }
+
+  Widget _makePanSlider() {
+    return Slider(
+        value: widget._graphWindowData.offset.toDouble(),
+        min: 0,
+        max: 99,
+        label: widget._graphWindowData.offset.toString(),
+        onChanged: (double value) {
+          setState(() {
+            widget._graphWindowData.offset = value.round();
+          });
+        });
   }
 }

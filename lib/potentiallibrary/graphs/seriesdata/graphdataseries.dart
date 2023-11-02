@@ -2,6 +2,7 @@ import 'graphdatapoint.dart';
 
 class GraphDataSeries {
   final List<GraphDataPoint> plots;
+  bool enable = true;
 
   GraphDataSeries(this.plots);
 
