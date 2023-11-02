@@ -27,7 +27,7 @@ class IrCommandsData {
     configuration = x ? 'irrecorder' : 'irtransmitter';
 
     var url = 'setoption?name=configuration.e6614143f502f&value=$configuration';
-    var response = await _webAccess.put(url);
+    var response = await _webAccess.put(url, null);
     return response;
   }
 

@@ -1,26 +1,28 @@
+import 'package:ircommandmanager/tracetoircodeconversion/wavedefinitionfrompico.dart';
+
 import '../../dataobjects/traces/tracepoint.dart';
 import '../../potentiallibrary/testframework/testmodule.dart';
 import '../../potentiallibrary/testframework/testunit.dart';
-import '../../tracetoircodeconversion/tracetoircodeconverter.dart';
+import '../../tracetoircodeconversion/tracetowavedefinitionfrompicoconverter.dart';
 
 class TraceToIrCodeConverterTests extends TestModule {
-  late ITraceToIrCodeConverter _converter;
+  late ITraceToIrWaveDefinitionFromPicoConverter _converter;
 
   @override
   void setUpObjectUnderTest() {
-    _converter = TraceToIrCodeConverter();
+    _converter = TraceToIrWaveDefinitionFromPicoConverter();
   }
 
   @override
   Iterable<TestUnit> getTests() {
     return [
-      createTest(aSimpleTraceIsConverted),
+      createTest(aTraceIsConvertedToAnIrCode),
       createTest(aSequenceCanHaveNoElements),
       createTest(aSingleElementIsConsideredEmpty),
     ];
   }
 
-  void aSimpleTraceIsConverted() {
+  void aTraceIsConvertedToAnIrCode() {
     var trace = createTrace([
       [0, 255],
       [0, 127],
@@ -28,23 +30,26 @@ class TraceToIrCodeConverterTests extends TestModule {
       [20, 127],
       [30, 255],
       [40, 127],
+      [100, 255],
+      [200, 127],
+      [1000, 255],
+    ]);
+
+    var expecteWave = createWave([
+      [0, 1],
+      [10, 0],
+      [10, 1],
+      [10, 0],
+      [10, 1],
+      [60, 0],
+      [100, 1],
+      [800, 0]
     ]);
 
     var code = _converter.convert('name', trace);
-    var points = code.wavepoints;
+    //var points = code.wavepoints;
 
-    assertEqual(code.code, 'name');
-    assertTrue(points.length == 5);
-    assertTrue(points[0][0] == 0);
-    assertTrue(points[0][1] == 1);
-    assertTrue(points[1][0] == 10);
-    assertTrue(points[1][1] == 0);
-    assertTrue(points[2][0] == 20);
-    assertTrue(points[2][1] == 1);
-    assertTrue(points[3][0] == 30);
-    assertTrue(points[3][1] == 0);
-    assertTrue(points[4][0] == 40);
-    assertTrue(points[4][1] == 1);
+    assertEqual(expecteWave, code);
   }
 
   void aSequenceCanHaveNoElements() {
@@ -67,8 +72,15 @@ class TraceToIrCodeConverterTests extends TestModule {
     assertEqual(points.length, 0);
   }
 
-  Iterable<TracePoint> createTrace(List<List<int>> list) {
+  List<TracePoint> createTrace(List<List<int>> list) {
     var points = list.map((p) => TracePoint(time: p[0], value: p[1]));
-    return points;
+    return points.toList();
+  }
+
+  WaveDefinitionFromPico createWave(List<List<int>> wavepoints) {
+    var wd = WaveDefinitionFromPico();
+    wd.code = 'name';
+    wd.wavepoints = wavepoints;
+    return wd;
   }
 }

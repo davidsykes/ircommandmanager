@@ -18,13 +18,13 @@ abstract class TestModule {
     }
   }
 
-  void assertSameObject(dynamic actual, dynamic expected) {
+  void assertSameObject(dynamic expected, dynamic actual) {
     if (actual != expected) {
       throwAssert(['Expected identical objects']);
     }
   }
 
-  void assertEqual(dynamic actual, dynamic expected) {
+  void assertEqual(dynamic expected, dynamic actual) {
     var vj = json.encode(actual);
     var ej = json.encode(expected);
     if (vj != ej) {

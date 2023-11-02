@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ircommandmanager/tracetoircodeconversion/codetobeconverted.dart';
 import 'package:ircommandmanager/dataobjects/traces/tracepoint.dart';
 import 'package:ircommandmanager/potentiallibrary/widgets/elevatedbutton.dart';
-
-import '../tracetoircodeconversion/tracetoircodeconverter.dart';
+import '../tracetoircodeconversion/tracetowavedefinitionfrompicoconverter.dart';
+import '../webservices/irtransmitteraccess.dart';
 
 class CodeConverterPage extends StatefulWidget {
   final CodeToBeConverted codeToBeConverted;
@@ -15,7 +15,7 @@ class CodeConverterPage extends StatefulWidget {
 
 class _CodeConverterPageState extends State<CodeConverterPage> {
   final myController = TextEditingController();
-  final _traceToIrCodeConverter = TraceToIrCodeConverter();
+  final _traceToIrCodeConverter = TraceToIrWaveDefinitionFromPicoConverter();
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +55,7 @@ class _CodeConverterPageState extends State<CodeConverterPage> {
           ),
         ),
         createElevatedButton('Save', () {
+          saveCode(myController.text);
           print(myController.text);
         }),
       ],
@@ -90,5 +91,11 @@ class _CodeConverterPageState extends State<CodeConverterPage> {
 
   String wavePointToText(List<int> p) {
     return '${p[0]}: ${p[1]}';
+  }
+
+  void saveCode(String name) {
+    var code = _traceToIrCodeConverter.convert(
+        name, widget.codeToBeConverted.getTracePoints().points);
+    IrTransmitterAccess().storeCode(code);
   }
 }

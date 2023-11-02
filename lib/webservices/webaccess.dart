@@ -34,18 +34,21 @@ class WebAccess {
     );
 
     var code = result.statusCode;
-    var body = result.body;
-    return '$code : $body';
+    var resultBody = result.body;
+    return '$code : $resultBody';
   }
 
-  Future<String> put(String url) async {
+  Future<String> put(String url, String? putBody) async {
     var result = await http.put(
       Uri.parse(makeUrl(url)),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
+      body: putBody,
     );
 
-    return result.toString();
+    var code = result.statusCode;
+    var resultBody = result.body;
+    return '$code : $resultBody';
   }
 }

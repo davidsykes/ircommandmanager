@@ -8,7 +8,7 @@ import '../tests/plotting/logic/plotsequencesrangescalertests.dart';
 import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
 import '../tests/plotting/logic/plotviewporttests.dart';
 import '../tests/potentiallibrary/widgets/myselectablelisttests.dart';
-import '../tests/tracetoircodeconversion/tracetoircodeconvertertests.dart';
+import '../tests/tracetoircodeconversion/tracetowavedefinitionfrompicoconvertertests.dart';
 import '../tests/utilities/converters/commandsequencetransferformattocommandsequenceconvertertests.dart';
 import '../tests/utilities/tracepointstographdataseriesconvertertests.dart';
 
