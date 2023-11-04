@@ -39,8 +39,6 @@ class IrCommandsData {
     return logs.toList().cast<String>();
   }
 
-  // TODO Review everything below here
-
   List<IrCommandSequence> commandsList =
       List<IrCommandSequence>.empty(growable: true);
   String configuration = 'unknown';

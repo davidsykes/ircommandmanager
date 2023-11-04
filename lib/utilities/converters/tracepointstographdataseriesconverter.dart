@@ -11,7 +11,7 @@ class TracePointsToGraphDataSeriesConverter {
     if (pointsToConvert > 0) {
       var lasty = points[0].value.toDouble();
       plots.add(GraphDataPoint(points[0].time.toDouble(), lasty));
-      var currentPoint = 0;
+      var currentPoint = 1;
 
       while (currentPoint < pointsToConvert) {
         var x = points[currentPoint].time.toDouble();

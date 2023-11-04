@@ -26,7 +26,7 @@ class TracePointsToGraphDataSeriesConverterTests extends TestModule {
     var series = _converter.convertTracePointsToGraphDataSeries(trace);
     var plot = series.plots;
 
-    assertTrue(plot.length == 7);
+    assertEqual(7, plot.length);
     assertTrue(plot[0].x == 0);
     assertTrue(plot[0].y == 0);
     assertTrue(plot[1].x == 1);
