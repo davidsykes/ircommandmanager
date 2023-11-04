@@ -8,7 +8,6 @@ import '../../../../potentiallibrary/widgets/overflowbar.dart';
 import '../../../../potentiallibrary/widgets/futurebuilder.dart';
 import '../../../../utilities/converters/tracepointstographdataseriesconverter.dart';
 import '../../ircommandsdata.dart';
-import 'ircommandsplotwindow.dart';
 import 'ircontrollercommandslistoverflowbar.dart';
 
 class IrCommandsListTabView extends StatefulWidget {
@@ -21,13 +20,10 @@ class IrCommandsListTabView extends StatefulWidget {
 
 class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
   final _counter = ValueNotifier<int>(0);
-  late IrCommandsPlotWindow _plotWindow;
   late MySelectableList<IrCommandSequence> _selectableList;
   late CachedDataLoader2<List<IrCommandSequence>> _irCommandSequences;
-  bool _showCommandResults = false;
 
   _IrCommandsListTabViewState() {
-    _plotWindow = IrCommandsPlotWindow(repaint: _counter);
     _selectableList =
         MySelectableList<IrCommandSequence>(onSelect: itemSelected);
     _irCommandSequences = CachedDataLoader2<List<IrCommandSequence>>(
@@ -45,7 +41,6 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
 
   void itemSelected(IrCommandSequence sItem) {
     setState(() {
-      _plotWindow.showCommand(sItem);
       _counter.value++;
     });
   }
@@ -57,9 +52,6 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
 
   Future<List<IrCommandSequence>> loadIrCommandsDataAndMakeSelectables() async {
     var commands = await _irCommandSequences.getData();
-    // _selectableList.refresh(commands, (IrCommandSequence s) => s.name,
-    //     (IrCommandSequence s) => "IrCommandSequence");
-
     return commands;
   }
 
@@ -79,11 +71,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
   }
 
   Widget chooseBetweenPlotWindowAndCommandResult() {
-    if (_showCommandResults) {
-      return Text('Show results');
-    } else {
-      return makeWidgetPlotWindowWithEdging();
-    }
+    return Text('Show results');
   }
 
   Widget makeWidgetIrControllerCommandsManager() {
@@ -108,9 +96,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
       results = results + result;
     }
 
-    setState(() {
-      _showCommandResults = true;
-    });
+    setState(() {});
     print(results);
   }
 
@@ -120,20 +106,5 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     var dataSeries = commandsToPlot
         .map((e) => converter.convertTracePointsToGraphDataSeries(e));
     widget.globalVariables.graphWindowWidget.addDataSeries(dataSeries);
-  }
-
-  Widget makeWidgetPlotWindowWithEdging() {
-    return Column(
-      children: <Widget>[
-        Text(''),
-        Expanded(
-          child: CustomPaint(
-            size: Size.infinite,
-            painter: _plotWindow.plotWindow,
-          ),
-        ),
-        Text(''),
-      ],
-    );
   }
 }

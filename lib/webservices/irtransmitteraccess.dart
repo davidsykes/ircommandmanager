@@ -13,7 +13,7 @@ class IrTransmitterAccess {
   }
 
   void storeCode(WaveDefinitionFromPico code) async {
-    // TODO Implement this
+    // TODO Check for errors
     var body = jsonEncode(code);
     print(body);
     var result = await _webAccess.put('ircode', body);
