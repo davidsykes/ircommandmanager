@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../myappstate.dart';
 import '../potentiallibrary/testframework/testrunner.dart';
-import '../tests/plotting/logic/plotsequencerangescalertests.dart';
 import '../tests/potentiallibrary/graphs/scaling/graphseriesextentcalculatortests.dart';
-import '../tests/plotting/logic/plotsequencesrangescalertests.dart';
-import '../tests/plotting/logic/plotsequencesunitsizescalertests.dart';
-import '../tests/plotting/logic/plotviewporttests.dart';
 import '../tests/potentiallibrary/widgets/myselectablelisttests.dart';
 import '../tests/tracetoircodeconversion/tracetowavedefinitionfrompicoconvertertests.dart';
 import '../tests/utilities/converters/commandsequencetransferformattocommandsequenceconvertertests.dart';
@@ -46,11 +42,7 @@ class _CodeTestPageState extends State<CodeTestPage> {
 
     runner.addTests(TracePointsToGraphDataSeriesConverterTests());
     runner.addTests(CommandsListFromApiCommandsConverterTests());
-    runner.addTests(PlotSequencesUnitSizeScalerTests());
     runner.addTests(GraphSeriesExtentCalculatorTests());
-    runner.addTests(PlotSequencesRangeScalerTests());
-    runner.addTests(PlotSequenceRangeScalerTests());
-    runner.addTests(PlotViewportTests());
     runner.addTests(MySelectableListTests());
     runner.addTests(TraceToIrCodeConverterTests());
 
