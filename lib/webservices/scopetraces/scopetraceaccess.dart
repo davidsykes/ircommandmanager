@@ -1,3 +1,4 @@
+import 'package:ircommandmanager/dataobjects/traces/tracepoint.dart';
 import 'package:ircommandmanager/webservices/webaccess.dart';
 import '../../dataobjects/traces/traceinfo.dart';
 import '../../dataobjects/traces/tracepoints.dart';
@@ -39,6 +40,7 @@ class ScopeTraceAccess {
     final rawPoints = await _webAccess.getJsonWebData('trace/$fileName');
 
     TracePoints td = TracePoints.fromJsonPoints(rawPoints);
+    td = convertTrace(td);
     return td;
   }
 
@@ -51,5 +53,14 @@ class ScopeTraceAccess {
   Future<void> deleteTrace(String trace) async {
     var result = await _webAccess.post('delete/$trace');
     print(result);
+  }
+
+  TracePoints convertTrace(TracePoints td) {
+    return TracePoints(td.points
+        .map((e) => TracePoint(time: e.time, value: convertValue(e.value))));
+  }
+
+  int convertValue(int value) {
+    return value > 127 ? 0 : 1;
   }
 }
