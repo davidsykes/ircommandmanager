@@ -6,7 +6,9 @@ import '../../../../potentiallibrary/tools/cacheddataloader2.dart';
 import '../../../../potentiallibrary/widgets/myselectablelist.dart';
 import '../../../../potentiallibrary/widgets/overflowbar.dart';
 import '../../../../potentiallibrary/widgets/futurebuilder.dart';
+import '../../../../tracetoircodeconversion/wavedefinitionfrompico.dart';
 import '../../../../utilities/converters/tracepointstographdataseriesconverter.dart';
+import '../../../../webservices/irtransmitteraccess.dart';
 import '../../ircommandsdata.dart';
 import 'ircontrollercommandslistoverflowbar.dart';
 
@@ -78,7 +80,7 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     return Column(
       children: <Widget>[
         createOverflowBar(IrControllerCommandsListOverflowBar(
-            sendButtonPressed, plotButtonPressed)),
+            sendButtonPressed, plotButtonPressed, createTest500)),
         Expanded(
           child: _selectableList.makeListWidget(),
         ),
@@ -106,5 +108,21 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     var dataSeries = commandsToPlot
         .map((e) => converter.convertTracePointsToGraphDataSeries(e));
     widget.globalVariables.graphWindowWidget.addDataSeries(dataSeries);
+  }
+
+  void createTest500() {
+    var code = WaveDefinitionFromPico();
+    code.code = 'Test500';
+    var wp = List<List<int>>.empty(growable: true);
+    wp.add([0, 1]);
+    wp.add([500, 0]);
+    wp.add([500, 1]);
+    wp.add([500, 0]);
+    wp.add([500, 1]);
+    wp.add([500, 0]);
+    wp.add([500, 1]);
+    wp.add([500, 0]);
+    code.wavepoints = wp;
+    IrTransmitterAccess().storeCode(code);
   }
 }

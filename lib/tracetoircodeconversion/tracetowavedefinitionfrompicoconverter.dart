@@ -18,7 +18,7 @@ class TraceToIrWaveDefinitionFromPicoConverter
     var lastTime = 0;
     for (final point in points) {
       var deltaTime = point.time - lastTime;
-      var value = point.value >= 128 ? 0 : 1;
+      var value = point.value;
       wavepoints.add([deltaTime, value]);
       lastTime = point.time;
     }
