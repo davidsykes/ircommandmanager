@@ -24,15 +24,15 @@ class TraceToIrCodeConverterTests extends TestModule {
 
   void aTraceIsConvertedToAnIrCode() {
     var trace = createTrace([
-      [0, 255],
-      [0, 127],
-      [10, 255],
-      [20, 127],
-      [30, 255],
-      [40, 127],
-      [100, 255],
-      [200, 127],
-      [1000, 255],
+      [0, 0],
+      [0, 1],
+      [10, 0],
+      [20, 1],
+      [30, 0],
+      [40, 1],
+      [100, 0],
+      [200, 1],
+      [1000, 0],
     ]);
 
     var expecteWave = createWave([

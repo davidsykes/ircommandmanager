@@ -115,13 +115,13 @@ class _IrCommandsListTabViewState extends State<IrCommandsListTabView> {
     code.code = 'Test500';
     var wp = List<List<int>>.empty(growable: true);
     wp.add([0, 1]);
-    wp.add([500, 0]);
-    wp.add([500, 1]);
-    wp.add([500, 0]);
-    wp.add([500, 1]);
-    wp.add([500, 0]);
-    wp.add([500, 1]);
-    wp.add([500, 0]);
+    wp.add([256, 0]);
+    wp.add([512, 1]);
+    wp.add([768, 0]);
+    wp.add([1024, 1]);
+    wp.add([256, 0]);
+    wp.add([256, 1]);
+    wp.add([256, 0]);
     code.wavepoints = wp;
     IrTransmitterAccess().storeCode(code);
   }
